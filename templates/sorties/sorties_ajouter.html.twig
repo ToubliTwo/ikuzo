@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %} Créer une évènement {% endblock %}
+
+{% block body %}
+<h1> Ajouter un évènement :</h1>
+
+    <div>
+        <h2>Ajouter une sortie</h2>
+        {{ form_start (sortieForm) }}
+        {{ form_widget (sortieForm) }}
+        <button>Valider</button>
+        {{ form_end(sortieForm) }}
+    </div>
+{% endblock %}
+
+
