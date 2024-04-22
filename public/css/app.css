@@ -1,0 +1,61 @@
+:root {
+    --couleur-principale : #EEEEFF ;
+    --couleur-secondaire : #7F7CAF ;
+    --couleur-tertiaire : #9FB4C7;
+    --couleur-quaternaire : #28587B;
+}
+
+body {
+    display : flex;
+    flex-direction: column;
+    font-family: 'Crimson Text', serif;
+}
+
+header {
+    background-color: var(--couleur-tertiaire);
+    padding-left : 7vw;
+}
+
+header img {
+    height: 70px;
+}
+
+header a {
+    text-decoration: none;
+    color: var(--couleur-principale);
+    font-size: 1.8rem;
+}
+
+a:hover {
+    color: white;
+}
+
+main {
+    background-color: var(--couleur-principale);
+    color: black;
+    text-align: center;
+    min-height: 80vh;
+    margin: 0;
+}
+
+footer {
+    background-color: var(--couleur-secondaire);
+    color: var(--couleur-principale);
+    min-height: 6vh;
+    text-align: center;
+    align-content: center;
+    margin: 0;
+}
+
+
+label {
+    display: block;
+}
+
+input, textarea, select {
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    max-width: 50%;
+    width: 150px;
+}
+
