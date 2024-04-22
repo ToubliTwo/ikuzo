@@ -2,20 +2,42 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Sortir.com{% endblock %}</title>
         <link rel="icon" href="{{ asset('img/touktouk.png') }}">
-        <link rel="stylesheet" href=" {{ asset('css/normalize.css') }}">
-        <link rel="stylesheet" href=" {{ asset('css/app.css') }}">
+
+        {# insertion d'une police d'écriture googlefonts (type cdn) : #}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+        {# insertion d'une feuille de style CSS qui permet de "gommer" toutes les différences d'un navigateur à l'autre #}
+        <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+
+        {# insertion d'une feuille de style CSS #}
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+        {#    insertion d'une icone #}
+        <link rel="icon" href="{{ asset('img/touktouk.png') }}">
     </head>
     <body>
-    {# read and display all flash messages #}
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="flash flash-{{ label }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-    {% block body %}{% endblock %}
+    {#    <div class="container">#}
+        <header>
+            <a href="{{ path('main_home') }}"><img src="{{ asset('img/touktouk.png') }}" alt="Ikouzo !"></a> {%  include('inc/nav.html.twig') %}
+        </header>
+        <main>
+            {# read and display all flash messages #}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% block body %}{% endblock %}
+        </main>
+        <footer>
+            &copy; {{ "now"|date("Y") }} | Sortir.com by #Devmj, #Toubli, #Carfaxx
+        </footer>
+{#    </div>#}
     </body>
 </html>
