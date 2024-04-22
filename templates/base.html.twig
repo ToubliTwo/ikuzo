@@ -20,11 +20,19 @@
         <link rel="icon" href="{{ asset('img/touktouk.png') }}">
     </head>
     <body>
-{#    <div class="container">#}
+    {#    <div class="container">#}
         <header>
             <a href="{{ path('main_home') }}"><img src="{{ asset('img/touktouk.png') }}" alt="Ikouzo !"></a> {%  include('inc/nav.html.twig') %}
         </header>
         <main>
+            {# read and display all flash messages #}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
             {% block body %}{% endblock %}
         </main>
         <footer>
