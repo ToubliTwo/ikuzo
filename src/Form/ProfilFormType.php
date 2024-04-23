@@ -18,7 +18,7 @@ class ProfilFormType extends AbstractType
             ->add('nom',)
             ->add('prenom')
             ->add('telephone')
-            ->add('mail')
+            ->add('email')
             //ne pas afficher le mot de passe
             ->add('password', null, [
                 'label' => 'Mot de passe',
