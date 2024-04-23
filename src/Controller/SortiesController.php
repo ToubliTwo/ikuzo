@@ -6,25 +6,35 @@ namespace App\Controller;
 
 use App\Entity\Sorties;
 use App\Form\AjouterSortieType;
+use App\Repository\SortiesRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class SortiesController extends AbstractController
 {
     #[Route('/sorties', name:'sorties_afficher')]
-    public function afficher(): Response
+    public function afficher(SortiesRepository $sortiesRepository): Response
     {
-        return $this->render('sorties\sorties.html.twig');
+        $sorties = $sortiesRepository->findAll();
+        return $this->render('sorties\sorties.html.twig', ["Sorties" => $sorties]);
     }
 
-
     #[Route('/sorties/ajouter', name:'sorties_ajouter')]
-    public function ajouter(): Response
+    public function ajouter(Request $request, EntityManagerInterface $entityManager): Response
     {
         $sortie = new Sorties();
         $sortieForm = $this->createForm(AjouterSortieType::class, $sortie);
-        //todo : traiter le formulaire
+
+        $sortieForm->handleRequest($request);
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+            $this->addFlash('success', 'Evènement correctement ajouté ;)');
+            return $this->redirectToRoute('sorties_afficher');
+        }
         return $this -> render('sorties\sorties_ajouter.html.twig',
         [
             'sortieForm' => $sortieForm->createView()
