@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% form_theme participantForm 'bootstrap_4_layout.html.twig' %}
+
+    <h1>Modifier votre profil</h1>
+    <div>
+    {{ form_start(participantForm) }}
+    {{ form_row(participantForm.nom) }}
+    {{ form_row(participantForm.prenom) }}
+    {{ form_row(participantForm.pseudo) }}
+    {{ form_row(participantForm.mail) }}
+    {{ form_row(participantForm.telephone) }}
+    {{ form_row(participantForm.password) }}
+    {{ form_row(participantForm.campus) }}
+    {{ form_end(participantForm) }}
+    </div>
+{% endblock %}
+
+{% block title %}
+Votre profil ({{ participant.nom~' '~participant.prenom }})| {{ parent() }}
+{% endblock %}
+
