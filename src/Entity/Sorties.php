@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\SortiesRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SortiesRepository::class)]
 class Sorties
@@ -15,16 +17,38 @@ class Sorties
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Titre = null;
+    private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Description = null;
+    private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Lieu = null;
+    private ?string $lieu = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $Date = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
+
+    #[ORM\Column]
+    private ?int $nombreDePlaces = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $duree = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    private ?string $ville = null ;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $rue = null;
+
+    #[ORM\Column]
+    private ?int $codePostal = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $latitude = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $longitude = null;
 
     public function getId(): ?int
     {
@@ -33,48 +57,132 @@ class Sorties
 
     public function getTitre(): ?string
     {
-        return $this->Titre;
+        return $this->titre;
     }
 
-    public function setTitre(string $Titre): static
+    public function setTitre(string $titre): static
     {
-        $this->Titre = $Titre;
+        $this->titre = $titre;
 
         return $this;
     }
 
     public function getDescription(): ?string
     {
-        return $this->Description;
+        return $this->description;
     }
 
-    public function setDescription(string $Description): static
+    public function setDescription(string $description): static
     {
-        $this->Description = $Description;
+        $this->description = $description;
 
         return $this;
     }
 
     public function getLieu(): ?string
     {
-        return $this->Lieu;
+        return $this->lieu;
     }
 
-    public function setLieu(string $Lieu): static
+    public function setLieu(string $lieu): static
     {
-        $this->Lieu = $Lieu;
+        $this->lieu = $lieu;
 
         return $this;
     }
 
     public function getDate(): ?\DateTimeInterface
     {
-        return $this->Date;
+        return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $Date): static
+    public function setDate(\DateTimeInterface $date): static
     {
-        $this->Date = $Date;
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getNombreDePlaces(): ?int
+    {
+        return $this->nombreDePlaces;
+    }
+
+    public function setNombreDePlaces(int $nombreDePlaces): static
+    {
+        $this->nombreDePlaces = $nombreDePlaces;
+
+        return $this;
+    }
+
+    public function getDuree(): ?\DateTimeInterface
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(\DateTimeInterface $duree): static
+    {
+        $this->duree = $duree;
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): static
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getRue(): ?string
+    {
+        return $this->rue;
+    }
+
+    public function setRue(?string $rue): static
+    {
+        $this->rue = $rue;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?int
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(int $codePostal): static
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+
+    public function getLatitude(): ?int
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?int $latitude): static
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?int
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?int $longitude): static
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }
