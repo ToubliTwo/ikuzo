@@ -2,16 +2,16 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="{{ asset('img/touktouk.png') }}">
+        <title>{% block title %}Sortie.com!{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+        <link rel="icon" href="{{ asset('img/LogoProjetSortir.png') }}">
         {% block stylesheets %}
         {% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
     </head>
     <body>
+        {% include 'nav.html.twig' %}
         {% block body %}{% endblock %}
+{#        {% include 'footer.html.twig' %}#}
     </body>
 </html>
