@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% form_theme userForm 'bootstrap_4_layout.html.twig' %}
+
+    <h1>Modifier votre profil</h1>
+    <div>
+    {{ form_start(userForm) }}
+    {{ form_row(userForm.nom) }}
+    {{ form_row(userForm.prenom) }}
+    {{ form_row(userForm.pseudo) }}
+    {{ form_row(userForm.email) }}
+    {{ form_row(userForm.telephone) }}
+    {{ form_row(userForm.password) }}
+    {{ form_row(userForm.campus) }}
+    {{ form_end(userForm) }}
+    </div>
+{% endblock %}
+
+{% block title %}
+Votre profil ({{ user.nom~' '~user.prenom }})| {{ parent() }}
+{% endblock %}
+
