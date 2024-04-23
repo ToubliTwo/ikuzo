@@ -7,11 +7,13 @@ namespace App\Controller;
 use App\Entity\Sorties;
 use App\Form\AjouterSortieType;
 use App\Repository\SortiesRepository;
+use App\Security\Voter\SortieVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class SortiesController extends AbstractController
 {
@@ -23,6 +25,7 @@ class SortiesController extends AbstractController
     }
 
     #[Route('/sorties/ajouter', name:'sorties_ajouter')]
+    #[IsGranted(SortieVoter::CREATE)]
     public function ajouter(Request $request, EntityManagerInterface $entityManager): Response
     {
         $sortie = new Sorties();

@@ -50,6 +50,10 @@ class Sorties
     #[ORM\Column(nullable: true)]
     private ?int $longitude = null;
 
+    #[ORM\ManyToOne(inversedBy: 'sorties')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Etat $etat = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -183,6 +187,18 @@ class Sorties
     public function setLongitude(?int $longitude): static
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getEtat(): ?Etat
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?Etat $etat): static
+    {
+        $this->etat = $etat;
 
         return $this;
     }
