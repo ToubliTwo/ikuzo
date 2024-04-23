@@ -2,13 +2,13 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Participant;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class ParticipantFixtures extends Fixture implements DependentFixtureInterface
+class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
@@ -19,12 +19,12 @@ class ParticipantFixtures extends Fixture implements DependentFixtureInterface
         $faker = \Faker\Factory::create('fr_FR');
 
         for ($i = 0; $i < 10; $i++) {
-            $participant = new Participant();
+            $participant = new User();
             $participant->setNom($faker->lastName);
             $participant->setPrenom($faker->firstName);
             $participant->setPseudo($faker->userName);
             $participant->setTelephone($faker->phoneNumber);
-            $participant->setMail($faker->email);
+            $participant->setEmail($faker->email);
             $participant->setPassword($this->passwordHasher->hashPassword(
                 $participant,
                 'password'

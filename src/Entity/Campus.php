@@ -23,10 +23,10 @@ class Campus
     private ?string $nom = null;
 
     /**
-     * @var Collection<int, Participant>
+     * @var Collection<int, User>
      */
-    #[ORM\OneToMany(targetEntity: Participant::class, mappedBy: 'campus')]
-    private Collection $participants;
+    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'campus')]
+    private Collection $users;
 
     public function __construct()
     {
@@ -51,14 +51,14 @@ class Campus
     }
 
     /**
-     * @return Collection<int, Participant>
+     * @return Collection<int, User>
      */
     public function getParticipants(): Collection
     {
         return $this->participants;
     }
 
-    public function addParticipant(Participant $participant): static
+    public function addParticipant(User $participant): static
     {
         if (!$this->participants->contains($participant)) {
             $this->participants->add($participant);
@@ -68,7 +68,7 @@ class Campus
         return $this;
     }
 
-    public function removeParticipant(Participant $participant): static
+    public function removeParticipant(User $participant): static
     {
         if ($this->participants->removeElement($participant)) {
             // set the owning side to null (unless already changed)

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ParticipantController extends AbstractController
 {
-    #[Route('/participant/modifier/{id}', name: 'participant_modifier')]
+    #[Route('/user/modifier/{id}', name: 'participant_modifier')]
     public function modifier(int $id,
                              ParticipantRepository $participantRepository,
                              EntityManagerInterface $entityManager,
@@ -22,7 +22,7 @@ class ParticipantController extends AbstractController
         $participant = $participantRepository->find($id);
 
         if (!$participant) {
-            throw $this->createNotFoundException('Participant non trouvé');
+            throw $this->createNotFoundException('Users non trouvé');
         }
 
         $participantForm = $this->createForm(ProfilFormType::class, $participant);
@@ -40,8 +40,8 @@ class ParticipantController extends AbstractController
             return $this->redirectToRoute('participant_modifier', ['id' => $participant->getId()]);
         }
 
-        return $this->render('participant/modifier.html.twig', [
-        'participant' => $participant,
+        return $this->render('user/modifier.html.twig', [
+        'user' => $participant,
         'participantForm' => $participantForm
         ]);
     }
