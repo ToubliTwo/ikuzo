@@ -1,13 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}COM SORTIR - ENI{% endblock %}
 {% block body %}
-<h1>Rejoignez-nous sur notre plateforme exclusive COM SORTIR</h1>
+<h1>Rejoignez-nous sur notre plateforme exclusive Sortir.com</h1>
+    {{ app.user.nom }}
 <p>Organisez et participez à des sorties passionnantes avec d'autres stagiaires ENI, où que vous soyez !</p>
-<form>
-    <input type="text" name="username" placeholder="Nom d'utilisateur" required>
-    <input type="password" name="password" placeholder="Mot de passe" required>
-    <label for="remember_me">Remember Me</label> <input id="remember_me" type="checkbox">
-    <button type="submit">Connexion</button>
-</form>
-<p><a href="#">Mot de passe oublié ?</a></p>
 {% endblock %}

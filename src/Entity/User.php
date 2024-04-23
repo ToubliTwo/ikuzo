@@ -2,24 +2,23 @@
 
 namespace App\Entity;
 
-use App\Repository\ParticipantRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[UniqueEntity(fields: ['pseudo'], message: 'Ce pseudo est déjà pris')]
-#[UniqueEntity(fields: ['mail'], message: 'Un compte est déjà associé à cet email')]
-#[ORM\Entity(repositoryClass: ParticipantRepository::class)]
-class Participant implements PasswordAuthenticatedUserInterface
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_PSEUDO', fields: ['pseudo'])]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
     #[Assert\Length(min: 3, max: 150)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank()]
     #[ORM\Column(length: 150)]
     private ?string $nom = null;
 
@@ -37,12 +36,26 @@ class Participant implements PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 3, max: 150)]
     #[Assert\NotBlank]
     #[ORM\Column(length: 150)]
-    private ?string $mail = null;
+    private ?string $email = null;
 
-    #[Assert\Length(min: 8, max: 255)]
+    #[Assert\Length(min: 3, max: 180)]
+    #[Assert\NotBlank]
+    #[ORM\Column(length: 180)]
+    private ?string $pseudo = null;
+
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column]
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     */
+    #[Assert\Length(min: 8, max: 180)]
     #[Assert\NotBlank]
     #[Assert\Regex(pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$/', message: 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial')]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column]
     private ?string $password = null;
 
     #[ORM\Column]
@@ -50,10 +63,6 @@ class Participant implements PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $actif = null;
-    #[Assert\Length(min: 3, max: 255)]
-    #[Assert\NotBlank]
-    #[ORM\Column(length: 255)]
-    private ?string $pseudo = null;
 
     #[ORM\ManyToOne(inversedBy: 'participants')]
     #[ORM\JoinColumn(nullable: false)]
@@ -100,30 +109,17 @@ class Participant implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getEmail(): ?string
     {
-        return $this->mail;
+        return $this->email;
     }
 
-    public function setMail(string $mail): static
+    public function setEmail(string $email): static
     {
-        $this->mail = $mail;
+        $this->email = $email;
 
         return $this;
     }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): static
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
     public function isAdministrateur(): ?bool
     {
         return $this->administrateur;
@@ -171,5 +167,61 @@ class Participant implements PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->pseudo;
+    }
 
+    /**
+     * @see UserInterface
+     *
+     * @return list<string>
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    /**
+     * @param list<string> $roles
+     */
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
 }

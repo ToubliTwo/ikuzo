@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Campus;
-use App\Entity\Participant;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
