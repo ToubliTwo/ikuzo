@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Sorties;
 use App\Form\AjouterSortieType;
+use App\Form\InscriptionSortieFormType;
 use App\Repository\SortiesRepository;
 use App\Security\Voter\SortieVoter;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,6 +42,21 @@ class SortiesController extends AbstractController
         return $this -> render('sorties\sorties_ajouter.html.twig',
         [
             'sortieForm' => $sortieForm->createView()
+        ]);
+    }
+
+    #[Route('/sorties/{id}/inscription', name:'sorties_inscription')]
+    public function inscriptionSortie(Sorties $sortie, Request $request): Response
+    {
+        $form = $this->createForm(InscriptionSortieFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Inscription à la sortie réussie');
+            return $this->redirectToRoute('main_home');
+        }
+        return $this->render('main/home.html.twig', [
+            'sortie' => $sortie,
+            'form' => $form->createView()
         ]);
     }
 
