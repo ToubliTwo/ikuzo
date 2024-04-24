@@ -22,7 +22,7 @@ class SortiesController extends AbstractController
     public function afficher(SortiesRepository $sortiesRepository): Response
     {
         $sorties = $sortiesRepository->findAll();
-        return $this->render('sorties\sorties.html.twig', ["Sorties" => $sorties]);
+        return $this->render('sorties\sorties.html.twig', ["sorties" => $sorties]);
     }
 
     #[Route('/sorties/ajouter', name:'sorties_ajouter')]
@@ -41,7 +41,7 @@ class SortiesController extends AbstractController
         }
         return $this -> render('sorties\sorties_ajouter.html.twig',
         [
-            'sortieForm' => $sortieForm->createView()
+            'sortieForm' => $sortieForm
         ]);
     }
 
