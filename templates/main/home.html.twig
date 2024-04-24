@@ -1,7 +1,40 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}COM SORTIR - ENI{% endblock %}
+
 {% block body %}
 <h1>Rejoignez-nous sur notre plateforme exclusive Sortir.com</h1>
 
 <p>Organisez et participez à des sorties passionnantes avec d'autres stagiaires ENI, où que vous soyez !</p>
+COUCOU !!!!
+    //Afficher un tableau avec les sorties
+    <table>
+        <tr>
+            <th>Nom de la sortie</th>
+            <th>Date de la sortie</th>
+            <th>Clôture</th>
+            <th>Inscrits/places</th>
+            <th>Etat</th>
+            <th>Inscrit</th>
+            <th>Organisateur</th>
+            <th>Actions</th>
+        </tr>
+
+
+        {% for sortie in sorties %}
+            <tr>
+                <td>{{ sortie.titre }}</td>
+                <td>{{ sortie.date|date('d/m/Y H:i') }}</td>
+                <td>{{ sortie.dateLimiteInscription|date('d/m/Y H:i') }}</td>
+                <td>{{ sortie.nombreDePlaces }}</td>
+                <td>{{ sortie.etat.libelle }}</td>
+                <td>''</td>
+                <td>{#{{ sortie.organisateur.pseudo }}#}</td>
+                <td>
+
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
 {% endblock %}
