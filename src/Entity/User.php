@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -67,6 +69,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
+
+    /**
+     * @var Collection<int, Sorties>
+     */
+    #[ORM\ManyToMany(targetEntity: Sorties::class, inversedBy: 'users')]
+    private Collection $sortie;
+
+    public function __construct()
+    {
+        $this->sortie = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -223,5 +236,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Sorties>
+     */
+    public function getSortie(): Collection
+    {
+        return $this->sortie;
+    }
+
+    public function addSortie(Sorties $sortie): static
+    {
+        if (!$this->sortie->contains($sortie)) {
+            $this->sortie->add($sortie);
+        }
+
+        return $this;
+    }
+
+    public function removeSortie(Sorties $sortie): static
+    {
+        $this->sortie->removeElement($sortie);
+
+        return $this;
     }
 }
