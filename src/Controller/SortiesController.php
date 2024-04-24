@@ -55,7 +55,7 @@ class SortiesController extends AbstractController
             return $this->redirectToRoute('main_home');
         }
         return $this->render('main/home.html.twig', [
-            'sortie' => $sortie,
+            'sorties' => $sortie,
             'form' => $form->createView()
         ]);
     }
