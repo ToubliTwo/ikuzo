@@ -5,8 +5,6 @@ namespace App\Entity;
 use App\Repository\SortiesRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SortiesRepository::class)]
 class Sorties
@@ -22,11 +20,12 @@ class Sorties
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $lieu = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateLimiteInscription = null;
 
     #[ORM\Column]
     private ?int $nombreDePlaces = null;
@@ -34,25 +33,13 @@ class Sorties
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $duree = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    private ?string $ville = null ;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $rue = null;
-
-    #[ORM\Column]
-    private ?int $codePostal = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $latitude = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $longitude = null;
-
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
+
+    #[ORM\ManyToOne(inversedBy: 'sorties')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Lieu $lieu = null;
 
     public function getId(): ?int
     {
@@ -83,18 +70,6 @@ class Sorties
         return $this;
     }
 
-    public function getLieu(): ?string
-    {
-        return $this->lieu;
-    }
-
-    public function setLieu(string $lieu): static
-    {
-        $this->lieu = $lieu;
-
-        return $this;
-    }
-
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
@@ -103,6 +78,18 @@ class Sorties
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getDateLimiteInscription(): ?\DateTimeInterface
+    {
+        return $this->dateLimiteInscription;
+    }
+
+    public function setDateLimiteInscription(\DateTimeInterface $dateLimiteInscription): static
+    {
+        $this->dateLimiteInscription = $dateLimiteInscription;
 
         return $this;
     }
@@ -130,67 +117,6 @@ class Sorties
         return $this;
     }
 
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(string $ville): static
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getRue(): ?string
-    {
-        return $this->rue;
-    }
-
-    public function setRue(?string $rue): static
-    {
-        $this->rue = $rue;
-
-        return $this;
-    }
-
-    public function getCodePostal(): ?int
-    {
-        return $this->codePostal;
-    }
-
-    public function setCodePostal(int $codePostal): static
-    {
-        $this->codePostal = $codePostal;
-
-        return $this;
-    }
-
-
-    public function getLatitude(): ?int
-    {
-        return $this->latitude;
-    }
-
-    public function setLatitude(?int $latitude): static
-    {
-        $this->latitude = $latitude;
-
-        return $this;
-    }
-
-    public function getLongitude(): ?int
-    {
-        return $this->longitude;
-    }
-
-    public function setLongitude(?int $longitude): static
-    {
-        $this->longitude = $longitude;
-
-        return $this;
-    }
-
     public function getEtat(): ?Etat
     {
         return $this->etat;
@@ -199,6 +125,18 @@ class Sorties
     public function setEtat(?Etat $etat): static
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getLieu(): ?Lieu
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?Lieu $lieu): static
+    {
+        $this->lieu = $lieu;
 
         return $this;
     }
