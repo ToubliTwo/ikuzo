@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Entity\Etat;
 use App\Entity\Sorties;
-use App\Entity\Etat;
 use App\Form\AjouterSortieType;
 
 use App\Form\RechercheSortieFormType;
