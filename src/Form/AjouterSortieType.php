@@ -8,7 +8,6 @@ use App\Entity\Ville;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
@@ -20,6 +19,7 @@ class AjouterSortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
             ->add('titre', TextType::class, [
                 'label' => 'Nom de la sortie :',
                 'attr' => ['placeholder' => 'Donnez un titire à votre évènement !']
@@ -43,7 +43,14 @@ class AjouterSortieType extends AbstractType
                 'attr' => [
                     'placeholder' => 'hh:mm'
                 ]
+            ])
 
+            ->add('dateLimiteInscription', DateTimeType::class, [
+                'html5' => true,
+                'widget' => 'single_text',
+                'label' => 'Date limite d\'inscription :',
+                'input' => 'datetime_immutable',
+                'required'=> false
             ])
 
             ->add('description', TextareaType::class,
@@ -52,13 +59,6 @@ class AjouterSortieType extends AbstractType
                     ,'required'=> false
                 ])
 
-            ->add('dateLimiteInscription' , DateType::class, [
-                'html5' => true,
-                'widget' => 'single_text',
-                'label' => 'Date et heure de la sortie :',
-                'input' => 'datetime_immutable',
-                'required'=> false
-            ])
 
             ->add('ville', EntityType::class, [
                 'choice_label' => 'nom',

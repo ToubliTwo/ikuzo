@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Sorties;
 use App\Entity\Etat;
 use App\Form\AjouterSortieType;
@@ -39,14 +40,15 @@ class SortiesController extends AbstractController
         $sortieForm->handleRequest($request);
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
+            //associer par défaut l'état "Créée" à la nouvelle sortie sur le point d'être créée
  //définir l'état à Créée qui correspond à l'id 1 de Etat, le setteur dans l'entité Sorties prend en paramètre une instance de Etat
             $sortie->setEtat($entityManager->getReference(Etat::class, 1));
 
-
-
             $entityManager->persist($sortie);
             $entityManager->flush();
-            $this->addFlash('success', 'Evènement correctement ajouté ;)');
+
+            $this->addFlash('success', 'Évènement correctement ajouté !');
+
             return $this->redirectToRoute('main_home');
         }
         return $this -> render('sorties\sorties_ajouter.html.twig',
