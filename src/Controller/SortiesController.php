@@ -7,6 +7,8 @@ namespace App\Controller;
 use App\Entity\Sorties;
 use App\Entity\Etat;
 use App\Form\AjouterSortieType;
+
+use App\Form\RechercheSortieFormType;
 use App\Form\InscriptionSortieFormType;
 use App\Repository\SortiesRepository;
 use App\Security\Voter\SortieVoter;
@@ -25,6 +27,7 @@ class SortiesController extends AbstractController
         $sorties = $sortiesRepository->findAll();
         return $this->render('sorties\sorties.html.twig', ["sorties" => $sorties]);
     }
+
 
     #[Route('/sorties/ajouter', name:'sorties_ajouter')]
     #[IsGranted(SortieVoter::CREATE)]
@@ -65,6 +68,26 @@ class SortiesController extends AbstractController
             'sorties' => $sortie,
             'form' => $form
         ]);
+    }
+        #[Route('/sorties/par-campus', name: 'sorties_par_campus')]
+            public function sortiesParCampus(Request $request, SortiesRepository $sortiesRepository): Response
+        {
+                $sortie = new Sorties();
+                $sortieform = $this->createForm(RechercheSortieFormType::class);
+                $sortieform->handleRequest($request);
+
+                if ($sortieform->isSubmitted() && $sortieform->isValid()) {
+                   $campusId = $sortieform->get('campus')->getData()->getId();
+                    $sorties = $sortiesRepository->findByCampus($campusId);
+                } else {
+                    $sorties = []; // Mettre à jour pour obtenir toutes les sorties si aucun campus n'est sélectionné
+                }
+
+                return $this->render('sorties/sorties_par_campus.html.twig', [
+                  'sortieform' => $sortieform,
+                   'sorties' => $sorties,
+               ]);
+
     }
 
 }

@@ -20,6 +20,7 @@
             <th>Actions</th>
         </tr>
 
+
         {% for sortie in sorties %}
             <tr>
                 <td>{{ sortie.titre }}</td>
@@ -30,7 +31,7 @@
                 <td>''</td>
                 <td>{#{{ sortie.organisateur.pseudo }}#}</td>
                 <td>
-                    <a href="{{ path('sorties_inscription', {'id': sortie.id}) }}">S'inscrire</a>
+
                 </td>
             </tr>
         {% endfor %}
