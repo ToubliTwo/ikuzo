@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
 
         <title>{% block title %}Sortir.com{% endblock %}</title>
-        <link rel="icon" href="{{ asset('img/LogoProjetSortir.png') }}">
+        <link rel="icon" href="{{ asset('img/LogoProjetSortir.webp') }}">
 
         {# insertion d'une police d'écriture googlefonts (type cdn) : #}
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,12 +18,12 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         {#    insertion d'une icone #}
-        <link rel="icon" href="{{ asset('img/touktouk.png') }}">
+        <link rel="icon" href="{{ asset('img/LogoProjetSortir.webp') }}">
     </head>
     <body>
     {#    <div class="container">#}
         <header>
-            <a href="{{ path('main_home') }}"><img src="{{ asset('img/touktouk.png') }}" alt="Ikouzo !"></a> {%  include('inc/nav.html.twig') %}
+            <a href="{{ path('main_home') }}"><img src="{{ asset('img/LogoProjetSortir.webp') }}" alt="Ikouzo !"></a> {%  include('inc/nav.html.twig') %}
         </header>
         <main>
             {# read and display all flash messages #}

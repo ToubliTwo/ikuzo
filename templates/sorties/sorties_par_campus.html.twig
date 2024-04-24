@@ -1,9 +1,14 @@
+{# templates/sorties/sorties_par_campus.html.twig #}
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des sorties{% endblock %}
+{% block title %}Sorties par Campus{% endblock %}
 
 {% block body %}
-    <h1> Consulter la liste des sorties : </h1>
+    <h1>Sorties par Campus</h1>
+    {{form_start(sortieform) }}
+        {{ form_widget(sortieform) }}
+        {{ form_end(sortieform) }}
     <ul>
         {% for sortie in sorties %}
             <li>
@@ -14,7 +19,4 @@
             </li>
         {% endfor %}
     </ul>
-
-
-
 {% endblock %}
