@@ -2,15 +2,42 @@
 {% block title %} Créer une évènement {% endblock %}
 
 {% block body %}
-<h1> Ajouter un évènement :</h1>
-
-    <div>
-        <h2>Ajouter une sortie</h2>
-        {{ form_start (sortieForm) }}
-        {{ form_widget (sortieForm) }}
-        <button>Valider</button>
-        {{ form_end(sortieForm) }}
-    </div>
+        <h1>Créer une sortie</h1>
+       <div class="formulaires">
+            <div class="colonne">
+               {{ form_start (sortieForm) }}
+               {{ form_row(sortieForm.titre) }}
+               {{ form_row(sortieForm.date) }}
+               {{ form_row(sortieForm.nombreDePlaces) }}
+               {{ form_row(sortieForm.duree) }}
+               {{ form_row(sortieForm.description) }}
+            </div>
+            <div class="colonne">
+{#               {{ form_row(sortieForm.campus) }}#}
+{#               {{ (sortieForm.lieu.ville.nom) }}#}
+{#               {{ (sortieForm.lieu.nom) }}#}
+                 {{form_widget (sortieForm)}}
+               <div class="submit"><button type="submit">Valider</button></div>
+               {{ form_end(sortieForm) }}
+            </div>
+        </div>
+{#    {{ form_start(sortieForm) }}#}
+{#    {{ form_widget(sortieForm) }}#}
+{#    {{ form_end(sortieForm) }}#}
 {% endblock %}
 
 
+
+
+
+
+
+
+
+
+{#<h1>Créer une sortie</h1>#}
+{#    {{ form_start (sortieForm) }}#}
+{#    {{ form_widget (sortieForm) }}#}
+{#    <button>Valider</button>#}
+{#    {{ form_end(sortieForm) }}#}
+{#</div>#}

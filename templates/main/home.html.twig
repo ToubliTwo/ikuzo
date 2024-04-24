@@ -2,9 +2,11 @@
 {% block title %}SORTIR.COM - ENI{% endblock %}
 {% block body %}
 <h1>Rejoignez-nous sur notre plateforme exclusive Sortir.com</h1>
+
     {% if app.user %}
     <p>Bienvenue, {{ app.user.nom }} !</p>
     {% else %}
         <p>Organisez et participez à des sorties passionnantes avec d'autres stagiaires ENI, où que vous soyez !</p>
     {% endif %}
+
 {% endblock %}

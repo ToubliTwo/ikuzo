@@ -21,10 +21,24 @@
         <link rel="icon" href="{{ asset('img/LogoProjetSortir.webp') }}">
     </head>
     <body>
-    {#    <div class="container">#}
         <header>
-            <a href="{{ path('main_home') }}"><img src="{{ asset('img/LogoProjetSortir.webp') }}" alt="Ikouzo !"></a> {%  include('inc/nav.html.twig') %}
+
+           <div class="contenuDuHeader">
+               <a href="{{ path('main_home') }}"><img src="{{ asset('img/LogoProjetSortir.webp') }}" alt="Ikouzo !"></a>
+               {%  include('inc/nav.html.twig') %}
+           </div>
+           
         </header>
+        {# gestion du flash message : #}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+
         <main>
             {# read and display all flash messages #}
             {% for label, messages in app.flashes %}
@@ -37,8 +51,7 @@
             {% block body %}{% endblock %}
         </main>
         <footer>
-            &copy; {{ "now"|date("Y") }} | Sortir.com by #Devmj, #Toubli, #Carfaxx
+          {%  include('inc/footer.html.twig') %}
         </footer>
-{#    </div>#}
     </body>
 </html>
