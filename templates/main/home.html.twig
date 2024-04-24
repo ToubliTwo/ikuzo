@@ -1,12 +1,36 @@
 {% extends 'base.html.twig' %}
-{% block title %}SORTIR.COM - ENI{% endblock %}
+
+{% block title %}COM SORTIR - ENI{% endblock %}
+
 {% block body %}
 <h1>Rejoignez-nous sur notre plateforme exclusive Sortir.com</h1>
 
-    {% if app.user %}
-    <p>Bienvenue, {{ app.user.nom }} !</p>
-    {% else %}
-        <p>Organisez et participez à des sorties passionnantes avec d'autres stagiaires ENI, où que vous soyez !</p>
-    {% endif %}
+<p>Organisez et participez à des sorties passionnantes avec d'autres stagiaires ENI, où que vous soyez !</p>
+
+    //Afficher un tableau avec les sorties
+    <table>
+        <tr>
+            <th>Nom de la sortie</th>
+            <th>Date de la sortie</th>
+            <th>Clôture</th>
+            <th>Inscrits/places</th>
+            <th>Etat</th>
+            <th>Inscrit</th>
+            <th>Organisateur</th>
+            <th>Actions</th>
+        </tr>
+        {% for sortie in sorties %}
+            <tr>
+                <td>{{ sortie.titre }}</td>
+                <td>{{ sortie.date }}</td>
+
+                <td>
+                    <a href="{{ path('', {'id': sortie.id}) }}">Voir</a>
+                    <a href="{{ path('', {'id': sortie.id}) }}">Modifier</a>
+                    <a href="{{ path('', {'id': sortie.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 
 {% endblock %}
