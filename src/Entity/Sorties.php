@@ -56,6 +56,10 @@ class Sorties
     private ?Lieu $lieu = null;
 
 
+    #[ORM\ManyToOne(inversedBy: 'sorties')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Campus $campus = null;
+
     public function getId(): ?int
     {
         return $this->id;

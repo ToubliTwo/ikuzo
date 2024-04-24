@@ -20,5 +20,13 @@ class SortiesRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Sorties::class);
     }
+    public function findByCampus($campusId)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.campus = :campusId')
+            ->setParameter('campusId', $campusId)
+            ->getQuery()
+            ->getResult();
+    }
 
 }
