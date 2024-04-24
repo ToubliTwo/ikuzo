@@ -81,7 +81,7 @@ label {
 }
 
 .colonne {
-    flex:  1 ;
+    flex: 1;
     margin-right: 10px;
 }
 
@@ -123,13 +123,5 @@ button:hover {
     background-color: var(--couleur-secondaire);
 }
 
-.flash {
-    padding: 20px;
-    font-weight: bold;
-    font-size: 1.4rem;
-    margin: 1rem 0;
-    border-radius: 5px;
-}
 
-.flash-success {background-color: lawngreen}
 

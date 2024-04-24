@@ -23,7 +23,6 @@ class Sorties
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateLimiteInscription = null;
 
@@ -36,6 +35,10 @@ class Sorties
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
+
+//    #[ORM\ManyToOne(targetEntity: Etat::class, cascade: ["persist"])] //ajout de la possibilité de persister en BDD sur la table ETAT
+//    #[ORM\JoinColumn(nullable: false)]
+//    private ?Etat $etat;
 
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
