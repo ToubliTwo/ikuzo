@@ -1,9 +1,9 @@
 /migrations/
-/public/css/aap.css
+/public/css/app.css
 /composer.lock
 /idea/ikouzo.iml
 /idea/phpspec.xml
-/public/css/style.css
+
 
 ###> symfony/framework-bundle ###
 /.env.local

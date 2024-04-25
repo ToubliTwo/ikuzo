@@ -46,10 +46,11 @@ COUCOU !!!!
                         <a href="{{ path('actions_desinscription', {'id': sortie.id}) }}">Se désinscrire</a>
                     {% endif %}
                     <a href="{{ path('actions_details', {'id': sortie.id}) }}" title="{{ sortie.titre }}">Afficher</a>
-                    {#{% if sortie.organisateur == app.user %}
+{#                    {% if sortie.organisateur == app.user %}#}
+{#                    {% endif %}#}
+
                         <a href="{{ path('sorties_modifier', {'id': sortie.id}) }}">Modifier la sortie</a>
-                        <a href="{{ path('sorties_annuler', {'id': sortie.id}) }}">Annuler la sortie</a>
-                    {% endif %}#}
+                        <a href="{{ path('sorties_supprimer', {'id': sortie.id}) }}">Annuler la sortie</a>
 
                 </td>
             </tr>

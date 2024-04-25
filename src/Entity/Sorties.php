@@ -18,30 +18,24 @@ class Sorties
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank()]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\NotBlank]
     #[Assert\Type("\DateTimeInterface")]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\NotBlank]
     #[Assert\Type("\DateTimeInterface")]
     private ?\DateTimeInterface $dateLimiteInscription = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank]
     #[Assert\Type("integer")]
     private ?int $nombreDePlaces = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
-    #[Assert\NotBlank]
     #[Assert\Type("\DateTimeInterface")]
     private ?\DateTimeInterface $duree = null;
 
@@ -68,6 +62,10 @@ class Sorties
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
+
+    #[ORM\ManyToOne(inversedBy: 'sortieOrganise')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $organisateur = null;
 
     public function getId(): ?int
     {
@@ -203,6 +201,18 @@ class Sorties
     public function setCampus(?Campus $campus): self
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getOrganisateur(): ?User
+    {
+        return $this->organisateur;
+    }
+
+    public function setOrganisateur(?User $organisateur): static
+    {
+        $this->organisateur = $organisateur;
 
         return $this;
     }

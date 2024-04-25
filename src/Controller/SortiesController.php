@@ -55,6 +55,21 @@ class SortiesController extends AbstractController
             'sortieForm' => $sortieForm
         ]);
     }
+
+
+    #[Route('/sorties/supprimer/{id}', name:'sorties_supprimer')]
+    public function supprimer(EntityManagerInterface $entityManager, Sorties $supprimerSortie): Response
+    {
+
+        $entityManager->remove($supprimerSortie);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Évènement supprimé avec succès !');
+
+        return $this->redirectToRoute('main_home');
+    }
+
+
     #[Route('/sorties/modifier/{id}', name:'sorties_modifier')]
     public function modifier(SortiesRepository $sortiesRepository, Request $request, EntityManagerInterface $entityManager, Sorties $modifSortie): Response
     {
@@ -80,13 +95,10 @@ class SortiesController extends AbstractController
            }
 
         return $this -> render('sorties\sorties_modifier.html.twig',[
-            'sortieForm' => $modifSortieForm
+            'sortieForm' => $modifSortieForm,
+            'sortie' => $modifSortie
         ]);
     }
-
-
-
-
 
         #[Route('/sorties/par-campus', name: 'sorties_par_campus')]
             public function sortiesParCampus(Request $request, SortiesRepository $sortiesRepository): Response
@@ -117,10 +129,8 @@ class SortiesController extends AbstractController
                 }
 
                 return $this->render('sorties/sorties_par_campus.html.twig', [
-                  'sortieform' => $sortieform->createView(),
+                  'sortieform' => $sortieform,
                    'sorties' => $sorties,
                ]);
-
     }
-
 }
