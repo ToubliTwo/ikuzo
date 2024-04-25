@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AjouterSortieType extends AbstractType
+class AjouterSortieFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -35,7 +35,10 @@ class AjouterSortieType extends AbstractType
                 'required'=> false
             ])
 
-            ->add('nombreDePlaces', TextType::class, ['label' => 'Nombre de places :' ,'required'=> false])
+            ->add('nombreDePlaces', TextType::class, [
+                'label' => 'Nombre de places :'
+                ,'required'=> false
+            ])
 
             ->add('duree', TimeType::class, [
                 'html5' => true,
