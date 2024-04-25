@@ -1,4 +1,10 @@
 /migrations/
+/public/css/aap.css
+/composer.lock
+/idea/ikouzo.iml
+/idea/phpspec.xml
+/public/css/style.css
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -13,11 +19,6 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
-
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
 
 ###> symfony/asset-mapper ###
 /public/assets/
