@@ -27,6 +27,10 @@ class Ville
     #[ORM\OneToMany(targetEntity: Lieu::class, mappedBy: 'ville')]
     private Collection $lieux;
 
+//    #[ORM\OneToMany(targetEntity: Lieu::class, mappedBy: 'ville', cascade: ['persist'])]
+//    private $lieux;
+
+
     public function __construct()
     {
         $this->lieux = new ArrayCollection();
