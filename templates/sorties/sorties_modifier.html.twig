@@ -22,6 +22,6 @@
         <div class="submitValider"><button type="submit">Valider</button></div>
         <div class="submitAnnuler"><a href="{{ path('main_home') }}">Annuler</a></div>
     {{ form_end(sortieForm) }}
-        <div class="submitSupprimer"><a href="{{ path('sorties_supprimer', {'id': sortie.id}) }}" title="Delete">Supprimer</a></div>
+        <div class="submitSupprimer"><a href="{{ path('actions_supprimer', {'id': sortie.id}) }}" title="Delete">Supprimer</a></div>
     </div>
 {% endblock %}
