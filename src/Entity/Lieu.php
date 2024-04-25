@@ -31,6 +31,11 @@ class Lieu
     #[ORM\JoinColumn(nullable: false)]
     private ?Ville $ville = null;
 
+//    #[ORM\ManyToOne(targetEntity: Ville::class, inversedBy: 'lieux', cascade: ['persist'])]
+//    #[ORM\JoinColumn(nullable: false)]
+//    private ?Ville $ville = null;
+
+
     /**
      * @var Collection<int, Sorties>
      */
@@ -40,6 +45,13 @@ class Lieu
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
+    }
+    /**
+     * Méthode magique pour convertir l'objet en chaîne
+     */
+    public function __toString(): string
+    {
+        return $this->nom ?? ''; // Retourne le nom du lieu s'il existe, sinon une chaîne vide
     }
 
     public function getId(): ?int
