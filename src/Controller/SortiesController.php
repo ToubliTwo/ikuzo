@@ -85,9 +85,6 @@ class SortiesController extends AbstractController
     }
 
 
-
-
-
         #[Route('/sorties/par-campus', name: 'sorties_par_campus')]
             public function sortiesParCampus(Request $request, SortiesRepository $sortiesRepository): Response
         {
