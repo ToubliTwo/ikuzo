@@ -15,8 +15,8 @@ class SortiesFixtures extends Fixture implements  DependentFixtureInterface
         for ($i = 0; $i < 10; $i++) {
             $sortie = new Sorties();
             $sortie->setTitre($faker->jobTitle);
-            $sortie->setDate($faker->dateTimeBetween('-30 days', '+30 days'));
-            $sortie->setDateLimiteInscription($faker->dateTimeBetween('-30 days', '-1 days'));
+            $sortie->setDate($faker->dateTimeBetween('-30 days', '+90 days'));
+            $sortie->setDateLimiteInscription($faker->dateTimeBetween('-30 days', '+50 days'));
             $sortie->setNombreDePlaces($faker->numberBetween(1, 10));
             $sortie->setDuree($faker->dateTime);
             $sortie->setDescription($faker->text);

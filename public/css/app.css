@@ -10,6 +10,7 @@ body {
     display : flex;
     flex-direction: column;
     font-family: 'Crimson Text', serif;
+    z-index: 0;
 }
 
 header {
@@ -95,10 +96,25 @@ input, select {
     box-sizing: border-box;
     width: 250px;
 }
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 80%;
+    text-align: left;
+}
+
 textarea {
     resize: none;
     width : 250px;
     height : 100px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
 }
 
 label {
@@ -193,6 +209,7 @@ button:hover {
     font-size: 1.4rem;
     border-radius: 5px;
     text-align: center;
+    margin: 1rem 0;
 }
 
 .flash-success {
@@ -204,6 +221,7 @@ button:hover {
 .flash-fail{
     color: white;
     background-color: red;
+}
 
 .formulaires ul {
     flex: 1;
@@ -211,8 +229,4 @@ button:hover {
     padding: 0;
     margin: 0;
     text-align: left;
-}
-
-.formulaires li {
-
 }
