@@ -133,7 +133,11 @@ label {
 /* Template pour les boutons cliquables genre submit */
 button[type="submit"]{
     /* Réinitialiser les styles par défaut */
-    border: none;
+
+ /*   background-color: transparent;
+    border: none;*/
+    /*color: inherit;*/
+
     cursor: pointer;
     padding: 0;
     font: inherit;
@@ -196,7 +200,19 @@ button:hover {
     background-color: var(--couleur-secondaire);
 }
 
+
 .flash-fail{
     color: white;
     background-color: red;
+
+.formulaires ul {
+    flex: 1;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.formulaires li {
+
 }

@@ -63,11 +63,13 @@ class AjouterSortieType extends AbstractType
                     ,'required'=> false
                 ])
 
+
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'nom',
                 'label' => 'Campus :',
             ])
+
 
             ->add('ville', EntityType::class, [
                 'choice_label' => 'nom',
@@ -93,7 +95,13 @@ class AjouterSortieType extends AbstractType
             'required'=> false,
             'class' => Lieu::class,
                 'mapped' => false,
-        ]);
+        ])
+
+            ->add('campus', EntityType::class, [
+            'choice_label' => 'nom',
+            'class' => Campus::class,
+    ]);
+
         }
     public function configureOptions(OptionsResolver $resolver): void
     {
