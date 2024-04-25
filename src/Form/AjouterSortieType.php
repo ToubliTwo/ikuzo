@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\Lieu;
 use App\Entity\Sorties;
 use App\Entity\Ville;
@@ -59,6 +60,11 @@ class AjouterSortieType extends AbstractType
                     ,'required'=> false
                 ])
 
+            ->add('campus', EntityType::class, [
+                'class' => Campus::class,
+                'choice_label' => 'nom',
+                'label' => 'Campus :',
+            ])
 
             ->add('ville', EntityType::class, [
                 'choice_label' => 'nom',

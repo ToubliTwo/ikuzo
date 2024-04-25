@@ -3,12 +3,11 @@
 namespace App\DataFixtures;
 
 use App\Entity\Lieu;
-use App\Entity\Ville;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
 
-class LieuFixtures extends Fixture
+class LieuFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
