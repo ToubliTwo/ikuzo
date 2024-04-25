@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Etat;
 use App\Entity\Sorties;
-use App\Form\AjouterSortieFormType;
+use App\Form\AjouterSortieType;
 use App\Form\ModifierSortieFormType;
 use App\Form\RechercheSortieFormType;
 use App\Form\InscriptionSortieFormType;
@@ -34,7 +34,7 @@ class SortiesController extends AbstractController
     public function ajouter(Request $request, EntityManagerInterface $entityManager): Response
     {
         $sortie = new Sorties();
-        $sortieForm = $this->createForm(AjouterSortieFormType::class, $sortie);
+        $sortieForm = $this->createForm(AjouterSortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
