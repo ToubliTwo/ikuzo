@@ -55,82 +55,33 @@ class SortiesController extends AbstractController
             'sortieForm' => $sortieForm
         ]);
     }
-
-
-    #[Route('/sorties/supprimer/{id}', name:'sorties_supprimer')]
-    public function supprimer(EntityManagerInterface $entityManager, Sorties $supprimerSortie): Response
+    #[Route('/sorties/par-campus', name: 'sorties_par_campus')]
+    public function sortiesParCampus(Request $request, SortiesRepository $sortiesRepository): Response
     {
-
-        $entityManager->remove($supprimerSortie);
-        $entityManager->flush();
-
-        $this->addFlash('success', 'Évènement supprimé avec succès !');
-
-        return $this->redirectToRoute('main_home');
-    }
-
-
-    #[Route('/sorties/modifier/{id}', name:'sorties_modifier')]
-    public function modifier(SortiesRepository $sortiesRepository, Request $request, EntityManagerInterface $entityManager, Sorties $modifSortie): Response
-    {
-        $modifSortieForm = $this->createForm(ModifierSortieFormType::class, $modifSortie);
-
-        $modifSortieForm->handleRequest($request);
-
-        //ci-dessous, on va chercher la fonction find du repository pour récupérer l'ID de la sortie à modifier
-        $modifSortie = $sortiesRepository -> find($modifSortie->getId());
-
-        if ($modifSortieForm->isSubmitted() && $modifSortieForm->isValid()) {
-
-            $entityManager->persist($modifSortie);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Évènement correctement modifié !');
-
-            return $this->redirectToRoute('main_home');
+        $sortie = new Sorties();
+        $sortieform = $this->createForm(RechercheSortieFormType::class);
+        $sortieform->handleRequest($request);
+        if ($sortieform->isSubmitted() && $sortieform->isValid()) {
+            // Récupérer les valeurs des champs du formulaire
+            $campusId = $sortieform->get('campus')->getData()->getId();
+            $organisateur = $sortieform->get('organisateur')->getData();
+            $inscrit = $sortieform->get('inscrit')->getData();
+            $pasInscrit = $sortieform->get('pasInscrit')->getData();
+            $sortiesPassees = $sortieform->get('sortiesPassees')->getData();
+            // Filtrer les sorties en fonction des valeurs des champs du formulaire
+            $sorties = $sortiesRepository->findByCriteria(
+                $campusId,
+                $organisateur,
+                $inscrit,
+                $pasInscrit,
+                $sortiesPassees
+            );
+        } else {
+            $sorties = []; // Mettre à jour pour obtenir toutes les sorties si aucun campus n'est sélectionné
         }
-           else if ($modifSortieForm->isSubmitted() && !$modifSortieForm->isValid())
-           {
-               $this->addFlash('fail', 'OOOOoops !');
-           }
-
-        return $this -> render('sorties\sorties_modifier.html.twig',[
-            'sortieForm' => $modifSortieForm,
-            'sortie' => $modifSortie
+        return $this->render('sorties/sorties_par_campus.html.twig', [
+            'sortieform' => $sortieform,
+            'sorties' => $sorties,
         ]);
-    }
-
-        #[Route('/sorties/par-campus', name: 'sorties_par_campus')]
-            public function sortiesParCampus(Request $request, SortiesRepository $sortiesRepository): Response
-        {
-            $sortie = new Sorties();
-            $sortieform = $this->createForm(RechercheSortieFormType::class);
-            $sortieform->handleRequest($request);
-
-            if ($sortieform->isSubmitted() && $sortieform->isValid()) {
-                // Récupérer les valeurs des champs du formulaire
-                $campusId = $sortieform->get('campus')->getData()->getId();
-
-                $organisateur = $sortieform->get('organisateur')->getData();
-                $inscrit = $sortieform->get('inscrit')->getData();
-                $pasInscrit = $sortieform->get('pasInscrit')->getData();
-                $sortiesPassees = $sortieform->get('sortiesPassees')->getData();
-
-                // Filtrer les sorties en fonction des valeurs des champs du formulaire
-                $sorties = $sortiesRepository->findByCriteria(
-                    $campusId,
-                    $organisateur,
-                    $inscrit,
-                    $pasInscrit,
-                    $sortiesPassees
-                );
-                } else {
-                    $sorties = []; // Mettre à jour pour obtenir toutes les sorties si aucun campus n'est sélectionné
-                }
-
-                return $this->render('sorties/sorties_par_campus.html.twig', [
-                  'sortieform' => $sortieform,
-                   'sorties' => $sorties,
-               ]);
     }
 }

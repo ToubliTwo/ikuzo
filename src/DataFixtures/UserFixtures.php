@@ -19,20 +19,21 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $faker = \Faker\Factory::create('fr_FR');
 
         for ($i = 0; $i < 10; $i++) {
-            $participant = new User();
-            $participant->setNom($faker->lastName);
-            $participant->setPrenom($faker->firstName);
-            $participant->setPseudo($faker->userName);
-            $participant->setTelephone($faker->phoneNumber);
-            $participant->setEmail($faker->email);
-            $participant->setPassword($this->passwordHasher->hashPassword(
-                $participant,
+            $user = new User();
+            $user->setNom($faker->lastName);
+            $user->setPrenom($faker->firstName);
+            $user->setPseudo($faker->userName);
+            $user->setTelephone($faker->phoneNumber);
+            $user->setEmail($faker->email);
+            $user->setPassword($this->passwordHasher->hashPassword(
+                $user,
                 'password'
             ));
-            $participant->setAdministrateur($faker->boolean);
-            $participant->setActif($faker->boolean);
-            $participant->setCampus($this->getReference("campus_" . $faker->numberBetween(1, 3)));
-            $manager->persist($participant);
+            $user->setAdministrateur($faker->boolean);
+            $user->setActif($faker->boolean);
+            $user->setCampus($this->getReference("campus_" . $faker->numberBetween(1, 3)));
+            $this->addReference("user_" . ($i + 1), $user);
+            $manager->persist($user);
         }
 
         $manager->flush();
