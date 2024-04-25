@@ -76,4 +76,5 @@ class SortiesRepository extends ServiceEntityRepository
         // Exécuter la requête
         return $queryBuilder->getQuery()->getResult();
     }
+
 }
