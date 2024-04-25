@@ -31,6 +31,11 @@ class Lieu
     #[ORM\JoinColumn(nullable: false)]
     private ?Ville $ville = null;
 
+//    #[ORM\ManyToOne(targetEntity: Ville::class, inversedBy: 'lieux', cascade: ['persist'])]
+//    #[ORM\JoinColumn(nullable: false)]
+//    private ?Ville $ville = null;
+
+
     /**
      * @var Collection<int, Sorties>
      */

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Etat;
 use App\Entity\Sorties;
 use App\Form\AjouterSortieType;
-
 use App\Form\RechercheSortieFormType;
 use App\Form\InscriptionSortieFormType;
 use App\Repository\SortiesRepository;
@@ -42,6 +42,7 @@ class SortiesController extends AbstractController
             //associer par défaut l'état "Créée" à la nouvelle sortie sur le point d'être créée
  //définir l'état à Créée qui correspond à l'id 1 de Etat, le setteur dans l'entité Sorties prend en paramètre une instance de Etat
             $sortie->setEtat($entityManager->getReference(Etat::class, 1));
+
 
             $entityManager->persist($sortie);
             $entityManager->flush();
