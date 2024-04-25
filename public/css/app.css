@@ -87,8 +87,8 @@ label {
 
 button[type="submit"]{
     /* Réinitialiser les styles par défaut */
-    background-color: transparent;
-    border: none;
+ /*   background-color: transparent;
+    border: none;*/
     /*color: inherit;*/
     cursor: pointer;
     padding: 0;
@@ -121,4 +121,16 @@ button:hover {
 .flash-success {
     color: var(--couleur-principale);
     background-color: var(--couleur-secondaire);
+}
+
+.formulaires ul {
+    flex: 1;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.formulaires li {
+    margin-bottom: 1rem;
 }

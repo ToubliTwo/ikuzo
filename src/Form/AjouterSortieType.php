@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\Lieu;
 use App\Entity\Sorties;
 use App\Entity\Ville;
@@ -59,7 +60,6 @@ class AjouterSortieType extends AbstractType
                     ,'required'=> false
                 ])
 
-
             ->add('ville', EntityType::class, [
                 'choice_label' => 'nom',
                 'class' => Ville::class,
@@ -84,7 +84,13 @@ class AjouterSortieType extends AbstractType
             'required'=> false,
             'class' => Lieu::class,
                 'mapped' => false,
-        ]);
+        ])
+
+            ->add('campus', EntityType::class, [
+            'choice_label' => 'nom',
+            'class' => Campus::class,
+    ]);
+
         }
     public function configureOptions(OptionsResolver $resolver): void
     {
