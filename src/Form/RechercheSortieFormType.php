@@ -39,6 +39,7 @@ class RechercheSortieFormType extends AbstractType
                 'widget' => 'single_text',
                 'mapped' => false,
                 'required' => false,
+
             ])
             // Ajout de la case à cocher pour les sorties dont vous êtes l'organisateur/trice
             ->add('organisateur', CheckboxType::class, [
