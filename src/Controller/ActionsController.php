@@ -50,7 +50,6 @@ class ActionsController extends AbstractController
     {
         // Récupérer l'utilisateur actuellement connecté (vous devez gérer cela en fonction de votre système d'authentification)
         $user = $this->getUser();
-
         // Vérifier si l'utilisateur est inscrit à la sortie
         if ($sortie->getUsers()->contains($user)) {
             // Vérifier si la date de sortie est dépassée
