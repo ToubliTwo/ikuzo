@@ -62,42 +62,6 @@ class RechercheSortieFormType extends AbstractType
                 'required' => false,
                 'mapped' => false,
             ])
-            //mettre les champs de Sorties manquant dans le formulaire
-                ->add('dateLimiteInscription', DateType::class, [
-                    'label' => 'Date limite d\'inscription :',
-                    'widget' => 'single_text',
-                    'required' => false,
-                ])
-                ->add('date', DateType::class, [
-                    'label' => 'Date de la sortie :',
-                    'widget' => 'single_text',
-                    'required' => false,
-                ])
-                ->add('lieu', null, [
-                    'label' => 'Lieu :',
-                    'required' => false,
-                ])
-                ->add('ville', null, [
-                    'label' => 'Ville :',
-                    'required' => false,
-                ])
-                ->add('etat', null, [
-                    'label' => 'Etat :',
-                    'required' => false,
-                ])
-                ->add('description', null, [
-                    'label' => 'Description :',
-                    'required' => false,
-                ])
-                ->add('duree', null, [
-                    'label' => 'Durée :',
-                    'required' => false,
-                ])
-                ->add('nombreDePlaces', null, [
-                    'label' => 'Nombre de places :',
-                    'required' => false,
-                ])
-
 
             ->add("submit", SubmitType::class, [
                 'label' => 'Rechercher'
