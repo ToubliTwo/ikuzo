@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Campus;
 use App\Entity\Etat;
 use App\Entity\Sorties;
 use App\Form\AjouterSortieType;
+use App\Form\ModifierSortieFormType;
 use App\Form\RechercheSortieFormType;
 use App\Repository\SortiesRepository;
 use App\Security\Voter\SortieVoter;
@@ -55,6 +55,35 @@ class SortiesController extends AbstractController
             'sortieForm' => $sortieForm
         ]);
     }
+    #[Route('/sorties/modifier/{id}', name:'sorties_modifier')]
+    public function modifier(SortiesRepository $sortiesRepository, Request $request, EntityManagerInterface $entityManager, Sorties $modifSortie): Response
+    {
+        $modifSortieForm = $this->createForm(ModifierSortieFormType::class, $modifSortie);
+
+        $modifSortieForm->handleRequest($request);
+
+        //ci-dessous, on va chercher la fonction find du repository pour récupérer l'ID de la sortie à modifier
+        $modifSortie = $sortiesRepository -> find($modifSortie->getId());
+
+        if ($modifSortieForm->isSubmitted() && $modifSortieForm->isValid()) {
+
+            $entityManager->persist($modifSortie);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Évènement correctement modifié !');
+
+            return $this->redirectToRoute('main_home');
+        }
+           else if ($modifSortieForm->isSubmitted() && !$modifSortieForm->isValid())
+           {
+               $this->addFlash('fail', 'OOOOoops !');
+           }
+
+        return $this -> render('sorties\sorties_modifier.html.twig',[
+            'sortieForm' => $modifSortieForm
+        ]);
+    }
+
 
 
 

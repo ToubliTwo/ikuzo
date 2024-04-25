@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Campus;
+use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Sorties;
+use App\Entity\User;
 use App\Entity\Ville;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -15,23 +17,22 @@ use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AjouterSortieType extends AbstractType
+class ModifierSortieFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
             ->add('titre', TextType::class, [
                 'label' => 'Nom de la sortie :',
-                'attr' => ['placeholder' => 'Donnez un titire à votre évènement !']
+                'attr' => ['placeholder' => 'modifiez le titre ']
                 ,'required'=> false
             ])
 
             ->add('date', DateTimeType::class, [
                 'html5' => true,
                 'widget' => 'single_text',
-                'label' => 'Date et heure de la sortie :',
-                'input' => 'datetime_immutable',
+                'label' => 'Modifiez la date et l\'heure :',
+//                'input' => 'datetime_immutable',
                 'required'=> false
             ])
 
@@ -53,16 +54,15 @@ class AjouterSortieType extends AbstractType
                 'html5' => true,
                 'widget' => 'single_text',
                 'label' => 'Date limite d\'inscription :',
-                'input' => 'datetime_immutable',
+//                'input' => 'datetime_immutable',
                 'required'=> false
             ])
 
             ->add('description', TextareaType::class,
                 ['label' => 'Description et infos : ',
-                    'attr' => ['placeholder' => 'Ajoutez une description à votre évènement !']
+                    'attr' => ['placeholder' => 'Modifiez la description de votre évènement !']
                     ,'required'=> false
                 ])
-
 
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
@@ -70,6 +70,10 @@ class AjouterSortieType extends AbstractType
                 'label' => 'Campus :',
             ])
 
+            ->add('etat', EntityType::class, [
+                'class' => Etat::class,
+                'choice_label' => 'libelle',
+            ])
 
             ->add('ville', EntityType::class, [
                 'choice_label' => 'nom',
@@ -84,25 +88,22 @@ class AjouterSortieType extends AbstractType
             ])
 
             ->add('latitude',EntityType::class, [
-            'choice_label' => 'latitude',
-            'required'=> false,
-            'class' => Lieu::class,
+                'choice_label' => 'latitude',
+                'required'=> false,
+                'class' => Lieu::class,
                 'mapped' => false,
-        ])
+            ])
 
             ->add('longitude',EntityType::class, [
-            'choice_label' => 'longitude',
-            'required'=> false,
-            'class' => Lieu::class,
+                'choice_label' => 'longitude',
+                'required'=> false,
+                'class' => Lieu::class,
                 'mapped' => false,
-        ])
+            ]);
 
-            ->add('campus', EntityType::class, [
-            'choice_label' => 'nom',
-            'class' => Campus::class,
-    ]);
+        ;
+    }
 
-        }
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -110,4 +111,3 @@ class AjouterSortieType extends AbstractType
         ]);
     }
 }
-
