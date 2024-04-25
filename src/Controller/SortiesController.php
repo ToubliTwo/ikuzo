@@ -9,7 +9,6 @@ use App\Entity\Etat;
 use App\Entity\Sorties;
 use App\Form\AjouterSortieType;
 use App\Form\RechercheSortieFormType;
-use App\Form\InscriptionSortieFormType;
 use App\Repository\SortiesRepository;
 use App\Security\Voter\SortieVoter;
 use Doctrine\ORM\EntityManagerInterface;
@@ -57,20 +56,9 @@ class SortiesController extends AbstractController
         ]);
     }
 
-    #[Route('/sorties/{id}/inscription', name:'sorties_inscription')]
-    public function inscriptionSortie(Sorties $sortie, Request $request): Response
-    {
-        $form = $this->createForm(InscriptionSortieFormType::class);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->addFlash('success', 'Inscription à la sortie réussie');
-            return $this->redirectToRoute('main_home');
-        }
-        return $this->render('main/home.html.twig', [
-            'sorties' => $sortie,
-            'form' => $form
-        ]);
-    }
+
+
+
         #[Route('/sorties/par-campus', name: 'sorties_par_campus')]
             public function sortiesParCampus(Request $request, SortiesRepository $sortiesRepository): Response
         {
