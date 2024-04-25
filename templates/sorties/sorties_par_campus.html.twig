@@ -6,7 +6,7 @@
 
 {% block body %}
     <h1>Sorties par Campus</h1>
-    {{form_start(sortieform) }}
+        {{form_start(sortieform) }}
         {{ form_widget(sortieform) }}
         {{ form_end(sortieform) }}
     <ul>
@@ -14,7 +14,7 @@
             <li>
                 <strong>{{ sortie.titre }}</strong><br>
                 <em>{{ sortie.description }}</em><br>
-                Lieu: {{ sortie.lieu }}<br>
+                Lieu: {{ sortie.lieu.nom }}<br>
                 Date: {{ sortie.date|date('d/m/Y') }}
             </li>
         {% endfor %}

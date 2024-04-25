@@ -23,19 +23,39 @@ class RechercheSortieFormType extends AbstractType
                 'choice_label' => 'nom',
                 'placeholder' => 'Sélectionnez un campus',
             ])
-            ->add('dateSelectionnee', DateType::class, [
+            ->add('dateRecherche', DateType::class, [
+                'label' => 'Entre',
                 'widget' => 'single_text',
-                // Vous pouvez ajouter d'autres options de personnalisation ici
+                'mapped' => 'false',
+
+            ])
+            ->add('dateDeFin', DateType::class, [
+                'label' => ' Et',
+                'widget' => 'single_text',
+                'mapped' => 'false',
+
             ])
             // Ajout de la case à cocher pour les sorties dont vous êtes l'organisateur/trice
             ->add('organisateur', CheckboxType::class, [
                 'label' => 'Sorties dont je suis l\'organisateur/trice',
                 'required' => false,
+                'mapped' => 'false',
             ])
             // Ajout de la case à cocher pour les sorties auxquelles vous êtes inscrit/e
             ->add('inscrit', CheckboxType::class, [
                 'label' => 'Sorties auxquelles je suis inscrit/e',
                 'required' => false,
+                'mapped' => 'false',
+            ])
+            ->add('pasInscrit', CheckboxType::class, [
+                'label' => 'Sorties auxquelles je ne suis pas inscrit/e',
+                'required' => false,
+                'mapped' => 'false',
+            ])
+            ->add('sortiesPassees', CheckboxType::class, [
+                'label' => 'Sorties passées',
+                'required' => false,
+                'mapped' => 'false',
             ])
 
             ->add("submit", SubmitType::class, [
