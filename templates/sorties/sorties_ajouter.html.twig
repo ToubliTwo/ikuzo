@@ -13,9 +13,6 @@
                {{ form_row(sortieForm.description) }}
             </div>
             <div class="colonne">
-{#               {{ form_row(sortieForm.campus) }}#}
-{#               {{ (sortieForm.lieu.ville.nom) }}#}
-{#               {{form_row(sortieForm.lieu.nom) }}#}
                  {{form_widget (sortieForm)}}
             </div>
         </div>
@@ -24,9 +21,6 @@
                 <div class="submitAnnuler"><a href="{{ path('main_home') }}">Annuler</a></div>
             </div>
                {{ form_end(sortieForm) }}
-{#    {{ form_start(sortieForm) }}#}
-{#    {{ form_widget(sortieForm) }}#}
-{#    {{ form_end(sortieForm) }}#}
 {% endblock %}
 
 
@@ -36,11 +30,3 @@
 
 
 
-
-
-{#<h1>Créer une sortie</h1>#}
-{#    {{ form_start (sortieForm) }}#}
-{#    {{ form_widget (sortieForm) }}#}
-{#    <button>Valider</button>#}
-{#    {{ form_end(sortieForm) }}#}
-{#</div>#}

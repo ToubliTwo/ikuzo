@@ -5,11 +5,13 @@ namespace App\Controller;
 use App\Entity\Sorties;
 use App\Form\ModifierSortieFormType;
 use App\Repository\SortiesRepository;
+use App\Security\Voter\ProfilVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ActionsController extends AbstractController
 {
@@ -46,6 +48,7 @@ class ActionsController extends AbstractController
     }
 
     #[Route('/sorties/desinscription/{id}', name:'actions_desinscription')]
+    #[IsGranted(ProfilVoter::DELETE, subject: 'user')]
     public function desinscrireSortie(Sorties $sortie, EntityManagerInterface $em): Response
     {
         // Récupérer l'utilisateur actuellement connecté (vous devez gérer cela en fonction de votre système d'authentification)

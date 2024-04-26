@@ -20,13 +20,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class SortiesController extends AbstractController
 {
-    #[Route('/sorties', name:'sorties_afficher')]
-    public function afficher(SortiesRepository $sortiesRepository): Response
-    {
-        $sorties = $sortiesRepository->findAll();
-        return $this->render('sorties\sorties.html.twig', ["sorties" => $sorties]);
-    }
-
 
     #[Route('/sorties/ajouter', name:'sorties_ajouter')]
     #[IsGranted(SortieVoter::CREATE)]
@@ -42,7 +35,6 @@ class SortiesController extends AbstractController
  //définir l'état à Créée qui correspond à l'id 1 de Etat, le setteur dans l'entité Sorties prend en paramètre une instance de Etat
             $sortie->setEtat($entityManager->getReference(Etat::class, 1));
 
-
             $entityManager->persist($sortie);
             $entityManager->flush();
 
@@ -55,33 +47,5 @@ class SortiesController extends AbstractController
             'sortieForm' => $sortieForm
         ]);
     }
-    #[Route('/sorties/par-campus', name: 'sorties_par_campus')]
-    public function sortiesParCampus(Request $request, SortiesRepository $sortiesRepository): Response
-    {
-        $sortie = new Sorties();
-        $sortieform = $this->createForm(RechercheSortieFormType::class);
-        $sortieform->handleRequest($request);
-        if ($sortieform->isSubmitted() && $sortieform->isValid()) {
-            // Récupérer les valeurs des champs du formulaire
-            $campusId = $sortieform->get('campus')->getData()->getId();
-            $organisateur = $sortieform->get('organisateur')->getData();
-            $inscrit = $sortieform->get('inscrit')->getData();
-            $pasInscrit = $sortieform->get('pasInscrit')->getData();
-            $sortiesPassees = $sortieform->get('sortiesPassees')->getData();
-            // Filtrer les sorties en fonction des valeurs des champs du formulaire
-            $sorties = $sortiesRepository->findByCriteria(
-                $campusId,
-                $organisateur,
-                $inscrit,
-                $pasInscrit,
-                $sortiesPassees
-            );
-        } else {
-            $sorties = []; // Mettre à jour pour obtenir toutes les sorties si aucun campus n'est sélectionné
-        }
-        return $this->render('sorties/sorties_par_campus.html.twig', [
-            'sortieform' => $sortieform,
-            'sorties' => $sorties,
-        ]);
-    }
+
 }
