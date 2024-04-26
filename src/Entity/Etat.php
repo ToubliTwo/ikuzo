@@ -48,6 +48,10 @@ class Etat
 
         return $this;
     }
+    public function __toString(): string
+    {
+        return $this->libelle ?: ''; // Assurez-vous de renvoyer une chaîne non null
+    }
 
     /**
      * @return Collection<int, Sorties>

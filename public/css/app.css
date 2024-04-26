@@ -1,6 +1,6 @@
 :root {
     --couleur-principale : #EEEEFF ;
-    --couleur-secondaire : #7F7CAF ;
+    --couleur-secondaire : #c1ff72;
     --couleur-tertiaire : #9FB4C7;
     --couleur-quaternaire : #28587B;
     font-family: 'Crimson Text', serif;
@@ -182,6 +182,29 @@ button:hover {
     transform: rotateY(10deg) scale(1.1); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
     border: solid 1px black;
 }
+
+a.button-create {
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
+    /*border: solid 1px black;*/
+
+    /* styles personnalisés */
+    justify-content: center;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+    width: 100px;
+    height: 40px;
+}
+
+a.button-create:hover {
+    background-color: forestgreen;
+    transition: transform 0.2s;
+    transform: rotateY(10deg) scale(1.1);
+}
+
 /************************************************/
 
 
@@ -201,18 +224,36 @@ button:hover {
 }
 
 
-.flash-fail{
+.flash-fail {
     color: white;
     background-color: red;
 
-.formulaires ul {
-    flex: 1;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    text-align: left;
-}
+    .formulaires ul {
+        flex: 1;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+    }
 
-.formulaires li {
+    .formulaires li {
 
+    }
+    /* tableau sorties */
+
+    .tableau-sorties {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .tableau-sorties th,
+    .tableau-sorties td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .tableau-sorties th {
+        background-color: #f2f2f2;
+    }
 }

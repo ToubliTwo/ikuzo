@@ -18,24 +18,25 @@ class RechercheSortieFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre', null, [
-                'label' => 'Le nom de la sortie contient :',
-                'required' => false,
-            ])
+
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'nom',
                 'placeholder' => 'Sélectionnez un campus',
                 'required' => false,
             ])
-            ->add('dateRecherche', DateType::class, [
-                'label' => 'Entre',
+            ->add('titre', null, [
+                'label' => 'Le nom de la sortie contient :',
+                'required' => false,
+            ])
+            ->add('dateDebut', DateType::class, [
+                'label' => 'Entre le',
                 'widget' => 'single_text',
                 'mapped' => false,
                 'required' => false,
             ])
             ->add('dateDeFin', DateType::class, [
-                'label' => ' Et',
+                'label' => ' Et le',
                 'widget' => 'single_text',
                 'mapped' => false,
                 'required' => false,
@@ -62,42 +63,6 @@ class RechercheSortieFormType extends AbstractType
                 'required' => false,
                 'mapped' => false,
             ])
-            //mettre les champs de Sorties manquant dans le formulaire
-                ->add('dateLimiteInscription', DateType::class, [
-                    'label' => 'Date limite d\'inscription :',
-                    'widget' => 'single_text',
-                    'required' => false,
-                ])
-                ->add('date', DateType::class, [
-                    'label' => 'Date de la sortie :',
-                    'widget' => 'single_text',
-                    'required' => false,
-                ])
-                ->add('lieu', null, [
-                    'label' => 'Lieu :',
-                    'required' => false,
-                ])
-                ->add('ville', null, [
-                    'label' => 'Ville :',
-                    'required' => false,
-                ])
-                ->add('etat', null, [
-                    'label' => 'Etat :',
-                    'required' => false,
-                ])
-                ->add('description', null, [
-                    'label' => 'Description :',
-                    'required' => false,
-                ])
-                ->add('duree', null, [
-                    'label' => 'Durée :',
-                    'required' => false,
-                ])
-                ->add('nombreDePlaces', null, [
-                    'label' => 'Nombre de places :',
-                    'required' => false,
-                ])
-
 
             ->add("submit", SubmitType::class, [
                 'label' => 'Rechercher'
