@@ -5,14 +5,18 @@ namespace App\DataFixtures;
 use App\Entity\Campus;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use phpDocumentor\Reflection\Types\Self_;
 
 class CampusFixtures extends Fixture
 {
+
+    public const CAMPUS_NOM = ['Rennes', 'Nantes', 'Niort'];
+
     public function load(ObjectManager $manager): void
     {
-        $campusNoms = ['Rennes', 'Nantes', 'Niort'];
 
-        foreach ($campusNoms as $index => $campusNom) {
+
+        foreach (self::CAMPUS_NOM as $index => $campusNom) {
             $campus = new Campus();
             $campus->setNom($campusNom);
             $manager->persist($campus);

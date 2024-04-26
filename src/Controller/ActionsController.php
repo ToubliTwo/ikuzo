@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Sorties;
 use App\Form\ModifierSortieFormType;
 use App\Repository\SortiesRepository;
@@ -48,7 +49,7 @@ class ActionsController extends AbstractController
     }
 
     #[Route('/sorties/desinscription/{id}', name:'actions_desinscription')]
-    #[IsGranted(ProfilVoter::DELETE, subject: 'user')]
+ /*   #[IsGranted(ProfilVoter::DELETE, subject: 'user')]*/
     public function desinscrireSortie(Sorties $sortie, EntityManagerInterface $em): Response
     {
         // Récupérer l'utilisateur actuellement connecté (vous devez gérer cela en fonction de votre système d'authentification)
@@ -111,6 +112,17 @@ class ActionsController extends AbstractController
             'sortieForm' => $modifSortieForm,
             'sortie' => $modifSortie
         ]);
+    }
+    #[Route('/sorties/publier/{id}', name:'actions_publier')]
+    public function publier(EntityManagerInterface $entityManager, Sorties $publierSortie): Response
+    {
+        $etatId = $entityManager->getReference(Etat::class, 2);
+        $publierSortie->setEtat($etatId);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Évènement publié avec succès !');
+
+        return $this->redirectToRoute('main_home');
     }
     #[Route('/sorties/supprimer/{id}', name:'actions_supprimer')]
     public function supprimer(EntityManagerInterface $entityManager, Sorties $supprimerSortie): Response

@@ -10,15 +10,18 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
+    const NB_USERS = 10;
+
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         $this->passwordHasher = $passwordHasher;
     }
     public function load(ObjectManager $manager): void
     {
+
         $faker = \Faker\Factory::create('fr_FR');
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < self::NB_USERS; $i++) {
             $user = new User();
             $user->setNom($faker->lastName);
             $user->setPrenom($faker->firstName);

@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\ChangementEtat;
 use App\Entity\Etat;
 use App\Entity\Sorties;
 use App\Form\AjouterSortieType;
-use App\Form\ModifierSortieFormType;
-use App\Form\RechercheSortieFormType;
 use App\Repository\SortiesRepository;
 use App\Security\Voter\SortieVoter;
+use App\Services\ChangementEtat;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +19,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class SortiesController extends AbstractController
 {
-    #[Route('/sorties', name: 'sorties_afficher')]
+/*    #[Route('/sorties', name: 'sorties_afficher')]
     public function afficher(SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager, ChangementEtat $changementEtat): Response
     {
         //obtenir la date actuelle :
@@ -35,7 +33,7 @@ class SortiesController extends AbstractController
         }
 
         return $this->render('sorties\sorties.html.twig', ["dateActuelle" => $dateActuelle, "tiensPrendsMonTableau" => $tableauDeSortiesQuiContientToutesLesSorties]); //"sorties" => $sorties,
-    }
+    }*/
 
     #[Route('/sorties/ajouter', name: 'sorties_ajouter')]
     #[IsGranted(SortieVoter::CREATE)]
