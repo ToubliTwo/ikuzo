@@ -17,14 +17,15 @@ class UserController extends AbstractController
 {
     #[Route('/user/modifier/{id}', name: 'user_modifier')]
 /*#[IsGranted(ProfilVoter::EDIT, subject: 'id')]*/ //FIXME : conflit entre Id et user
-    public function modifier(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, int $id
+    public function modifier(Request $request,
+                             EntityManagerInterface $entityManager,
+                             UserRepository $ur,
+                             int $id
     ): Response
     {
         /*$this->denyAccessUnlessGranted(ProfilVoter::EDIT, $id);*/
-        $user = $userRepository->find($id);
+        $user = $ur->find($id);
         $userForm = $this->createForm(ProfilFormType::class, $user);
-
-
 
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
@@ -40,9 +41,12 @@ class UserController extends AbstractController
                 'userForm' => $userForm,
                 'user' => $user
             ]);
-
-
     }
+    #[Route('/user/detail/{id}', name: 'user_details')]
+    public function afficherProfil(UserRepository $ur, int $id): Response
+    {
+        $user = $ur->find($id);
 
-
+        return $this->render('user/profil.html.twig', ['user' => $user]);
+    }
 }
