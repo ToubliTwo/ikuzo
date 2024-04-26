@@ -20,7 +20,8 @@
             </div>
         </div>
             <div class="nosBoutons">
-               <div class="submitValider"><button type="submit">Valider</button></div>
+               <div class="submitValider"><button type="submit">Enregistrer</button></div>
+                <div class="submitPublier"><button type="submit">Publier</button></div>
                 <div class="submitAnnuler"><a href="{{ path('main_home') }}">Annuler</a></div>
             </div>
                {{ form_end(sortieForm) }}
@@ -28,19 +29,3 @@
 {#    {{ form_widget(sortieForm) }}#}
 {#    {{ form_end(sortieForm) }}#}
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-{#<h1>Créer une sortie</h1>#}
-{#    {{ form_start (sortieForm) }}#}
-{#    {{ form_widget (sortieForm) }}#}
-{#    <button>Valider</button>#}
-{#    {{ form_end(sortieForm) }}#}
-{#</div>#}

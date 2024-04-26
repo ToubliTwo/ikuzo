@@ -6,15 +6,29 @@
     <h1> Consulter la liste des sorties : </h1>
 
     <ul>
-        {% for sortie in sorties %}
+
+        {% for curseur in tiensPrendsMonTableau %}
             <li>
-                <strong>{{ sortie.titre }}</strong><br>
-                <em>{{ sortie.description }}</em><br>
-                Lieu: {{ sortie.lieu }}<br>
-                Date: {{ sortie.date|date('d/m/Y') }}
+                <strong>{{ curseur.titre }}</strong><br>
+                <em>{{ curseur.description }}</em><br>
+                Lieu: {{ curseur.lieu }}<br>
+                Date: {{ curseur.date|date('d/m/Y') }}
             </li>
         {% endfor %}
+
+
+
+
+{#        {% for sortie in sorties %}#}
+{#            <li>#}
+{#                <strong>{{ sortie.titre }}</strong><br>#}
+{#                <em>{{ sortie.description }}</em><br>#}
+{#                Lieu: {{ sortie.lieu }}<br>#}
+{#                Date: {{ sortie.date|date('d/m/Y') }}#}
+{#            </li>#}
+{#        {% endfor %}#}
     </ul>
-
-
 {% endblock %}
+
+
+{#{% endblock %}#}
