@@ -47,6 +47,9 @@ class SortiesRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('s')
             ->leftJoin('s.campus', 'c')
             ->leftJoin('s.etat', 'e');
+        $queryBuilder
+            ->andWhere('e.libelle NOT IN (:etatsExclus)')
+            ->setParameter('etatsExclus', ['Archivée', 'Annulée']);
 
         if ($titre) {
             $queryBuilder
