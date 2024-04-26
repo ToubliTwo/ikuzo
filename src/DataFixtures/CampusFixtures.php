@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use App\Entity\Campus;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use phpDocumentor\Reflection\Types\Self_;
 
 class CampusFixtures extends Fixture
 {

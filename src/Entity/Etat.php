@@ -48,10 +48,10 @@ class Etat
 
         return $this;
     }
-    public function __toString(): string
+ /*   public function __toString(): string
     {
-        return $this->libelle ?: ''; // Assurez-vous de renvoyer une chaîne non null
-    }
+        return $this->libelle ?: '';
+    }*/
 
     /**
      * @return Collection<int, Sorties>
@@ -81,5 +81,10 @@ class Etat
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getLibelle() . '(id:' . $this->getId() . ')';
     }
 }
