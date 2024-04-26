@@ -19,11 +19,10 @@
     </div>
     {{ form_end(sortieform) }}
 </div>
-
-
 <p>Organisez et participez à des sorties passionnantes avec d'autres stagiaires ENI, où que vous soyez !</p>
 COUCOU !!!!
     //Afficher un tableau avec les sorties
+<div class="tableauAccueil">
     <table>
         <tr>
             <th>Nom de la sortie</th>
@@ -35,6 +34,8 @@ COUCOU !!!!
             <th>Organisateur</th>
             <th>Actions</th>
         </tr>
+
+
         {% for sortie in sorties %}
             <tr>
                 <td>{{ sortie.titre }}</td>
@@ -67,4 +68,5 @@ COUCOU !!!!
             </tr>
         {% endfor %}
     </table>
-{% endblock %}
+</div>
+    {% endblock %}

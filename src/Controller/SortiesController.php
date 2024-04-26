@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\ChangementEtat;
 use App\Entity\Etat;
 use App\Entity\Sorties;
 use App\Form\AjouterSortieType;
@@ -20,8 +21,23 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class SortiesController extends AbstractController
 {
+    #[Route('/sorties', name: 'sorties_afficher')]
+    public function afficher(SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager, ChangementEtat $changementEtat): Response
+    {
+        //obtenir la date actuelle :
+        $dateActuelle = new \DateTime();
 
-    #[Route('/sorties/ajouter', name:'sorties_ajouter')]
+        $tableauDeSortiesQuiContientToutesLesSorties = $sortiesRepository->findAll();
+
+        // Vérifier l'état de l'activité sur le point d'être affichée
+        foreach ($tableauDeSortiesQuiContientToutesLesSorties as $instanceDeSortie) {
+            $changementEtat->modifierEtat($instanceDeSortie);
+        }
+
+        return $this->render('sorties\sorties.html.twig', ["dateActuelle" => $dateActuelle, "tiensPrendsMonTableau" => $tableauDeSortiesQuiContientToutesLesSorties]); //"sorties" => $sorties,
+    }
+
+    #[Route('/sorties/ajouter', name: 'sorties_ajouter')]
     #[IsGranted(SortieVoter::CREATE)]
     public function ajouter(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -32,9 +48,10 @@ class SortiesController extends AbstractController
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
             //associer par défaut l'état "Créée" à la nouvelle sortie sur le point d'être créée
- //définir l'état à Créée qui correspond à l'id 1 de Etat, le setteur dans l'entité Sorties prend en paramètre une instance de Etat
+            //définir l'état à Créée qui correspond à l'id 1 de Etat, le setteur dans l'entité Sorties prend en paramètre une instance de Etat
             $sortie->setEtat($entityManager->getReference(Etat::class, 1));
 
+            $sortie->setOrganisateur($this->getUser());
             $entityManager->persist($sortie);
             $entityManager->flush();
 
@@ -42,10 +59,10 @@ class SortiesController extends AbstractController
 
             return $this->redirectToRoute('main_home');
         }
-        return $this -> render('sorties\sorties_ajouter.html.twig',
-        [
-            'sortieForm' => $sortieForm
-        ]);
+        return $this->render('sorties\sorties_ajouter.html.twig',
+            [
+                'sortieForm' => $sortieForm
+            ]);
     }
-
 }
+
