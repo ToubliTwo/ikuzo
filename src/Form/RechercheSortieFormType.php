@@ -28,13 +28,13 @@ class RechercheSortieFormType extends AbstractType
                 'placeholder' => 'Sélectionnez un campus',
                 'required' => false,
             ])
-            ->add('dateRecherche', DateType::class, [
+            ->add('dateRechercheDebut', DateType::class, [
                 'label' => 'Entre',
                 'widget' => 'single_text',
                 'mapped' => false,
                 'required' => false,
             ])
-            ->add('dateDeFin', DateType::class, [
+            ->add('dateRechercheFin', DateType::class, [
                 'label' => ' Et',
                 'widget' => 'single_text',
                 'mapped' => false,

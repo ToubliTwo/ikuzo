@@ -4,6 +4,22 @@
 
 {% block body %}
 <h1>Rejoignez-nous sur notre plateforme exclusive Sortir.com</h1>
+<div>
+    {{ form_start(sortieform) }}
+    <div>
+        {{ form_row(sortieform.titre) }}
+        {{ form_row(sortieform.campus) }}
+        {{ form_row(sortieform.dateRechercheDebut)}}{{ form_row(sortieform.dateRechercheFin) }}
+    </div>
+    <div>
+        {{ form_row(sortieform.organisateur) }}
+        {{ form_row(sortieform.inscrit) }}
+        {{ form_row(sortieform.pasInscrit) }}
+        {{ form_row(sortieform.sortiesPassees) }}
+    </div>
+    {{ form_end(sortieform) }}
+</div>
+
 
 <p>Organisez et participez à des sorties passionnantes avec d'autres stagiaires ENI, où que vous soyez !</p>
 COUCOU !!!!

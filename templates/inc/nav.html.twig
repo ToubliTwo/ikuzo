@@ -1,12 +1,8 @@
 <nav>
   {% if app.user %}
 
-  <a href="{{ path('sorties_afficher') }}" title="Sorties"> | Consulter les sorties</a>
-  <a href="{{ path('sorties_ajouter') }}" title="AjoutSortie"> | Créer une sortie </a>
-  <a href="{{ path('sorties_par_campus') }}" title="AjoutSortie"> | Sortie par campus</a>
-  <a href="{{ path('app_logout') }}" title="Logout"> | Se déconnecter <i class="fa-regular fa-user"></i> ({{ app.user.pseudo }})</a>
-
-  {# Accès à son profil si connecté - (penser à transmettre l'id)
-    <a href="{{ path('user_modifier') }}" title="Modifier le profil de l'utilisateur"> | Modifier mon profil</a>#}
+    <a href="{{ path('sorties_ajouter') }}" title="AjoutSortie"> | Créer une sortie </a>
+    <a href="{{ path('user_modifier', {'id': app.user.id}) }}" title="Modifier le profil de l'utilisateur"> | Modifier mon profil</a>
+    <a href="{{ path('app_logout') }}" title="Logout"> | Se déconnecter <i class="fa-regular fa-user"></i> ({{ app.user.pseudo }})</a>
   {% endif %}
 </nav>

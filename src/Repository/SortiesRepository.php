@@ -32,45 +32,72 @@ class SortiesRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    public function findByCriteria($campusId, $organisateur, $inscrit, $pasInscrit, $sortiesPassees)
+    public function findByCriteria($campusId,
+                                   $organisateur,
+                                   $inscrit,
+                                   $pasInscrit,
+                                   $sortiesPassees,
+                                   $titre = null,
+                                   $dateRechercheDebut = null,
+                                   $dateRechercheFin = null,
+                                  )
     {
         $user = $this->security->getUser();
 
         $queryBuilder = $this->createQueryBuilder('s')
-            ->leftJoin('s.campus', 'c');
+            ->leftJoin('s.campus', 'c')
+            ->leftJoin('s.etat', 'e');
 
-        if ($campusId) {
+        if ($titre) {
             $queryBuilder
-                ->andWhere('c.id = :campusId')
-                ->setParameter('campusId', $campusId);
+                ->andWhere('s.titre LIKE :titre')
+                ->setParameter('titre', '%' . $titre . '%');
         }
 
         if ($organisateur) {
             // Ajouter le filtre pour les sorties dont l'utilisateur est l'organisateur
             $queryBuilder
                 ->andWhere('s.organisateur = :userId')
-                ->setParameter('userId', $user->getId()); // Remplacer '1' par l'ID de l'utilisateur actuel
+                ->setParameter('userId', $user);
         }
 
         if ($inscrit) {
             // Ajouter le filtre pour les sorties auxquelles l'utilisateur est inscrit
             $queryBuilder
                 ->andWhere(':userId MEMBER OF s.users')
-                ->setParameter('userId', $user->getId()); // Remplacer '1' par l'ID de l'utilisateur actuel
+                ->setParameter('userId', $user);
         }
 
         if ($pasInscrit) {
             // Ajouter le filtre pour les sorties auxquelles l'utilisateur n'est pas inscrit
             $queryBuilder
                 ->andWhere(':userId NOT MEMBER OF s.users')
-                ->setParameter('userId', $user->getId()); // Remplacer '1' par l'ID de l'utilisateur actuel
+                ->setParameter('userId', $user);
+            $queryBuilder
+                ->andWhere('e.libelle IN (:etats)')
+                ->setParameter('etats', ['Ouverte', 'Activité en cours']);
         }
 
         if ($sortiesPassees) {
             // Ajouter le filtre pour les sorties passées
             $queryBuilder
-            ->andWhere('s.date < :currentDate')
-            ->setParameter('currentDate', new \DateTime());
+                ->andWhere('e.libelle = :etatPassee')
+                ->setParameter('etatPassee', 'Passée');
+        }
+
+        if ($dateRechercheDebut && $dateRechercheFin) {
+
+            $queryBuilder
+                ->andWhere('s.date >= :dateRechercheDebut')
+                ->andWhere('s.date <= :dateRechercheFin')
+                ->setParameter('dateRechercheDebut', $dateRechercheDebut)
+                ->setParameter('dateRechercheFin', $dateRechercheFin);
+        }
+
+        if ($campusId) {
+            $queryBuilder
+                ->andWhere('c.id = :campusId')
+                ->setParameter('campusId', $campusId);
         }
 
         // Exécuter la requête
