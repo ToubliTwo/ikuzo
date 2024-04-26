@@ -16,7 +16,7 @@ class Etat
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\Choice(choices: ['Créée', 'Ouverte', 'Clôturée', 'Activité en cours', 'Passée', 'Annulée'], message: 'Statut invalide!')]
+    #[Assert\Choice(choices: ['Créée', 'Ouverte', 'Clôturée', 'Activité en cours', 'Passée', 'Annulée', 'Archivée'], message: 'Statut invalide!')]
 
     #[ORM\Column(length: 30)]
     private ?string $libelle = null;

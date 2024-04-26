@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\ProfilFormType;
 use App\Repository\UserRepository;
 use App\Security\Voter\ProfilVoter;
@@ -15,38 +16,32 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class UserController extends AbstractController
 {
     #[Route('/user/modifier/{id}', name: 'user_modifier')]
-    #[IsGranted(ProfilVoter::EDIT, subject: 'user')]
-    public function modifier(int $id,
-                             UserRepository $userRepository,
-                             EntityManagerInterface $entityManager,
-                             Request $request
+/*#[IsGranted(ProfilVoter::EDIT, subject: 'id')]*/ //FIXME : conflit entre Id et user
+    public function modifier(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, int $id
     ): Response
     {
+        /*$this->denyAccessUnlessGranted(ProfilVoter::EDIT, $id);*/
         $user = $userRepository->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException('Utilisateur non trouvé');
-        }
-
         $userForm = $this->createForm(ProfilFormType::class, $user);
+
+
+
         $userForm->handleRequest($request);
-
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-
-            $user->setAdministrateur(false);
-            $user->$this->setActif(true);
-
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Profil modifié');
-            return $this->redirectToRoute('user_modifier', ['id' => $user->getId()]);
-        }
+            $this->addFlash('success', 'Profil modifié avec succès !');
 
-        return $this->render('user/modifier.html.twig', [
-        'user' => $user,
-        'userForm' => $userForm
-        ]);
+            return $this->redirectToRoute('main_home');
+        }
+        return $this->render('user/modifier.html.twig',
+            [
+                'userForm' => $userForm,
+                'user' => $user
+            ]);
+
+
     }
 
 

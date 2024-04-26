@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\ChangementEtat;
 use App\Entity\Etat;
 use App\Entity\Sorties;
 use App\Form\AjouterSortieType;
@@ -20,15 +21,23 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class SortiesController extends AbstractController
 {
-    #[Route('/sorties', name:'sorties_afficher')]
-    public function afficher(SortiesRepository $sortiesRepository): Response
+    #[Route('/sorties', name: 'sorties_afficher')]
+    public function afficher(SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager, ChangementEtat $changementEtat): Response
     {
-        $sorties = $sortiesRepository->findAll();
-        return $this->render('sorties\sorties.html.twig', ["sorties" => $sorties]);
+        //obtenir la date actuelle :
+        $dateActuelle = new \DateTime();
+
+        $tableauDeSortiesQuiContientToutesLesSorties = $sortiesRepository->findAll();
+
+        // Vérifier l'état de l'activité sur le point d'être affichée
+        foreach ($tableauDeSortiesQuiContientToutesLesSorties as $instanceDeSortie) {
+            $changementEtat->modifierEtat($instanceDeSortie);
+        }
+
+        return $this->render('sorties\sorties.html.twig', ["dateActuelle" => $dateActuelle, "tiensPrendsMonTableau" => $tableauDeSortiesQuiContientToutesLesSorties]); //"sorties" => $sorties,
     }
 
-
-    #[Route('/sorties/ajouter', name:'sorties_ajouter')]
+    #[Route('/sorties/ajouter', name: 'sorties_ajouter')]
     #[IsGranted(SortieVoter::CREATE)]
     public function ajouter(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -39,10 +48,10 @@ class SortiesController extends AbstractController
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
             //associer par défaut l'état "Créée" à la nouvelle sortie sur le point d'être créée
- //définir l'état à Créée qui correspond à l'id 1 de Etat, le setteur dans l'entité Sorties prend en paramètre une instance de Etat
+            //définir l'état à Créée qui correspond à l'id 1 de Etat, le setteur dans l'entité Sorties prend en paramètre une instance de Etat
             $sortie->setEtat($entityManager->getReference(Etat::class, 1));
 
-
+            $sortie->setOrganisateur($this->getUser());
             $entityManager->persist($sortie);
             $entityManager->flush();
 
@@ -50,74 +59,10 @@ class SortiesController extends AbstractController
 
             return $this->redirectToRoute('main_home');
         }
-        return $this -> render('sorties\sorties_ajouter.html.twig',
-        [
-            'sortieForm' => $sortieForm
-        ]);
+        return $this->render('sorties\sorties_ajouter.html.twig',
+            [
+                'sortieForm' => $sortieForm
+            ]);
     }
-    #[Route('/sorties/modifier/{id}', name:'sorties_modifier')]
-    public function modifier(SortiesRepository $sortiesRepository, Request $request, EntityManagerInterface $entityManager, Sorties $modifSortie): Response
-    {
-        $modifSortieForm = $this->createForm(ModifierSortieFormType::class, $modifSortie);
-
-        $modifSortieForm->handleRequest($request);
-
-        //ci-dessous, on va chercher la fonction find du repository pour récupérer l'ID de la sortie à modifier
-        $modifSortie = $sortiesRepository -> find($modifSortie->getId());
-
-        if ($modifSortieForm->isSubmitted() && $modifSortieForm->isValid()) {
-
-            $entityManager->persist($modifSortie);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Évènement correctement modifié !');
-
-            return $this->redirectToRoute('main_home');
-        }
-           else if ($modifSortieForm->isSubmitted() && !$modifSortieForm->isValid())
-           {
-               $this->addFlash('fail', 'OOOOoops !');
-           }
-
-        return $this -> render('sorties\sorties_modifier.html.twig',[
-            'sortieForm' => $modifSortieForm
-        ]);
-    }
-
-
-        #[Route('/sorties/par-campus', name: 'sorties_par_campus')]
-            public function sortiesParCampus(Request $request, SortiesRepository $sortiesRepository): Response
-        {
-            $sortie = new Sorties();
-            $sortieform = $this->createForm(RechercheSortieFormType::class);
-            $sortieform->handleRequest($request);
-
-            if ($sortieform->isSubmitted() && $sortieform->isValid()) {
-                // Récupérer les valeurs des champs du formulaire
-                $campusId = $sortieform->get('campus')->getData()->getId();
-
-                $organisateur = $sortieform->get('organisateur')->getData();
-                $inscrit = $sortieform->get('inscrit')->getData();
-                $pasInscrit = $sortieform->get('pasInscrit')->getData();
-                $sortiesPassees = $sortieform->get('sortiesPassees')->getData();
-
-                // Filtrer les sorties en fonction des valeurs des champs du formulaire
-                $sorties = $sortiesRepository->findByCriteria(
-                    $campusId,
-                    $organisateur,
-                    $inscrit,
-                    $pasInscrit,
-                    $sortiesPassees
-                );
-                } else {
-                    $sorties = []; // Mettre à jour pour obtenir toutes les sorties si aucun campus n'est sélectionné
-                }
-
-                return $this->render('sorties/sorties_par_campus.html.twig', [
-                  'sortieform' => $sortieform->createView(),
-                   'sorties' => $sorties,
-               ]);
-
-    }
-
 }
+

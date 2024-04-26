@@ -10,14 +10,14 @@ class EtatFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $etatNoms = ['Créée', 'Ouverte', 'Clôturée', 'Activité en cours', 'Passée', 'Annulée'];
+        $etatNoms = ['Créée', 'Ouverte', 'Clôturée', 'Activité en cours', 'Passée', 'Annulée', 'Archivée'];
 
         foreach ($etatNoms as $index => $etatNom) {
             $etat = new Etat();
             $etat->setLibelle($etatNom);
             $manager->persist($etat);
 
-            /*$this->addReference('campus_' . ($index + 1), $etat);*/
+            $this->addReference('etat_' . ($index + 1), $etat);
         }
         $manager->flush();
     }

@@ -44,7 +44,7 @@ class SortieVoter extends Voter
         switch ($attribute) {
             case self::EDIT:
             case self::DELETE:
-                return $subject->getUser()->getId() === $user->getId();
+                return $subject->getId() === $user->getId();
                 break;
 
             case self::VIEW:

@@ -4,10 +4,25 @@
 
 {% block body %}
 <h1>Rejoignez-nous sur notre plateforme exclusive Sortir.com</h1>
-
+<div>
+    {{ form_start(sortieform) }}
+    <div>
+        {{ form_row(sortieform.titre) }}
+        {{ form_row(sortieform.campus) }}
+        {{ form_row(sortieform.dateRechercheDebut)}}{{ form_row(sortieform.dateRechercheFin) }}
+    </div>
+    <div>
+        {{ form_row(sortieform.organisateur) }}
+        {{ form_row(sortieform.inscrit) }}
+        {{ form_row(sortieform.pasInscrit) }}
+        {{ form_row(sortieform.sortiesPassees) }}
+    </div>
+    {{ form_end(sortieform) }}
+</div>
 <p>Organisez et participez à des sorties passionnantes avec d'autres stagiaires ENI, où que vous soyez !</p>
 COUCOU !!!!
     //Afficher un tableau avec les sorties
+<div class="tableauAccueil">
     <table>
         <tr>
             <th>Nom de la sortie</th>
@@ -38,22 +53,20 @@ COUCOU !!!!
                         {% endif %}
                     {% endif %}
                 </td>
-                <td>{#{{ sortie.organisateur.pseudo }}#}</td>
+                <td>{{ sortie.organisateur.pseudo }}</td>
                 <td>
-
                     <a href="{{ path('actions_inscription', {'id': sortie.id}) }}" title="S'inscrire">S'inscrire</a>
                     {% if sortie.users.contains(app.user) and sortie.date > 'now'|date('Y-m-d H:i:s') %}
                         <a href="{{ path('actions_desinscription', {'id': sortie.id}) }}">Se désinscrire</a>
                     {% endif %}
                     <a href="{{ path('actions_details', {'id': sortie.id}) }}" title="{{ sortie.titre }}">Afficher</a>
-                    {#{% if sortie.organisateur == app.user %}
-                        <a href="{{ path('sorties_modifier', {'id': sortie.id}) }}">Modifier la sortie</a>
-                        <a href="{{ path('sorties_annuler', {'id': sortie.id}) }}">Annuler la sortie</a>
-                    {% endif %}#}
-
+                    {% if sortie.organisateur == app.user %}
+                        <a href="{{ path('actions_modifier', {'id': sortie.id}) }}">Modifier la sortie</a>
+                        <a href="{{ path('actions_supprimer', {'id': sortie.id}) }}">Annuler la sortie</a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
     </table>
-
-{% endblock %}
+</div>
+    {% endblock %}

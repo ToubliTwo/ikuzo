@@ -22,6 +22,7 @@ class LieuFixtures extends Fixture implements DependentFixtureInterface
             $lieu ->setVille($this->getReference("ville_" . $faker->numberBetween(1, 10)));
 
             $manager->persist($lieu);
+            $this->addReference("lieu_" . ($i+1), $lieu);
         }
         $manager->flush();
     }

@@ -20,7 +20,6 @@ class AdminVoter extends Voter
     {
         $user = $token->getUser();
 
-        // if the user is anonymous, do not grant access
         if (!$user instanceof User) {
             return false;
         }

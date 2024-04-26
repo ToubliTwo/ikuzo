@@ -63,6 +63,10 @@ class Sorties
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
+    #[ORM\ManyToOne(inversedBy: 'sortieOrganise')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $organisateur = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -197,6 +201,18 @@ class Sorties
     public function setCampus(?Campus $campus): self
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getOrganisateur(): ?User
+    {
+        return $this->organisateur;
+    }
+
+    public function setOrganisateur(?User $organisateur): static
+    {
+        $this->organisateur = $organisateur;
 
         return $this;
     }

@@ -18,28 +18,28 @@ class RechercheSortieFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
+            ->add('titre', null, [
+                'label' => 'Le nom de la sortie contient :',
+                'required' => false,
+            ])
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'nom',
                 'placeholder' => 'Sélectionnez un campus',
                 'required' => false,
             ])
-            ->add('titre', null, [
-                'label' => 'Le nom de la sortie contient :',
-                'required' => false,
-            ])
-            ->add('dateDebut', DateType::class, [
-                'label' => 'Entre le',
+            ->add('dateRechercheDebut', DateType::class, [
+                'label' => 'Entre',
                 'widget' => 'single_text',
                 'mapped' => false,
                 'required' => false,
             ])
-            ->add('dateDeFin', DateType::class, [
-                'label' => ' Et le',
+            ->add('dateRechercheFin', DateType::class, [
+                'label' => ' Et',
                 'widget' => 'single_text',
                 'mapped' => false,
                 'required' => false,
+
             ])
             // Ajout de la case à cocher pour les sorties dont vous êtes l'organisateur/trice
             ->add('organisateur', CheckboxType::class, [
