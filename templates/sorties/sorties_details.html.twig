@@ -18,6 +18,7 @@
             <li>Code postal : {{ sortie.lieu.ville.codePostal }}</li>
             <li>Latitude : {{ sortie.lieu.latitude }}</li>
             <li>Longitude : {{ sortie.lieu.longitude }}</li>
+            <li>Motif d'annulation : </li>
         </ul>
     </div>
     <h2>Liste des participants</h2>
@@ -28,7 +29,7 @@
         </tr>
         {% for participant in participants %}
             <tr>
-                <td>{{ participant.pseudo }}</td>
+                <td><a href="{{ path('user_details', {'id' : participant.id}) }}">{{ participant.pseudo }}</a></td>
                 <td>{{ participant.prenom ~ ' ' ~ participant.nom }}</td>
             </tr>
         {% endfor %}

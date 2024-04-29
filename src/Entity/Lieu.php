@@ -49,10 +49,10 @@ class Lieu
     /**
      * Méthode magique pour convertir l'objet en chaîne
      */
-    public function __toString(): string
+/*    public function __toString(): string
     {
         return $this->nom ?? ''; // Retourne le nom du lieu s'il existe, sinon une chaîne vide
-    }
+    }*/
 
     public function getId(): ?int
     {
@@ -147,5 +147,10 @@ class Lieu
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getNom() . ' (id: ' . $this->getId() . ')';
     }
 }

@@ -1,0 +1,41 @@
+{# templates/villes/gerer_villes.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer les villes{% endblock %}
+
+{% block body %}
+    <h1>Gérer les villes</h1>
+    <h2>Filtrer les villes</h2>
+
+    {# Afficher le formulaire de recherche des villes #}
+    {{ form_start(form) }}
+    {{ form_row(form.nom, {'label': 'Le nom contient'}) }}
+    {{ form_end(form) }}
+
+    {# Div pour le tableau et le déroulant #}
+    <div class="table-wrapper">
+    <table>
+        <thead>
+        <tr>
+            <th>Ville</th>
+            <th>Code Postal</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ville in villes %}
+            <tr>
+                <td>{{ ville.nom }}</td>
+                <td>{{ ville.codePostal }}</td>
+                <td>
+                    {#<a href="{{ path('modifier_ville', {'id': ville.id}) }}">Modifier</a>
+                    <a href="{{ path('supprimer_ville', {'id': ville.id}) }}">Supprimer</a>#}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
