@@ -14,26 +14,12 @@ body {
 
 header {
     position: sticky;
+    top: 0;
     background-color: var(--couleur-tertiaire);
     padding : 1vw;
     padding-left : 5%;
-    height : 8vh;
+    height : 15%;
     perspective: 1000px; /* Définit la distance de perspective pour l'effet 3D */
-}
-
-header nav {
-    margin-left : 30px;
-}
-
-header nav a {
-    color: var(--couleur-principale);
-    border-radius: 5px;
-    padding: 5px 10px;
-}
-
-.contenuDuHeader {
-    display : flex;
-    align-items: center;
 }
 
 header img {
@@ -41,18 +27,24 @@ header img {
     height: 70px;
 }
 
-header a:hover {
-    color: white;
-    font-weight: bold;
-    transition: transform 0.5s; /* Ajoute une transition pour un effet plus fluide */
-    transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
-    font-size: 1.8rem;
-}
-
 header a {
+    margin-left: 2%;
     color: var(--couleur-principale);
     font-size: 1.4rem;
     text-decoration: none;
+}
+
+header a:hover {
+    color: white;
+    font-weight: bold;
+    transition: transform 0.1s;
+    transform: scale(1.1);
+    font-size: 1.4rem;
+}
+
+.contenuDuHeader {
+    display : flex;
+    align-items: center;
 }
 
 main {
@@ -61,8 +53,9 @@ main {
     text-align: center;
     height: 84vh;
     margin: 0;
-    animation: fadeIn 2s ease forwards;
+    animation: fadeIn 1s ease forwards;
     animation-iteration-count: 1;
+    overflow-y: auto; /* Activer le défilement vertical lorsque nécessaire */
 }
 
 .tableauAccueil {
@@ -85,6 +78,7 @@ input, select {
     box-sizing: border-box;
     width: 250px;
 }
+
 textarea {
     resize: none;
     width : 250px;
@@ -112,6 +106,28 @@ ul, ol {
 
 li {
     margin-bottom: 20px;
+}
+
+a.button-create {
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
+    /*border: solid 1px black;*/
+
+    /* styles personnalisés */
+    justify-content: center;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+    width: 100px;
+    height: 40px;
+}
+
+a.button-create:hover {
+    background-color: forestgreen;
+    transition: transform 0.2s;
+    transform: rotateY(10deg) scale(1.1);
 }
 
 /*utile pour le positionnement*/
@@ -239,7 +255,9 @@ li {
 }
 
 .flash-success {
-    color: white;
+
+    color: var(--couleur-tertiaire);
+
     background-color: #c1ff72;
 }
 
@@ -283,6 +301,7 @@ li {
         transform: translateX(0);
     }
 }
+
 a.button-create {
     cursor: pointer;
     padding: 0;
