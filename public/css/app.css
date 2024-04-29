@@ -27,11 +27,28 @@ header img {
     height: 70px;
 }
 
+
+header nav a {
+    color: var(--couleur-principale);
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.contenuDuHeader {
+    display : flex;
+    align-items: center;
+}
+
+header img {
+    animation: mouvement 5s infinite alternate;
+    height: 70px;
+
 header a {
     margin-left: 2%;
     color: var(--couleur-principale);
     font-size: 1.4rem;
     text-decoration: none;
+
 }
 
 header a:hover {
@@ -164,7 +181,6 @@ a.button-create:hover {
     border: solid 1px black;
 }
 
-
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables PUBLIER  ******** */
 /* *********************************************************** */
@@ -255,7 +271,6 @@ a.button-create:hover {
 }
 
 .flash-success {
-
     color: var(--couleur-tertiaire);
 
     background-color: #c1ff72;
@@ -272,6 +287,7 @@ a.button-create:hover {
     margin: 0;
     text-align: left;
 }
+
 
 /* *************************KEYFRAMES************************* */
 /* *********************************************************** */
@@ -308,7 +324,7 @@ a.button-create {
     font: inherit;
     outline: none;
     /*border: solid 1px black;*/
-
+  
     /* styles personnalisés */
     justify-content: center;
     border-radius: 5px;
