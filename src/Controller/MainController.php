@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\RechercheSortieFormType;
 use App\Repository\SortiesRepository;
+use App\Services\ChangementEtat;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,8 +13,18 @@ use Symfony\Component\Routing\Attribute\Route;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'main_home')]
-    public function home(Request $request,SortiesRepository $sortiesRepository): Response
+    public function home(Request $request,SortiesRepository $sortiesRepository, ChangementEtat $changementEtat): Response
     {
+        //obtenir la date actuelle :
+        $dateActuelle = new \DateTime();
+
+        $sortie = $sortiesRepository->findAll();
+
+        // Vérifier l'état de l'activité sur le point d'être affichée
+        foreach ($sortie as $instanceDeSortie) {
+            $changementEtat->modifierEtat($instanceDeSortie);
+        }
+
         $sortieform = $this->createForm(RechercheSortieFormType::class);
         $sortieform->handleRequest($request);
 
