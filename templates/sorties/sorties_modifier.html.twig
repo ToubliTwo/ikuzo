@@ -19,10 +19,23 @@
         </div>
     </div>
     <div class="nosBoutons">
-        <div class="submitValider"><button type="submit">Enregistrer</button></div>
-        <div class="submitPublier"><button type="submit" onclick="window.location.href='{{ path('actions_publier', {'id': sortie.id}) }}'" title="Publier la sortie">Publier</button></div>
+        <div class="submitValider">
+            <button type="submit">Enregistrer</button>
+        </div>
+
+        <div class="submitPublier">
+            <button type="submit" onclick="window.location.href='{{ path('actions_publier', {'id': sortie.id}) }}'" title="Publier la sortie">Publier</button>
+        </div>
+
+
+        <div class="submitSupprimer">
+            <a href="{{ path('actions_supprimer', {'id': sortie.id}) }}" title="Delete">Supprimer</a>
+        </div>
+
+        <div class="submitAnnuler">
+            <a href="{{ path('main_home') }}">Annuler</a>
+        </div>
     {{ form_end(sortieForm) }}
-        <div class="submitSupprimer"><a href="{{ path('actions_supprimer', {'id': sortie.id}) }}" title="Delete">Supprimer</a></div>
-        <div class="submitAnnuler"><a href="{{ path('main_home') }}">Annuler</a></div>
+
     </div>
 {% endblock %}

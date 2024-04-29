@@ -79,6 +79,7 @@ main {
     margin-top: 5%;
     display: flex;
     justify-content: center;
+    margin-bottom: 5%;
 }
 
 footer {
@@ -104,6 +105,19 @@ textarea {
 
 label {
     display : block;
+}
+
+.formulaire_bloc {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: lavenderBlush;
+    width: 100%;
+    max-width: 60%;
+    justify-content: center;
+    margin-left : 20%;
+    padding: 1%;
+    border: solid 1px black;
+    border-radius: 10px;
 }
 
 .formulaires {
@@ -182,6 +196,33 @@ a.button-create:hover {
 }
 
 /* *********************************************************** */
+/* *****Template pour les boutons submit VALIDER  ******** */
+/* *********************************************************** */
+.submitValider {
+    /* Réinitialiser les styles par défaut */
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
+    border: solid 1px black;
+
+    /* styles personnalisés */
+    justify-content: center;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+    width: 100px;
+    height: 40px;
+}
+
+.submitValider:hover {
+    transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
+    transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
+    border: solid 1px black;
+}
+
+
+/* *********************************************************** */
 /* *****Template pour les boutons cliquables PUBLIER  ******** */
 /* *********************************************************** */
 .submitPublier button[type="submit"]{
@@ -233,6 +274,35 @@ a.button-create:hover {
     transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
     border: solid 1px black;
 }
+
+/* *********************************************************** */
+/* *****Template pour les boutons cliquables RECHERCHER  ******** */
+/* *********************************************************** */
+.submitRechercher {
+    /* Réinitialiser les styles par défaut */
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
+    border: solid 1px black;
+
+    /* styles personnalisés */
+    justify-content: center;
+    border-radius: 5px;
+    background-color: var(--couleur-quaternaire);
+    color: white;
+    width: 100px;
+    height: 40px;
+    margin-top: 25px;
+}
+/*
+.submitRechercher:hover {
+    transition: transform 0.2s; !* Ajoute une transition pour un effet plus fluide *!
+    transform: scale(1.2); !* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol *!
+    border: solid 1px black;
+}
+*/
+
 
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables SUPPRIMER******** */
