@@ -141,7 +141,7 @@ a.button-create:hover {
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables VALIDER  ******** */
 /* *********************************************************** */
-.submitValider button[type="submit"]{
+.submitValider button[type="submit"] {
     /* Réinitialiser les styles par défaut */
     cursor: pointer;
     padding: 0;
@@ -183,6 +183,7 @@ a.button-create:hover {
     color: white;
     width: 100px;
     height: 40px;
+
 }
 
 .submitPublier button:hover {
@@ -254,7 +255,9 @@ a.button-create:hover {
 }
 
 .flash-success {
+
     color: var(--couleur-tertiaire);
+
     background-color: #c1ff72;
 }
 
@@ -299,63 +302,40 @@ a.button-create:hover {
     }
 }
 
-
-
-/* *********************************************************** */
-/* ********************** MEDIA QUERIES ********************** */
-/* *********************************************************** */
-
-@media screen and (min-width: 750px) and (max-width: 970px) {} /*tablette*/
-
-
-
-
-
-@media screen and (max-width: 576px) /* smartphone */
-.burger-btn {
+a.button-create {
     cursor: pointer;
-    padding: 10px;
+    padding: 0;
+    font: inherit;
+    outline: none;
+    /*border: solid 1px black;*/
+
+    /* styles personnalisés */
+    justify-content: center;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+    width: 100px;
+    height: 40px;
 }
 
-.bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: #fff;
-    margin: 5px;
-    transition: 0.4s;
+a.button-create:hover {
+    background-color: forestgreen;
+    transition: transform 0.2s;
+    transform: rotateY(10deg) scale(1.1);
 }
 
-/* Transformations pour l'animation */
-#burgerCheckbox:checked + .burger-btn .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
+#rechercher_sortie_form__token {
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
+    border: solid 1px black;
 
-#burgerCheckbox:checked + .burger-btn .bar:nth-child(2) {
-    opacity: 0;
-}
-
-#burgerCheckbox:checked + .burger-btn .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-}
-
-nav {
-    display: none;
-}
-
-#burgerCheckbox:checked ~ #menu {
-    display: block;
-}
-
-nav ul {
-    list-style-type: none;
-}
-
-nav ul li {
-    padding: 10px 0;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #333;
+    /* styles personnalisés */
+    justify-content: center;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+    width: 100px;
+    height: 40px;
 }

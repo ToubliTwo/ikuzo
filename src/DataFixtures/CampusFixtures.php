@@ -8,11 +8,14 @@ use Doctrine\Persistence\ObjectManager;
 
 class CampusFixtures extends Fixture
 {
+
+    public const CAMPUS_NOM = ['Rennes', 'Nantes', 'Niort'];
+
     public function load(ObjectManager $manager): void
     {
-        $campusNoms = ['Rennes', 'Nantes', 'Niort'];
 
-        foreach ($campusNoms as $index => $campusNom) {
+
+        foreach (self::CAMPUS_NOM as $index => $campusNom) {
             $campus = new Campus();
             $campus->setNom($campusNom);
             $manager->persist($campus);

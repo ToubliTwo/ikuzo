@@ -67,6 +67,9 @@ class Sorties
     #[ORM\JoinColumn(nullable: false)]
     private ?User $organisateur = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $MotifAnnulation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -217,4 +220,20 @@ class Sorties
         return $this;
     }
 
+    public function getMotifAnnulation(): ?string
+    {
+        return $this->MotifAnnulation;
+    }
+
+    public function setMotifAnnulation(?string $MotifAnnulation): static
+    {
+        $this->MotifAnnulation = $MotifAnnulation;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getTitre() . ' (id: ' . $this->getId() . ')';
+    }
 }
