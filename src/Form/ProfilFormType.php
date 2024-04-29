@@ -36,14 +36,18 @@ class ProfilFormType extends AbstractType
                 'required' => false,
                 'mapped' => false,
             ])
+
             //ajouter un bouton de validation
-            ->add('submit', SubmitType::class, [
+            ->add('submit', SubmitType::class,
+            [
                 'label' => 'Enregistrer',
+                'attr' => ['class'=> 'submitValider'],
             ])
+
             //ajouter un bouton d'annulation qui redirige vers la page d'accueil
             ->add('cancel', SubmitType::class, [
                 'label' => 'Annuler',
-
+                'attr' => ['class'=>'submitAnnuler', 'style'=>'color=white;'],
             ])
         ;
     }
