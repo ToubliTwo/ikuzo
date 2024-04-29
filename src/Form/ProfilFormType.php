@@ -47,7 +47,7 @@ class ProfilFormType extends AbstractType
             //ajouter un bouton d'annulation qui redirige vers la page d'accueil
             ->add('cancel', SubmitType::class, [
                 'label' => 'Annuler',
-                'attr' => ['class'=>'submitAnnuler', 'style'=>'color=white;'],
+                'attr' => ['class'=>'submitAnnuler'],
             ])
         ;
     }
