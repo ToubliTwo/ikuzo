@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Sorties;
 use App\Entity\User;
+use App\Form\AjouterSortieFormType;
 use App\Form\ModifierSortieFormType;
 use App\Repository\SortiesRepository;
 use Doctrine\ORM\EntityManagerInterface;
