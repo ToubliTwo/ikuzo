@@ -8,12 +8,14 @@
     <h1>Gérer les villes</h1>
     <h2>Filtrer les villes</h2>
 
-    {# Afficher le formulaire de recherche des villes #}
-    {{ form_start(form) }}
-    {{ form_row(form.nom, {'label': 'Le nom contient'}) }}
-    {{ form_end(form) }}
+     Afficher le formulaire de recherche des villes
+    {{ form_start(rechercherForm) }}
+    {{ form_row(rechercherForm.nom, {'label': 'Le nom contient'}) }}
 
-    {# Div pour le tableau et le déroulant #}
+     <div class="submitRechercher">
+         <button type="submit" title="Valider la recherche" name="clickSurRechercher">Rechercher</button>
+     </div>
+    {{ form_end(rechercherForm) }}
     <div class="table-wrapper">
     <table>
         <thead>
@@ -29,11 +31,28 @@
                 <td>{{ ville.nom }}</td>
                 <td>{{ ville.codePostal }}</td>
                 <td>
-                    {#<a href="{{ path('modifier_ville', {'id': ville.id}) }}">Modifier</a>
-                    <a href="{{ path('supprimer_ville', {'id': ville.id}) }}">Supprimer</a>#}
+{#                    <a href="{{ path('modifier_ville', {'id': ville.id}) }}">Modifier</a>#}
+{#                    <a href="{{ path('supprimer_ville', {'id': ville.id}) }}">Supprimer</a>#}
                 </td>
             </tr>
         {% endfor %}
+        <tr>
+            {{ form_start(form) }}
+            <td colspan="2">
+                {# Formulaire d'ajout de nouvelle ville #}
+                {{ form_row(form.nom) }}
+            </td>
+            <td>
+                {{ form_row(form.codePostal) }}
+
+            </td>
+            <td>
+                {# Bouton Ajouter #}
+                <button type="submit" name="clickSurAjouter">Ajouter</button>
+                {{ form_end(form) }}
+{#                onclick="window.location.href='{{ path('ajouter_villes') }}'"#}
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>

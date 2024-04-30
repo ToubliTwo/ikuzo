@@ -19,10 +19,12 @@ class SortiesController extends AbstractController
 {
     #[Route('/sorties/ajouter', name: 'sorties_ajouter')]
     #[IsGranted(SortieVoter::CREATE)]
+
     public function ajouter(Request $request, EntityManagerInterface $entityManager): Response
     {
         $sortie = new Sorties();
         $sortieForm = $this->createForm(AjouterSortieFormType::class, $sortie);
+
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
