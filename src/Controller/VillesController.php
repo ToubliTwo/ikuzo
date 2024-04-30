@@ -24,29 +24,30 @@ class VillesController extends AbstractController
     }
 
 
-#[Route('/gerer-villes', name: 'gerer_villes')]
+    #[Route('/gerer-villes', name: 'gerer_villes')]
+
     public function gererVilles(Request $request, EntityManagerInterface $entityManager): Response
-{
-    $villes = $this->villeRepository->findAll();
-              $ville = new Ville();
+    {
+        $villes = $this->villeRepository->findAll();
+        $ville = new Ville();
 
 
-    $nouvelleVilleForm = $this->createForm(NouvelleVilleFormType::class);
+        $nouvelleVilleForm = $this->createForm(NouvelleVilleFormType::class);
 
-    $form = $this->createForm(VilleFormType::class);
-    $form->handleRequest($request);
+        $form = $this->createForm(VilleFormType::class);
+        $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid() && $request->request->has('clickSurRechercher')) {
-        $this->addFlash('success', "");
+        if ($form->isSubmitted() && $form->isValid() && $request->request->has('clickSurRechercher')) {
+            $this->addFlash('success', "");
             $nom = $form->get('nom')->getData();
 
             $villes = $this->villeRepository->findByCriteriaWithVille($nom);
 
-    }
+        }
         $ajouterForm = $this->createForm(NouvelleVilleFormType::class, $ville);
         $ajouterForm->handleRequest($request);
 
-        if ($ajouterForm->isSubmitted()&&$ajouterForm->isValid()
+        if ($ajouterForm->isSubmitted() && $ajouterForm->isValid()
             && $request->request->has('clickSurAjouter')) {
             $entityManager->persist($ville);
             $entityManager->flush();
@@ -55,12 +56,12 @@ class VillesController extends AbstractController
             return $this->redirectToRoute('gerer_villes');
         }
 
+        return $this->render('villes/gerer_villes.html.twig', [
+            'rechercherForm' => $form,
+            'villes' => $villes,
+            'form' => $nouvelleVilleForm,
 
-    return $this->render('villes/gerer_villes.html.twig', [
-        'rechercherForm' => $form,
-        'villes' => $villes,
-        'form' => $nouvelleVilleForm,
+        ]);
+    }
 
-    ]);
-}
 }
