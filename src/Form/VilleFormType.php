@@ -15,10 +15,7 @@ class VilleFormType extends AbstractType
         $builder
             ->add('nom', null, [
                 'label' => 'Le nom contient :',
-                'required' => false,
-            ])
-            ->add("submit", SubmitType::class, [
-                'label' => 'Rechercher'
+                'required'=> false,
             ]);
     }
 

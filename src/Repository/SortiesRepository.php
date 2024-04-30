@@ -107,4 +107,5 @@ class SortiesRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
+
 }
