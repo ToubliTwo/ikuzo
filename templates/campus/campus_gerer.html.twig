@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+
+{% block body %}
+<h1>Gestion des campus</h1>
+<div>
+    <div class="formulaire_bloc">
+        <div class="colonne">
+            {{ form_start (rechercheCampusForm) }}
+            {{ form_widget(rechercheCampusForm) }}
+            <button type="submit" class="submitRechercher" name="clickSurRechercher">Rechercher</button> {# <i class="fa-light fa-magnifying-glass"></i> #}
+            {{ form_end(rechercheCampusForm) }}
+        </div>
+    </div>
+
+    <div class="tableauAccueil">
+        <table>
+            <thead>
+              <div class="colonne">
+                <tr>
+                    <th>Campus</th>
+                    <th>Action</th>
+                </tr>
+              </div>
+            </thead>
+        {%  for campus in campusList %}
+             <tr>
+                 <td >{{ campus.nom }}</td>
+            </tr>
+        {% endfor %}
+            <tr>
+                {{ form_start (ajouterNouveauCampus) }}
+                <td>{{ form_row (ajouterNouveauCampus.nom) }}</td>
+                {{ form_end (ajouterNouveauCampus) }}
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="nosBoutons">
+{#        <div class="submitValider">#}
+{#            <button type="submit" name="clickSurEnregistrer" >Enregistrer</button>#}
+{#        </div>#}
+
+        <div class="submitAnnuler">
+            <a href="{{ path('main_home') }}">Annuler</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
