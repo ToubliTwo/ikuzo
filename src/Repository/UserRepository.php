@@ -7,6 +7,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -21,9 +22,13 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    private PaginatorInterface $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, User::class);
+
+        $this->paginator = $paginator;
     }
 
     /**
@@ -42,19 +47,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function findById($id): ?User
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.id = :id')
-            ->leftJoin('u.campus', 'c')
-            ->setParameter('id', $id)
+        return $this->createQueryBuilder(alias: 'u')
+            ->andWhere(where: 'u.id = :id')
+            ->leftJoin(join: 'u.campus',alias:  'c')
+            ->setParameter(key: 'id',value:  $id)
             ->getQuery()
             ->getOneOrNullResult();
     }
 
     public function findByCampus($campus): array
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.campus = :campus')
-            ->setParameter('campus', $campus)
+        return $this->createQueryBuilder(alias: 'u')
+            ->andWhere(where: 'u.campus = :campus')
+            ->setParameter(key: 'campus',value:  $campus)
             ->getQuery()
             ->getResult();
     }
@@ -72,24 +77,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
              WHERE s = :sorties
              DQL)->getResult())*/ //construction de la requete en DQL
 
-        return $this->createQueryBuilder('u')
-            ->select('NEW App\\DTO\\UserAvecPseudoNomPrenomDTO($u.id, $u.pseudo, $u.nom, $u.prenom)')
-            ->leftJoin('u.sorties', 's')
-            ->andWhere('s = :sorties')
-            ->setParameter('sorties', $sorties)
+        return $this->createQueryBuilder(alias: 'u')
+            ->select(select: 'NEW App\\DTO\\UserAvecPseudoNomPrenomDTO($u.id, $u.pseudo, $u.nom, $u.prenom)')
+            ->leftJoin(join: 'u.sorties',alias:  's')
+            ->andWhere(where: 's = :sorties')
+            ->setParameter(key: 'sorties',value:  $sorties)
             ->getQuery()
             ->getResult();
     }
-
-    public function paginateUsers(int $page, int $limite): Paginator
+    public function paginateUsers(int $page, int $limit): \Knp\Component\Pager\Pagination\PaginationInterface
     {
-      return new Paginator($this->createQueryBuilder('u')
-          ->orderBy('u.id', 'ASC')
-          ->getQuery()
-          ->setFirstResult(($page - 1) * $limite)
-          ->setMaxResults($limite)
-          ->setHint(Paginator::HINT_ENABLE_DISTINCT, false),
-      false
+      return $this->paginator->paginate(
+          $this->createQueryBuilder(alias: 'u'),
+          $page,
+          $limit
       );
     }
     //dans le controller, injecter Request $request dans la methode

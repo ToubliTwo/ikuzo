@@ -22,16 +22,16 @@ class UserController extends AbstractController
     {
         /*$this->denyAccessUnlessGranted(ProfilVoter::EDIT, $id);*/
         $user = $ur->find($id);
-        $userForm = $this->createForm(ProfilFormType::class, $user);
+        $userForm = $this->createForm(type: ProfilFormType::class, data: $user);
 
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Profil modifié avec succès !');
+            $this->addFlash(type: 'success', message: 'Profil modifié avec succès !');
 
-            return $this->redirectToRoute('main_home');
+            return $this->redirectToRoute(route: 'main_home');
         }
         return $this->render('user/modifier.html.twig',
             [

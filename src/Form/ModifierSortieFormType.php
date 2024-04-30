@@ -21,26 +21,26 @@ class ModifierSortieFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre', TextType::class, [
+            ->add(child: 'titre', type: TextType::class, options: [
                 'label' => 'Nom de la sortie :',
-                'attr' => ['placeholder' => 'modifiez le titre ']
+                'attr' => ['placeholder' => 'Donnez un titire à votre évènement !']
                 ,'required'=> false
             ])
 
-            ->add('date', DateTimeType::class, [
+            ->add(child: 'date', type: DateTimeType::class, options: [
                 'html5' => true,
                 'widget' => 'single_text',
-                'label' => 'Modifiez la date et l\'heure :',
-//                'input' => 'datetime_immutable',
+                'label' => 'Date et heure de la sortie :',
+                'input' => 'datetime_immutable',
                 'required'=> false
             ])
 
-            ->add('nombreDePlaces', TextType::class, [
+            ->add(child: 'nombreDePlaces', type: TextType::class, options: [
                 'label' => 'Nombre de places :'
                 ,'required'=> false
             ])
 
-            ->add('duree', TimeType::class, [
+            ->add(child: 'duree', type: TimeType::class, options: [
                 'html5' => true,
                 'widget' => 'single_text',
                 'label' => 'Durée de l\'évènement : ',
@@ -49,57 +49,59 @@ class ModifierSortieFormType extends AbstractType
                 ]
             ])
 
-            ->add('dateLimiteInscription', DateTimeType::class, [
+            ->add(child: 'dateLimiteInscription', type: DateTimeType::class, options: [
                 'html5' => true,
                 'widget' => 'single_text',
                 'label' => 'Date limite d\'inscription :',
-//                'input' => 'datetime_immutable',
+                'input' => 'datetime_immutable',
                 'required'=> false
             ])
 
-            ->add('description', TextareaType::class,
-                ['label' => 'Description et infos : ',
-                    'attr' => ['placeholder' => 'Modifiez la description de votre évènement !']
-                    ,'required'=> false
-                ])
+            ->add(child: 'description', type: TextareaType::class, options: [
+                'label' => 'Description et infos : ',
+                'attr' => ['placeholder' => 'Ajoutez une description à votre évènement !']
+                ,'required'=> false
+            ])
 
-            ->add('campus', EntityType::class, [
+
+            ->add(child: 'campus', type: EntityType::class, options: [
                 'class' => Campus::class,
                 'choice_label' => 'nom',
                 'label' => 'Campus :',
             ])
 
-            ->add('etat', EntityType::class, [
-                'class' => Etat::class,
-                'choice_label' => 'libelle',
-            ])
 
-            ->add('ville', EntityType::class, [
+            ->add(child: 'ville', type: EntityType::class, options: [
                 'choice_label' => 'nom',
                 'class' => Ville::class,
                 'mapped' => false, //pour indiquer que l'attribut n'existe pas dans l'entité Sortie
             ])
 
-            ->add('lieu',EntityType::class, [
+            ->add(child: 'lieu',type: EntityType::class, options: [
                 'choice_label' => 'nom',
                 'required'=> false,
                 'class' => Lieu::class,
             ])
 
-            ->add('latitude',EntityType::class, [
+
+            ->add(child: 'latitude',type: EntityType::class, options: [
                 'choice_label' => 'latitude',
                 'required'=> false,
                 'class' => Lieu::class,
                 'mapped' => false,
             ])
 
-            ->add('longitude',EntityType::class, [
+            ->add(child: 'longitude',type: EntityType::class, options: [
                 'choice_label' => 'longitude',
                 'required'=> false,
                 'class' => Lieu::class,
                 'mapped' => false,
-            ]);
+            ])
 
+            ->add(child: 'etat', type: EntityType::class, options: [
+                'class' => Etat::class,
+                'choice_label' => 'libelle',
+            ])
         ;
     }
 

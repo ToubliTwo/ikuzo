@@ -20,14 +20,12 @@ class MainController extends AbstractController
     {
         $dateActuelle = new \DateTime();
 
-        $sorties = $sortiesRepository->findAll();
+        /*$sorties = $sortiesRepository->findAll();
 
         // Vérifier l'état de l'activité sur le point d'être affichée
-        foreach ($sorties as $instanceDeSortie) {
-            $changementEtat->modifierEtat($instanceDeSortie);
-        }
+        */
 
-        $sortieform = $this->createForm(RechercheSortieFormType::class);
+        $sortieform = $this->createForm(type: RechercheSortieFormType::class);
         $sortieform->handleRequest($request);
 
         if ($sortieform->isSubmitted() && $sortieform->isValid()) {
@@ -49,15 +47,17 @@ class MainController extends AbstractController
             // Filtrer les sorties en fonction des champs renseignés
             $sorties = $sortiesRepository->findByCriteria(
                 $campusId,
-                $organisateur ? $organisateur : null,
-                $inscrit ? $inscrit : null,
-                $pasInscrit ? $pasInscrit : null,
-                $sortiesPassees ? $sortiesPassees : null,
-                $titre,
-                $dateRechercheDebut,
-                $dateRechercheFin
+                organisateur: $organisateur ? $organisateur : null,
+                inscrit: $inscrit ? $inscrit : null,
+                pasInscrit: $pasInscrit ? $pasInscrit : null,
+                sortiesPassees: $sortiesPassees ? $sortiesPassees : null,
+                titre:  $titre,
+                dateRechercheDebut: $dateRechercheDebut,
+                dateRechercheFin: $dateRechercheFin
             );
-
+            foreach ($sorties as $instanceDeSortie) {
+                $changementEtat->modifierEtat($instanceDeSortie);
+            }
             return $this->render('main/home.html.twig', [
                 'sortieform' => $sortieform,
                 'sorties' => $sorties,
@@ -68,6 +68,5 @@ class MainController extends AbstractController
             'sortieform' => $sortieform,
             'sorties' => [],
         ]);
-
     }
 }

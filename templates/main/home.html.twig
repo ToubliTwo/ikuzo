@@ -20,10 +20,11 @@
     {{ form_end(sortieform) }}
 </div>
 <p>Organisez et participez à des sorties passionnantes avec d'autres stagiaires ENI, où que vous soyez !</p>
-COUCOU !!!!
-    //Afficher un tableau avec les sorties
+    {% if sorties is not empty %}
+
 <div class="tableauAccueil">
-    <table>
+    <div class="table-container">
+    <table class="result-table">
         <tr>
             <th>Nom de la sortie</th>
             <th>Date de la sortie</th>
@@ -71,5 +72,7 @@ COUCOU !!!!
             </tr>
         {% endfor %}
     </table>
+    </div>
 </div>
-    {% endblock %}
+    {% endif %}
+{% endblock %}

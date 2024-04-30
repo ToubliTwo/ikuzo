@@ -19,7 +19,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
 
-        $faker = \Faker\Factory::create('fr_FR');
+        $faker = \Faker\Factory::create(locale: 'fr_FR');
 
         for ($i = 0; $i < self::NB_USERS; $i++) {
             $user = new User();
@@ -30,16 +30,16 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setEmail($faker->email);
             $user->setPassword($this->passwordHasher->hashPassword(
                 $user,
-                'password'
+                plainPassword: 'password'
             ));
             $user->setAdministrateur($faker->boolean);
             if ($user->isAdministrateur()) {
                 $user->setRoles(["ROLE_ADMIN"]);
             } else
-                $user->setRoles(["ROLE_USER"]);
+            $user->setRoles(["ROLE_USER"]);
             $user->setActif($faker->boolean);
-            $user->setCampus($this->getReference("campus_" . $faker->numberBetween(1, 3)));
-            $this->addReference("user_" . ($i + 1), $user);
+            $user->setCampus($this->getReference(name: "campus_" . $faker->numberBetween(int1: 1, int2: 3)));
+            $this->addReference(name: "user_" . ($i + 1), object: $user);
             $manager->persist($user);
         }
 

@@ -8,6 +8,7 @@ use App\Entity\Lieu;
 use App\Entity\Sorties;
 use App\Entity\User;
 use App\Entity\Ville;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -29,17 +30,13 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin_dashboard_index')]
     public function index(): Response
     {
-
-
         return $this->render('admin/my-dashboard.html.twig');
-
     }
-
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Ikouzo')
+            ->setTitle(title: 'Ikouzo')
             ->setLocales(['fr', 'en'])
             ->renderContentMaximized();
     }
@@ -48,27 +45,27 @@ class DashboardController extends AbstractDashboardController
     {
         return parent::configureCrud()
             ->renderContentMaximized()
-            ->setDateTimeFormat('dd/MM/yyyy HH:mm:ss');
-
+            ->setDateTimeFormat(dateFormatOrPattern: 'dd/MM/yyyy HH:mm:ss')
+            ->showEntityActionsInlined()
+            ;
     }
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToLogout('Logout', 'fa-solid fa-arrow-right-from-bracket');
-        yield MenuItem::section('Users');
-        yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
-        yield MenuItem::section('Villes');
-        yield MenuItem::linkToCrud('Villes', 'fa fa-city', Ville::class);
-        yield MenuItem::section('Campus');
-        yield MenuItem::linkToCrud('Campus', 'fa fa-university', Campus::class);
-        yield MenuItem::section('Sorties');
-        yield MenuItem::linkToCrud('Sorties', 'fa fa-calendar', Sorties::class);
-        yield MenuItem::section('Etats');
-        yield MenuItem::linkToCrud('Etats', 'fa fa-check', Etat::class);
-        yield MenuItem::section('Lieux');
-        yield MenuItem::linkToCrud('Lieux', 'fa fa-map-marker', Lieu::class);
-
-
+        yield MenuItem::linkToDashboard(label: 'Dashboard', icon: 'fa-solid fa-user-tie');
+        yield MenuItem::linkToRoute(label: 'Retour au site',icon:  'fa fa-home', routeName: 'main_home');
+        yield MenuItem::linkToLogout(label: 'Logout', icon: 'fa-solid fa-arrow-right-from-bracket');
+        yield MenuItem::section(label: 'DONNEES');
+        yield MenuItem::linkToCrud(label: 'Utilisateurs', icon: 'fa fa-user', entityFqcn: User::class);
+        yield MenuItem::linkToCrud(label: 'Villes', icon: 'fa fa-city', entityFqcn: Ville::class);
+        yield MenuItem::linkToCrud(label: 'Campus', icon: 'fa fa-university', entityFqcn:  Campus::class);
+        yield MenuItem::linkToCrud(label: 'Sorties', icon: 'fa fa-calendar', entityFqcn: Sorties::class);
+        yield MenuItem::linkToCrud(label: 'Etats', icon: 'fa fa-check', entityFqcn: Etat::class);
+        yield MenuItem::linkToCrud(label: 'Lieux', icon: 'fa fa-map-marker', entityFqcn:  Lieu::class);
     }
 
+    public function configureAssets(): Assets
+    {
+        return parent::configureAssets()
+            ->addCssFile(pathOrAsset: 'css/admin.css');
+    }
 }
