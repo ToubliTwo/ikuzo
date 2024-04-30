@@ -82,6 +82,20 @@ main {
     margin-bottom: 5%;
 }
 
+.tableauAccueil th {
+    gap: 50px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--couleur-quaternaire);
+    text-align: left;
+    padding-left: 15px;
+}
+
+.tableauAccueil td {
+    justify-content: flex-start;
+    text-align: left;
+}
+
 footer {
     background-color: var(--couleur-quaternaire);
     color: var(--couleur-principale);
@@ -139,6 +153,9 @@ li {
     margin-bottom: 20px;
 }
 
+
+
+
 a.button-create {
     cursor: pointer;
     padding: 0;
@@ -172,7 +189,7 @@ a.button-create:hover {
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables VALIDER  ******** */
 /* *********************************************************** */
-.submitValider button[type="submit"] {
+.submitValider button[type="submit"], .submitValider {
     /* Réinitialiser les styles par défaut */
     cursor: pointer;
     padding: 0;
@@ -195,6 +212,7 @@ a.button-create:hover {
     border: solid 1px black;
 }
 
+
 /* *********************************************************** */
 /* *****Template pour les boutons submit VALIDER  ******** */
 /* *********************************************************** */
@@ -214,6 +232,7 @@ a.button-create:hover {
     width: 100px;
     height: 40px;
 }
+
 
 .submitValider:hover {
     transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
@@ -293,15 +312,14 @@ a.button-create:hover {
     color: white;
     width: 100px;
     height: 40px;
-    margin-top: 25px;
+    margin-top: 20px;
 }
-/*
+
 .submitRechercher:hover {
-    transition: transform 0.2s; !* Ajoute une transition pour un effet plus fluide *!
-    transform: scale(1.2); !* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol *!
+    transition: transform 0.2s;
+    transform: scale(1.2);
     border: solid 1px black;
 }
-*/
 
 
 /* *********************************************************** */
@@ -425,3 +443,19 @@ a.button-create:hover {
     width: 100px;
     height: 40px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

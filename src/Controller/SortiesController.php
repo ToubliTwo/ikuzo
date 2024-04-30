@@ -39,7 +39,7 @@ class SortiesController extends AbstractController
                 $entityManager->persist($sortie);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'FONCTION AJOUTER : Évènement correctement ajouté !');
+                $this->addFlash('success', 'Évènement correctement ajouté !');
 
                 return $this->redirectToRoute('main_home');
             }
@@ -52,7 +52,7 @@ class SortiesController extends AbstractController
                 $entityManager->persist($sortie);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'FONCTION PUBLIER : Évènement correctement ajouté et publié !');
+                $this->addFlash('success', 'Évènement correctement ajouté et publié !');
 
                 return $this->redirectToRoute('main_home');
             }
