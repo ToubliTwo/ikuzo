@@ -25,7 +25,6 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $rolesChoices = ['ROLE_USER' => 'User', 'ROLE_ADMIN' => 'Admin'];
-//TODO: FIXME: affichage de l'image sur le formulaire d'édition (dump possible dans le formulaire?)
         return [
             IdField::new(propertyName: 'id')->hideOnForm(),
             TextField::new(propertyName: 'nom'),

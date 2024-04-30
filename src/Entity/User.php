@@ -374,7 +374,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
 
     public function serialize(): ?string
     {
-        // TODO: Implement serialize() method.
 
         return serialize([
             $this->id,
@@ -399,7 +398,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
 
     public function unserialize(string $serialized): void
     {
-        // TODO: Implement unserialize() method.
 
         [
             $this->id,
@@ -424,7 +422,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
 
     public function __serialize(): array
     {
-        // TODO: Implement __serialize() method.
 
         return [
             $this->id,
@@ -449,7 +446,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
 
     public function __unserialize(array $serialized): void
     {
-        // TODO: Implement __unserialize() method.
 
         [
             $this->id,
