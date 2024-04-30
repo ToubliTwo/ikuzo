@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Etat;
 use App\Entity\Sorties;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 
 
@@ -18,8 +21,8 @@ use Symfony\Bundle\SecurityBundle\Security;
  */
 class SortiesRepository extends ServiceEntityRepository
 {
-    private $security;
-    public function __construct(ManagerRegistry $registry, Security $security)
+    private Security $security;
+    public function __construct(ManagerRegistry $registry, Security $security, private readonly PaginatorInterface $paginator)
     {
         parent::__construct($registry, Sorties::class);
         $this->security = $security;
@@ -46,12 +49,17 @@ class SortiesRepository extends ServiceEntityRepository
 
         $queryBuilder = $this->createQueryBuilder('s')
             ->leftJoin('s.campus', 'c')
-            ->leftJoin('s.etat', 'e');
-        $queryBuilder
-            ->andWhere('e.libelle NOT IN (:etatsExclus)')
-            ->setParameter('etatsExclus', ['Archivée', 'Annulée']);
+            ->leftJoin('s.etat', 'e')
+            ->leftJoin('s.users', 'u')
+            ->leftJoin('s.lieu', 'l')
+            ->addSelect('u')
+            ->addSelect('c')
+            ->addSelect('e')
+            ->where('e.libelle NOT IN (:etatsExclus)')
+            ->setParameter('etatsExclus', ['Archivée', 'Annulée']);;
 
         if ($titre) {
+            // Ajouter le filtre pour les sorties dont le titre contient le mot-clé
             $queryBuilder
                 ->andWhere('s.titre LIKE :titre')
                 ->setParameter('titre', '%' . $titre . '%');
@@ -89,7 +97,7 @@ class SortiesRepository extends ServiceEntityRepository
         }
 
         if ($dateRechercheDebut && $dateRechercheFin) {
-
+            // Ajouter le filtre pour les sorties comprises entre les dates de recherche
             $queryBuilder
                 ->andWhere('s.date >= :dateRechercheDebut')
                 ->andWhere('s.date <= :dateRechercheFin')
@@ -98,13 +106,13 @@ class SortiesRepository extends ServiceEntityRepository
         }
 
         if ($campusId) {
+            // Ajouter le filtre pour les sorties du campus sélectionné
             $queryBuilder
                 ->andWhere('c.id = :campusId')
                 ->setParameter('campusId', $campusId);
         }
 
-        // Exécuter la requête
-        return $queryBuilder->getQuery()->getResult();
+        $query = $queryBuilder->getQuery();
+        return $query->getResult();
     }
-
 }

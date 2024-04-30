@@ -17,23 +17,23 @@ class RechercheSortieFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre', null, [
+            ->add(child: 'titre', type: null, options: [
                 'label' => 'Le nom de la sortie contient :',
                 'required' => false,
             ])
-            ->add('campus', EntityType::class, [
+            ->add(child: 'campus', type: EntityType::class, options: [
                 'class' => Campus::class,
                 'choice_label' => 'nom',
                 'placeholder' => 'Sélectionnez un campus',
                 'required' => false,
             ])
-            ->add('dateRechercheDebut', DateType::class, [
+            ->add(child: 'dateRechercheDebut', type: DateType::class, options: [
                 'label' => 'Entre',
                 'widget' => 'single_text',
                 'mapped' => false,
                 'required' => false,
             ])
-            ->add('dateRechercheFin', DateType::class, [
+            ->add(child: 'dateRechercheFin', type: DateType::class, options: [
                 'label' => ' Et',
                 'widget' => 'single_text',
                 'mapped' => false,
@@ -41,29 +41,29 @@ class RechercheSortieFormType extends AbstractType
 
             ])
             // Ajout de la case à cocher pour les sorties dont vous êtes l'organisateur/trice
-            ->add('organisateur', CheckboxType::class, [
+            ->add(child: 'organisateur', type: CheckboxType::class, options: [
                 'label' => 'Sorties dont je suis l\'organisateur/trice',
                 'required' => false,
                 'mapped' => false,
             ])
             // Ajout de la case à cocher pour les sorties auxquelles vous êtes inscrit/e
-            ->add('inscrit', CheckboxType::class, [
+            ->add(child: 'inscrit', type: CheckboxType::class, options: [
                 'label' => 'Sorties auxquelles je suis inscrit/e',
                 'required' => false,
                 'mapped' => false,
             ])
-            ->add('pasInscrit', CheckboxType::class, [
+            ->add(child: 'pasInscrit', type: CheckboxType::class, options: [
                 'label' => 'Sorties auxquelles je ne suis pas inscrit/e',
                 'required' => false,
                 'mapped' => false,
             ])
-            ->add('sortiesPassees', CheckboxType::class, [
+            ->add(child: 'sortiesPassees', type: CheckboxType::class, options: [
                 'label' => 'Sorties passées',
                 'required' => false,
                 'mapped' => false,
             ])
 
-            ->add("submit", SubmitType::class, [
+            ->add(child: "submit", type: SubmitType::class, options: [
                 'label' => 'Rechercher'
             ])
         ;

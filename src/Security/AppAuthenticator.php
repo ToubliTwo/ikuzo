@@ -22,13 +22,13 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
     {
     }
 
     public function authenticate(Request $request): Passport
     {
-        $pseudo = $request->getPayload()->getString('pseudo');
+        $pseudo = $request->getPayload()->getString(key: 'pseudo');
 
         $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $pseudo);
 
@@ -36,7 +36,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             new UserBadge($pseudo),
             new PasswordCredentials($request->getPayload()->getString('password')),
             [
-                new CsrfTokenBadge('authenticate', $request->getPayload()->getString('_csrf_token')),
+                new CsrfTokenBadge(csrfTokenId: 'authenticate', csrfToken:  $request->getPayload()->getString('_csrf_token')),
                 new RememberMeBadge(),
             ]
         );
@@ -49,11 +49,11 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // For example:
-        return new RedirectResponse($this->urlGenerator->generate('main_home'));
+        return new RedirectResponse($this->urlGenerator->generate(name: 'main_home'));
     }
 
     protected function getLoginUrl(Request $request): string
     {
-        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+        return $this->urlGenerator->generate(name: self::LOGIN_ROUTE);
     }
 }

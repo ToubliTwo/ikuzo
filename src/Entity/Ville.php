@@ -88,7 +88,7 @@ class Ville
         if ($this->lieux->removeElement($lieux)) {
             // set the owning side to null (unless already changed)
             if ($lieux->getVille() === $this) {
-                $lieux->setVille(null);
+                $lieux->setVille(ville: null);
             }
         }
 

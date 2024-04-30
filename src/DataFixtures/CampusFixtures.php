@@ -20,7 +20,7 @@ class CampusFixtures extends Fixture
             $campus->setNom($campusNom);
             $manager->persist($campus);
 
-            $this->addReference('campus_' . ($index + 1), $campus);
+            $this->addReference(name: 'campus_' . ($index + 1), object: $campus);
         }
         $manager->flush();
     }

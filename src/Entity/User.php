@@ -6,15 +6,19 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_PSEUDO', fields: ['pseudo'])]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -55,11 +59,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[Assert\Length(min: 8, max: 180)]
-    #[Assert\NotBlank]
     #[Assert\Regex(pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$/', message: 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial')]
     #[ORM\Column]
     private ?string $password = null;
 
+    #[Assert\Length(min: 8, max: 180)]
+    #[Assert\Regex(pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$/', message: 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial')]
+    private ?string $plainPassword = null; // permet de traiter le password tout en le gardant non persisté
     #[ORM\Column]
     private ?bool $administrateur = null;
 
@@ -73,14 +79,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Sorties>
      */
-    #[ORM\ManyToMany(targetEntity: Sorties::class, inversedBy: 'users')]
+    #[ORM\ManyToMany(targetEntity: Sorties::class, inversedBy: 'users', cascade: ['persist', 'remove'])]
     private Collection $sortie;
 
     /**
      * @var Collection<int, Sorties>
      */
-    #[ORM\OneToMany(targetEntity: Sorties::class, mappedBy: 'organisateur')]
+    #[ORM\OneToMany(targetEntity: Sorties::class, mappedBy: 'organisateur', cascade: ['persist', 'remove'])]
     private Collection $sortieOrganise;
+
+    #[Vich\UploadableField(mapping: 'imageProfile', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function __construct()
     {
@@ -236,13 +254,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): static
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
     public function eraseCredentials(): void
     {
+        //A décommenter si on veut effacer le mot de passe en clair après chaque connexion
+        // pour éviter qu'il se retrouve dans la session ou un cookie
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     /**
@@ -292,7 +324,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->sortieOrganise->removeElement($sortieOrganise)) {
             // set the owning side to null (unless already changed)
             if ($sortieOrganise->getOrganisateur() === $this) {
-                $sortieOrganise->setOrganisateur(null);
+                $sortieOrganise->setOrganisateur(organisateur: null);
             }
         }
 
@@ -302,5 +334,141 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return $this-> getNom() . ' - '. $this->getPseudo() . ' - ' . $this->getPrenom() . ' (id: ' . $this->getId() . ')';
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one fields changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    public function serialize(): ?string
+    {
+        // TODO: Implement serialize() method.
+
+        return serialize([
+            $this->id,
+            $this->nom,
+            $this->prenom,
+            $this->telephone,
+            $this->email,
+            $this->pseudo,
+            $this->password,
+            $this->administrateur,
+            $this->actif,
+            $this->campus,
+            $this->roles,
+            $this->sortie,
+            $this->sortieOrganise,
+            $this->imageName,
+            $this->imageSize,
+            $this->updatedAt,
+        ]);
+
+    }
+
+    public function unserialize(string $serialized): void
+    {
+        // TODO: Implement unserialize() method.
+
+        [
+            $this->id,
+            $this->nom,
+            $this->prenom,
+            $this->telephone,
+            $this->email,
+            $this->pseudo,
+            $this->password,
+            $this->administrateur,
+            $this->actif,
+            $this->campus,
+            $this->roles,
+            $this->sortie,
+            $this->sortieOrganise,
+            $this->imageName,
+            $this->imageSize,
+            $this->updatedAt,
+        ] = unserialize($serialized);
+
+    }
+
+    public function __serialize(): array
+    {
+        // TODO: Implement __serialize() method.
+
+        return [
+            $this->id,
+            $this->nom,
+            $this->prenom,
+            $this->telephone,
+            $this->email,
+            $this->pseudo,
+            $this->password,
+            $this->administrateur,
+            $this->actif,
+            $this->campus,
+            $this->roles,
+            $this->sortie,
+            $this->sortieOrganise,
+            $this->imageName,
+            $this->imageSize,
+            $this->updatedAt,
+        ];
+
+    }
+
+    public function __unserialize(array $serialized): void
+    {
+        // TODO: Implement __unserialize() method.
+
+        [
+            $this->id,
+            $this->nom,
+            $this->prenom,
+            $this->telephone,
+            $this->email,
+            $this->pseudo,
+            $this->password,
+            $this->administrateur,
+            $this->actif,
+            $this->campus,
+            $this->roles,
+            $this->sortie,
+            $this->sortieOrganise,
+            $this->imageName,
+            $this->imageSize,
+            $this->updatedAt,
+        ] = $serialized;
+
     }
 }

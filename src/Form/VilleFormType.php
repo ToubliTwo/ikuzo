@@ -13,11 +13,11 @@ class VilleFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', null, [
+            ->add(child: 'nom', type: null, options: [
                 'label' => 'Le nom contient :',
                 'required' => false,
             ])
-            ->add("submit", SubmitType::class, [
+            ->add(child: "submit", type: SubmitType::class, options: [
                 'label' => 'Rechercher'
             ]);
     }

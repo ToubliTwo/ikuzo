@@ -19,7 +19,7 @@ class VillesController extends AbstractController
         $villes = $villeRepository->findAll();
 
         // Création du formulaire
-        $form = $this->createForm(VilleFormType::class);
+        $form = $this->createForm(type: VilleFormType::class);
         $form->handleRequest($request);
 
         // Traitement du formulaire s'il est soumis et valide
@@ -29,7 +29,7 @@ class VillesController extends AbstractController
 
 
             // Renvoi vers le template avec les résultats de la recherche
-            return $this->render('villes/gerer_villes.html.twig', [
+            return $this->render( 'villes/gerer_villes.html.twig',  [
                 'form' => $form,
                 'villes' => $villes,
             ]);
