@@ -23,7 +23,9 @@ class VillesController extends AbstractController
         $this->villeRepository = $villeRepository;
     }
 
+
     #[Route('/gerer-villes', name: 'gerer_villes')]
+
     public function gererVilles(Request $request, EntityManagerInterface $entityManager): Response
     {
         $villes = $this->villeRepository->findAll();
@@ -54,7 +56,6 @@ class VillesController extends AbstractController
             return $this->redirectToRoute('gerer_villes');
         }
 
-
         return $this->render('villes/gerer_villes.html.twig', [
             'rechercherForm' => $form,
             'villes' => $villes,
@@ -62,4 +63,5 @@ class VillesController extends AbstractController
 
         ]);
     }
+
 }

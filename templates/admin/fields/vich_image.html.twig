@@ -1,0 +1,19 @@
+{# admin/fields/vich_image.html.twig #}
+{% if field.value %}
+   {#{{ dump(entity) }}#}
+    {% set html_id = 'ea-lightbox-' ~ entity.instance.id %}
+    <a href="#" class="ea-lightbox-thumbnail" data-featherlight="#{{ html_id }}"
+       data-featherlight-close-on-click="anywhere">
+        <img src="{{ asset('images/users/' ~ entity.instance.id ~ '/' ~ entity.instance.imageName) }}"
+             alt="" class="img-fluid">
+    </a>
+
+    <div id="{{ html_id }}" class="ea-lightbox">
+        <img src="{{ asset('images/users/' ~ entity.instance.id ~ '/' ~ entity.instance.imageName) }}"
+             alt="">
+    </div>
+{% else %}
+    <span class="badge badge-secondary">
+        <img src="{{ asset('images/users/PasDePhoto.png') }}" alt="Pas de Photo" class="img-fluid ea-lightbox-thumbnail" width="45" height="45">
+    </span>
+{% endif %}

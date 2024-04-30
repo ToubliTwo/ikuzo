@@ -25,6 +25,7 @@ class ChangementEtat
          $dateLimiteInscription = $sorties -> getDateLimiteInscription();
 
         // Créer une nouvelle instance de DateTime pour la date de 30j auparavant
+
 //      $delaiMax = $today->modify('-30 days');
         $delaiMax = (clone $today)->sub(new \DateInterval('P30D'));
 
@@ -37,7 +38,6 @@ class ChangementEtat
             $this -> entityManager -> flush();
         }
 
-
         /*/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\*/
         // /!\ PASSÉE : Si la date actuelle est supérieure à la date de l'activité, on passe :
         if ($today > $dateDeLaSortie)
@@ -47,8 +47,6 @@ class ChangementEtat
             $this -> entityManager -> flush();
         }
         /*/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\*/
-
-
 
         // CLOTURE : Si la date actuelle est supérieure à la date limite d'inscription, on clôture :
         if ($today>$dateLimiteInscription && $today<$dateDeLaSortie)

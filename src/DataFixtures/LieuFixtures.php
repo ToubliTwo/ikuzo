@@ -13,7 +13,7 @@ class LieuFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create('fr_FR');
+        $faker = \Faker\Factory::create(locale: 'fr_FR');
 
         for ($i = 0; $i < self::NB_LIEUX; $i++) {
             $lieu = new Lieu();
@@ -21,10 +21,10 @@ class LieuFixtures extends Fixture implements DependentFixtureInterface
             $lieu ->setRue($faker->streetName);
             $lieu ->setLatitude($faker->latitude);
             $lieu ->setLongitude($faker->longitude);
-            $lieu ->setVille($this->getReference("ville_" . $faker->numberBetween(1, 10)));
+            $lieu ->setVille($this->getReference(name: "ville_" . $faker->numberBetween(int1: 1, int2: 10)));
 
             $manager->persist($lieu);
-            $this->addReference("lieu_" . ($i+1), $lieu);
+            $this->addReference(name: "lieu_" . ($i+1), object: $lieu);
         }
         $manager->flush();
     }

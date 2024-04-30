@@ -11,6 +11,6 @@ class InscriptionSortieFormType extends AbstractType
     public function buildForm (FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('submit', SubmitType::class, ['label' => 'Inscription à la sortie']);
+            ->add(child: 'submit', type: SubmitType::class, options: ['label' => 'Inscription à la sortie']);
     }
 }

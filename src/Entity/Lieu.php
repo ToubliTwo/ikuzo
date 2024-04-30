@@ -142,7 +142,7 @@ class Lieu
         if ($this->sorties->removeElement($sorty)) {
             // set the owning side to null (unless already changed)
             if ($sorty->getLieu() === $this) {
-                $sorty->setLieu(null);
+                $sorty->setLieu(lieu: null);
             }
         }
 

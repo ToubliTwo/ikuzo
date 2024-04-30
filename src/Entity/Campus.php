@@ -80,7 +80,7 @@ class Campus
         if ($this->participants->removeElement($participant)) {
             // set the owning side to null (unless already changed)
             if ($participant->getCampus() === $this) {
-                $participant->setCampus(null);
+                $participant->setCampus(campus: null);
             }
         }
 
@@ -110,7 +110,7 @@ class Campus
         if ($this->sorties->removeElement($sorty)) {
             // set the owning side to null (unless already changed)
             if ($sorty->getCampus() === $this) {
-                $sorty->setCampus(null);
+                $sorty->setCampus(campus: null);
             }
         }
 

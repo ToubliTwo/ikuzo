@@ -9,34 +9,52 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ProfilFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom',)
-            ->add('prenom')
-            ->add('telephone')
-            ->add('email')
+            ->add(child: 'nom',)
+            ->add(child: 'prenom')
+            ->add(child: 'telephone')
+            ->add(child: 'email')
             //ne pas afficher le mot de passe
-            ->add('password', null, [
+            ->add(child: 'password', type: null, options: [
                 'label' => 'Mot de passe',
                 'required' => false,
                 'mapped' => false,
             ])
-            ->add('pseudo')
-            ->add('campus', EntityType::class, [
+            ->add(child: 'pseudo')
+            ->add(child: 'campus', type: EntityType::class, options: [
                 'class' => Campus::class,
                 'choice_label' => 'nom',
             ])
             //ajouter un champ pour uploader une photo
-            ->add('photo', null, [
-                'label' => 'Photo',
+            ->add(child: 'imageFile', type: VichFileType::class, options: [
+                'label' => 'Photo de profil',
                 'required' => false,
-                'mapped' => false,
-            ]);
-   }
+            ])
+            ->add(child: 'imageName', type: null, options: [
+                'label' => 'Photo de profil',
+                'required' => false,
+            ])
+            ->add(child: 'imageSize', type: null, options: [
+                'label' => 'Photo de profil',
+                'required' => false,
+            ])
+
+        //ajouter un bouton de validation
+            ->add(child: 'submit', type: SubmitType::class, options: [
+                'label' => 'Enregistrer',
+            ])
+            //ajouter un bouton d'annulation qui redirige vers la page d'accueil
+            ->add(child: 'cancel', type: SubmitType::class, options: [
+                'label' => 'Annuler',
+            ])
+        ;
+    }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
