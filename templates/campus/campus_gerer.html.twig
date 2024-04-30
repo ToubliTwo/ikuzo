@@ -18,14 +18,12 @@
 
     <div class="tableauAccueil">
         <table>
-          <div class="colonne">
-            <thead>
+            <thead class="colonne">
                 <tr>
                     <th>Campus</th>
                     <th>Action</th>
                 </tr>
             </thead>
-          </div>
         {%  for campus in campusList %}
              <tr>
                  <td >{{ campus.nom }}</td>
