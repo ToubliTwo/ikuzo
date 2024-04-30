@@ -22,26 +22,15 @@
         {# insertion d'une feuille de style CSS #}
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-
+{#        import BOOTSTRAP#}
+{#        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">#}
 
     </head>
     <body>
-        <header>
-
-           <div class="contenuDuHeader">
-               <a href="{{ path('main_home') }}"><img src="{{ asset('img/LogoProjetSortir.webp') }}" alt="Ikouzo !"></a>
+        <header class="contenuDuHeader">
+               <a class="zoom" href="{{ path('main_home') }}"><img class="logo" src="{{ asset('img/LogoProjetSortir.webp') }}" alt="Ikouzo !"></a>
                {%  include('inc/nav.html.twig') %}
-           </div>
-           
         </header>
-        {# gestion du flash message : #}
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="flash flash-{{ label }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
         <main>
             {# read and display all flash messages #}
             {% for label, messages in app.flashes %}

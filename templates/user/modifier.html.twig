@@ -1,33 +1,33 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <h1>Modifier votre profil</h1>
-        <div>
     <div class="formulaire_bloc">
-    {{ form_start(userForm) }}
-    {{ form_row(userForm.nom) }}
-    {{ form_row(userForm.prenom) }}
-    {{ form_row(userForm.pseudo) }}
-    {{ form_row(userForm.email) }}
-    {{ form_row(userForm.telephone) }}
-    {{ form_row(userForm.password) }}
-    {{ form_row(userForm.campus) }}
-    {{ form_widget(userForm) }}
+        <div class="formulaires">
+            <div class="colonne">
+            {{ form_start(userForm) }}
+            {{ form_row(userForm.nom) }}
+            {{ form_row(userForm.prenom) }}
+            {{ form_row(userForm.pseudo) }}
+            {{ form_row(userForm.email) }}
+            </div>
+            <div class="colonne">
+                {{ form_row(userForm.telephone) }}
+                {{ form_row(userForm.password) }}
+                {{ form_row(userForm.campus) }}
+                {{ form_widget(userForm) }}
+            </div>
         </div>
-        <div class="nosBoutons">
-
-            <div class="submitValider">
-                <button type="submit" title="Valider la sortie" name="clickSurValider">Valider</button>
-            </div>
-
-            {{ form_end(userForm) }}
-
-            <div class="submitAnnuler">
-                <a href="{{ path('main_home') }}">Annuler</a>
-            </div>
+    </div>
+    <div class="nosBoutons">
+        <div class="submitValider">
+            <button type="submit" title="Valider la sortie" name="clickSurValider">Valider</button>
+        </div>
+        {{ form_end(userForm) }}
+        <div class="submitAnnuler">
+            <a href="{{ path('main_home') }}">Annuler</a>
         </div>
     </div>
 {% endblock %}
 {% block title %}
-Votre profil ({{ user.nom~' '~user.prenom }})| {{ parent() }}
+    Votre profil ({{ user.nom~' '~user.prenom }})| {{ parent() }}
 {% endblock %}
-
