@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Etat;
 use App\Entity\Sorties;
-use App\Form\AjouterSortieType;
+use App\Form\AjouterSortieFormType;
 use App\Security\Voter\SortieVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,10 +35,11 @@ class SortiesController extends AbstractController
 
     #[Route('/sorties/ajouter', name: 'sorties_ajouter')]
     #[IsGranted(SortieVoter::CREATE)]
+
     public function ajouter(Request $request, EntityManagerInterface $entityManager): Response
     {
         $sortie = new Sorties();
-        $sortieForm = $this->createForm(AjouterSortieType::class, $sortie);
+        $sortieForm = $this->createForm(AjouterSortieFormType::class, $sortie);
 
         $sortieForm->handleRequest($request);
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
