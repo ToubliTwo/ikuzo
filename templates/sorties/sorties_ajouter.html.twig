@@ -3,7 +3,8 @@
 
 {% block body %}
         <h1>Créer une sortie</h1>
-       <div class="formulaires">
+    <div class="formulaire_bloc">
+    <div class="formulaires">
             <div class="colonne">
                {{ form_start (sortieForm) }}
                {{ form_row(sortieForm.titre) }}
@@ -37,12 +38,12 @@
             <div class="nosBoutons">
                <div class="submitValider"><button type="submit" name="sorties_ajouter">Valider</button></div>
                 <div class="submitPublier"><button type="submit" name="publier">Publier</button></div>
+                {# Champ caché pour stocker les détails du lieu sélectionné #}
+                <input type="hidden" id="lieuDetails" name="lieuDetails">
+                {{ form_end(sortieForm) }}
                 <div class="submitAnnuler"><a href="{{ path('main_home') }}">Annuler</a></div>
             </div>
-    {# Champ caché pour stocker les détails du lieu sélectionné #}
-    <input type="hidden" id="lieuDetails" name="lieuDetails">
-               {{ form_end(sortieForm) }}
-
+         
 <script>
         document.addEventListener('DOMContentLoaded', function () {
             var villeSelect = document.querySelector('#{{ sortieForm.ville.vars.id }}');

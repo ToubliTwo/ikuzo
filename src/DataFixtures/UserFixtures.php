@@ -37,7 +37,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 $user->setRoles(["ROLE_ADMIN"]);
             } else
             $user->setRoles(["ROLE_USER"]);
-
             $user->setActif($faker->boolean);
             $user->setCampus($this->getReference(name: "campus_" . $faker->numberBetween(int1: 1, int2: 3)));
             $this->addReference(name: "user_" . ($i + 1), object: $user);

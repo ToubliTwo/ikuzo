@@ -17,8 +17,8 @@ class Campus
     private ?int $id = null;
 
     #[Assert\Length(min: 3, max: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Choice(choices: ['Rennes', 'Nantes', 'Niort'], message: 'Campus doit être Rennes, Nantes ou Niort')]
+//    #[Assert\NotBlank]
+//    #[Assert\Choice(choices: ['Rennes', 'Nantes', 'Niort'], message: 'Campus doit être Rennes, Nantes ou Niort')]
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 

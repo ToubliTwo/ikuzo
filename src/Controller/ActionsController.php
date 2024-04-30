@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Sorties;
 use App\Entity\User;
+use App\Form\AjouterSortieFormType;
 use App\Form\ModifierSortieFormType;
 use App\Repository\SortiesRepository;
 use App\Repository\UserRepository;
@@ -17,6 +18,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ActionsController extends AbstractController
 {
+
+
     #[Route('/sorties/inscription/{id}', name:'actions_inscription')]
     public function inscrireSortie(Sorties $sortie, EntityManagerInterface $em): Response
     {
@@ -143,8 +146,8 @@ class ActionsController extends AbstractController
     #[Route('/sorties/supprimer/{id}', name:'actions_supprimer')]
     public function supprimer(EntityManagerInterface $entityManager, Sorties $supprimerSortie): Response
     {
-
         $entityManager->remove($supprimerSortie);
+
         $entityManager->flush();
 
         $this->addFlash(type: 'success', message: 'Évènement supprimé avec succès !');

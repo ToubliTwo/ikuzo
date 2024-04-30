@@ -42,10 +42,12 @@ class AjouterSortieFormType extends AbstractType
                 'required'=> false
             ])
 
+
             ->add(child: 'nombreDePlaces', type: TextType::class, options: [
                 'label' => 'Nombre de places :'
                 ,'required'=> false
             ])
+
 
             ->add(child: 'duree', type: TimeType::class, options: [
                 'html5' => true,
@@ -70,7 +72,6 @@ class AjouterSortieFormType extends AbstractType
                     ,'required'=> false
                 ])
 
-
             ->add(child: 'campus', type: EntityType::class, options: [
                 'class' => Campus::class,
                 'choice_label' => 'nom',
@@ -92,27 +93,18 @@ class AjouterSortieFormType extends AbstractType
             ])
 
             ->add(child: 'latitude',type: TextType::class, options: [
-            'required'=> false,
+                'required'=> false,
                 'mapped' => false,
-    'disabled' => true,
+                'disabled' => true,
         ])
 
             ->add(child: 'longitude',type: TextType::class, options: [
-            'required'=> false,
+                'required'=> false,
                 'mapped' => false,
                 'disabled' => true,
         ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($builder) {
                 $form = $event->getForm();
-
-/*                $form->add('ville', EntityType::class, [
-                    'class' => Ville::class,
-                    'choice_label' => 'nom',
-                    'label' => 'Ville :',
-                    'placeholder' => 'Sélectionnez une ville',
-                    'required' => false,
-                    'mapped' => false, // On ne mappe pas ce champ avec l'entité Sorties
-                ]);*/
 
                 // Ajouter le champ "lieu" dynamiquement
                 $form->add('lieu', EntityType::class, [

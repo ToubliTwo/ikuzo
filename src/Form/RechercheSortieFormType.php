@@ -63,8 +63,10 @@ class RechercheSortieFormType extends AbstractType
                 'mapped' => false,
             ])
 
-            ->add(child: "submit", type: SubmitType::class, options: [
-                'label' => 'Rechercher'
+
+            ->add("submit", SubmitType::class, [
+                'label' => 'Rechercher',
+                'attr' => ['class' => 'submitRechercher']
             ])
         ;
     }

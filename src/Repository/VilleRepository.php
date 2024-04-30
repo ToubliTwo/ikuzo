@@ -21,8 +21,22 @@ class VilleRepository extends ServiceEntityRepository
         parent::__construct($registry, Ville::class);
     }
 
+
     public function fingAllOrderedByNameQueryBuilder() : \Doctrine\ORM\QueryBuilder
     {
         return $this->createQueryBuilder('v')->orderBy('v.nom', 'ASC');
+    }
+  
+    public function findByCriteriaWithVille(
+        $nomVille = null
+    ) {
+
+            $queryBuilder= $this->createQueryBuilder('v')
+                ->andWhere('v.nom LIKE :nomVille')
+                ->setParameter('nomVille', '%' . $nomVille . '%');
+
+
+        // Exécuter la requête
+        return $queryBuilder->getQuery()->getResult();
     }
 }

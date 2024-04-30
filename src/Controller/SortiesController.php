@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class SortiesController extends AbstractController
 {
+
     private $entityManager;
     private $user;
 
@@ -141,3 +142,18 @@ class SortiesController extends AbstractController
     }
 }
 
+/*    #[Route('/sorties', name: 'sorties_afficher')]
+        public function afficher(SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager, ChangementEtat $changementEtat): Response
+        {
+            //obtenir la date actuelle :
+            $dateActuelle = new \DateTime();
+
+            $tableauDeSortiesQuiContientToutesLesSorties = $sortiesRepository->findAll();
+
+            // Vérifier l'état de l'activité sur le point d'être affichée
+            foreach ($tableauDeSortiesQuiContientToutesLesSorties as $instanceDeSortie) {
+                $changementEtat->modifierEtat($instanceDeSortie);
+            }
+
+            return $this->render('sorties\sorties.html.twig', ["dateActuelle" => $dateActuelle, "tiensPrendsMonTableau" => $tableauDeSortiesQuiContientToutesLesSorties]); //"sorties" => $sorties,
+        }*/

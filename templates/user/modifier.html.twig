@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
-
     <h1>Modifier votre profil</h1>
-    <div>
+        <div>
+    <div class="formulaire_bloc">
     {{ form_start(userForm) }}
     {{ form_row(userForm.nom) }}
     {{ form_row(userForm.prenom) }}
@@ -12,10 +11,22 @@
     {{ form_row(userForm.telephone) }}
     {{ form_row(userForm.password) }}
     {{ form_row(userForm.campus) }}
-    {{ form_end(userForm) }}
+    {{ form_widget(userForm) }}
+        </div>
+        <div class="nosBoutons">
+
+            <div class="submitValider">
+                <button type="submit" title="Valider la sortie" name="clickSurValider">Valider</button>
+            </div>
+
+            {{ form_end(userForm) }}
+
+            <div class="submitAnnuler">
+                <a href="{{ path('main_home') }}">Annuler</a>
+            </div>
+        </div>
     </div>
 {% endblock %}
-
 {% block title %}
 Votre profil ({{ user.nom~' '~user.prenom }})| {{ parent() }}
 {% endblock %}
