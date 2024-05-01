@@ -6,3 +6,8 @@
 {% block main %}
 
 {% endblock main %}
+
+ {% block head %}
+        {# insertion d'une feuille de style CSS pour la partie admin #}
+<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+ {% endblock %}

@@ -38,7 +38,7 @@ class AjouterSortieFormType extends AbstractType
                 'html5' => true,
                 'widget' => 'single_text',
                 'label' => 'Date et heure de la sortie :',
-                'input' => 'datetime_immutable',
+                'input' => 'datetime',
                 'required'=> false
             ])
 
@@ -62,7 +62,7 @@ class AjouterSortieFormType extends AbstractType
                 'html5' => true,
                 'widget' => 'single_text',
                 'label' => 'Date limite d\'inscription :',
-                'input' => 'datetime_immutable',
+                'input' => 'datetime',
                 'required'=> false
             ])
 

@@ -24,7 +24,7 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $rolesChoices = ['ROLE_USER' => 'User', 'ROLE_ADMIN' => 'Admin'];
+        $rolesChoices = ['User' => 'ROLE_USER', 'Admin' => 'ROLE_ADMIN', 'Off' => 'ROLE_OFF'];
         return [
             IdField::new(propertyName: 'id')->hideOnForm(),
             TextField::new(propertyName: 'nom'),
