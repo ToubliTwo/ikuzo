@@ -1,24 +1,25 @@
 {% extends 'base.html.twig' %}
-{% block title %} Créer une évènement {% endblock %}
+{% block title %} Créer un évènement {% endblock %}
 
 {% block body %}
-        <h1>Créer une sortie</h1>
+    <h1>Créer une sortie</h1>
     <div class="formulaire_bloc">
-    <div class="formulaires">
+        <div class="formulaires">
             <div class="colonne">
-               {{ form_start (sortieForm) }}
-               {{ form_row(sortieForm.titre) }}
-               {{ form_row(sortieForm.date) }}
-               {{ form_row(sortieForm.nombreDePlaces) }}
-               {{ form_row(sortieForm.duree) }}
-               {{ form_row(sortieForm.description) }}
+                {{ form_start (sortieForm) }}
+                {{ form_row(sortieForm.titre) }}
+                {{ form_row(sortieForm.date) }}
+                {{ form_row(sortieForm.nombreDePlaces) }}
+                {{ form_row(sortieForm.duree) }}
+                {{ form_row(sortieForm.description) }}
             </div>
             <div class="colonne">
                 {{ form_row(sortieForm.campus) }}
                 {{ form_row(sortieForm.dateLimiteInscription) }}
                 {{ form_row(sortieForm.ville) }}
                 <div id="lieu-container">
-                    {{form_row(sortieForm.lieu)}}<button id="add-lieu-button" style="display: none;">Ajouter un lieu</button>
+                    {{ form_row(sortieForm.lieu) }}
+                    <a href="{{ path('lieu_ajouter') }}" id="add-lieu-link" style="display: none;" class="button-link hidden">Ajouter un lieu</a>
                 </div>
                 {% if sortieForm.lieu.vars.data is not null %}
                     <div>
@@ -34,91 +35,26 @@
                 {{ form_row(sortieForm.latitude) }}
                 {{ form_row(sortieForm.longitude) }}
             </div>
-       </div>
-            <div class="nosBoutons">
-               <div class="submitValider"><button type="submit" name="sorties_ajouter">Valider</button></div>
-                <div class="submitPublier"><button type="submit" name="publier">Publier</button></div>
-                {# Champ caché pour stocker les détails du lieu sélectionné #}
-                <input type="hidden" id="lieuDetails" name="lieuDetails">
-                {{ form_end(sortieForm) }}
-                <div class="submitAnnuler"><a href="{{ path('main_home') }}">Annuler</a></div>
-            </div>
-         
-<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var villeSelect = document.querySelector('#{{ sortieForm.ville.vars.id }}');
-            var lieuSelect = document.querySelector('#{{ sortieForm.lieu.vars.id }}');
-            var latitudeInput = document.querySelector('#{{ sortieForm.latitude.vars.id }}');
-            var longitudeInput = document.querySelector('#{{ sortieForm.longitude.vars.id }}');
-            var addLieuButton = document.querySelector('#add-lieu-button');
-
-            function updateLocationInfo(lieuId) {
-                // Make AJAX request to fetch lieu details based on selected lieu
-                fetch('{{ path('fetch_lieu_details') }}?lieuId=' + lieuId)
-                    .then(response => response.json()) // Parse JSON response
-                    .then(data => {
-                        // Set latitude and longitude inputs with data from the selected lieu
-                        //TODO: FIXME les données ne sont pas reset lorsqu'on change de lieu
-                        latitudeInput.value = (data.latitude !== undefined && data.latitude !== '') ? data.latitude : '';
-                        longitudeInput.value = (data.longitude !== undefined && data.longitude !== '') ? data.longitude : '';
-                    })
-                    .catch(error => {
-                        // Handle error here if needed
-                        console.error('Error fetching lieu details:', error);
-                    });
-            }
-
-            // Ajouter le placeholder pour le champ Ville
-            villeSelect.setAttribute('placeholder', 'Sélectionnez une ville');
-
-            // Ajouter le placeholder pour le champ Lieu
-            lieuSelect.setAttribute('placeholder', 'Sélectionnez un lieu');
-
-            villeSelect.addEventListener('change', function () {
-                // Réinitialiser les champs de latitude et de longitude
-                latitudeInput.value = '';
-                longitudeInput.value = '';
-
-                var villeId = this.value;
-                // Make AJAX request to fetch lieux based on selected ville
-                fetch('{{ path('fetch_lieux_by_ville') }}?villeId=' + villeId)
-                    .then(response => response.json()) // Parse JSON response
-                    .then(data => {
-                        // Clear current options
-                        lieuSelect.innerHTML = '';
-                        if (data.length === 0) {
-                            // If no lieux are returned, show add lieu button
-                            lieuSelect.innerHTML = '<option value="" disabled selected>Aucun lieu enregistré</option>';
-                            addLieuButton.style.display = 'block';
-                        } else {
-                            // Append new options
-                            data.forEach(function (lieu) {
-                                var option = document.createElement('option');
-                                option.value = lieu.id;
-                                option.textContent = lieu.nom;
-                                lieuSelect.appendChild(option);
-                            });
-                            // Hide add lieu button
-                            addLieuButton.style.display = 'none';
-                            // Trigger updateLocationInfo for the first lieu
-                            updateLocationInfo(data[0].id);
-                        }
-                    })
-                    .catch(error => {
-                        // Handle errors if necessary
-                        console.error('Error fetching lieux:', error);
-                    });
-            });
-
-            // Add event listener for lieu change
-            lieuSelect.addEventListener('change', function () {
-                var lieuId = this.value;
-                updateLocationInfo(lieuId);
-            });
-
-        });
+        </div>
+    </div>
+    <div class="nosBoutons">
+        <div class="submitValider">
+            <button type="submit" name="sorties_ajouter">Valider</button>
+        </div>
+        <div class="submitPublier">
+            <button type="submit" name="publier">Publier</button>
+        </div>
+        {# Champ caché pour stocker les détails du lieu sélectionné #}
+        <input type="hidden" id="lieuDetails" name="lieuDetails">
+        {{ form_end(sortieForm) }}
+        <div class="submitAnnuler"><a href="{{ path('main_home') }}">Annuler</a></div>
+    </div>
+    {% include '/inc/EventListenerFormulaireAjout.html.twig' %}
+    <script>
+        function redirectToPage() {
+            window.location.href = "{{ path('lieu_ajouter') }}";
+        }
     </script>
-
 {% endblock %}
 
 

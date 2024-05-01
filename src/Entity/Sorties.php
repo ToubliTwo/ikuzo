@@ -23,11 +23,11 @@ class Sorties
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     #[Assert\Type("\DateTimeInterface")]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     #[Assert\Type("\DateTimeInterface")]
     private ?\DateTimeInterface $dateLimiteInscription = null;
 
