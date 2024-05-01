@@ -103,10 +103,12 @@ class ActionsController extends AbstractController
              'sortie' => $sortie
         ]);
     }
+
+    //TODO: FIXME les données ne sont plus les mêmes avec le formulaire d'ajout
     #[Route('/sorties/modifier/{id}', name:'actions_modifier')]
     public function modifier(SortiesRepository $sortiesRepository, Request $request, EntityManagerInterface $entityManager, Sorties $modifSortie): Response
     {
-        $modifSortieForm = $this->createForm(type: ModifierSortieFormType::class, data: $modifSortie);
+        $modifSortieForm = $this->createForm(type: AjouterSortieFormType::class, data: $modifSortie);
 
         $modifSortieForm->handleRequest($request);
 

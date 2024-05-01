@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau lieu{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un lieu pour votre sortie</h1>
+    <div class="formulaire_bloc">
+        <div>
+            {{ form_start(lieuForm) }}
+            {{ form_row(lieuForm.nom) }}
+            {{ form_row(lieuForm.rue) }}
+            {{ form_row(lieuForm.latitude) }}
+            {{ form_row(lieuForm.longitude) }}
+            {{ form_row(lieuForm.ville) }}
+        </div>
+        </div>
+            <div class="nosBoutons">
+                <div class="submitValider">
+                    <button type="submit" title="Valider la sortie" name="clickSurValider">Valider</button>
+                </div>
+                {{ form_end(lieuForm) }}
+                <div class="submitAnnuler">
+                    <a href="{{ path('main_home') }}">Annuler</a>
+                </div>
+            </div>
+            {{ form_end(lieuForm) }}
+
+{% endblock %}

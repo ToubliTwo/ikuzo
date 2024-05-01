@@ -36,23 +36,6 @@ class ProfilFormType extends AbstractType
                 'label' => 'Photo de profil',
                 'required' => false,
             ])
-            ->add(child: 'imageName', type: null, options: [
-                'label' => 'Photo de profil',
-                'required' => false,
-            ])
-            ->add(child: 'imageSize', type: null, options: [
-                'label' => 'Photo de profil',
-                'required' => false,
-            ])
-
-        //ajouter un bouton de validation
-            ->add(child: 'submit', type: SubmitType::class, options: [
-                'label' => 'Enregistrer',
-            ])
-            //ajouter un bouton d'annulation qui redirige vers la page d'accueil
-            ->add(child: 'cancel', type: SubmitType::class, options: [
-                'label' => 'Annuler',
-            ])
         ;
     }
 
