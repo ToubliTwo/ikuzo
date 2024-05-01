@@ -4,10 +4,10 @@ body {
 
 aside.sidebar {
     background: #9FB4C7;
-    color: #EEEEFF;
+    color: black;
 }
 
-div.sidebar-wrapper {
+.sidebar-wrapper {
 
 
 }
@@ -23,7 +23,10 @@ div.content-search{
 div.navbar-custom-menu{
 
 }
-
+a:-webkit-any-link {
+    cursor: pointer;
+    text-decoration: none;
+}
 aside.content-top.ea-search-disable{
 
 }
@@ -31,13 +34,25 @@ aside.content-top.ea-search-disable{
 div.dropdown.dropdown-setting{
 
 }
-
-div.content-wrapper{
+input[type="text"]{
+    background-color: #9FB4C7;
+    color: #7F7CAF;
+    border: solid 1px black;
+    border-radius: 10px;
+}
+.content-wrapper{
 
 }
+#main .conten-body table.datagrid thead {
+    background-color: lavenderBlush;
+}
 
-article.content{
+.content{
 
+    background-color: lavenderBlush;
+    color: #7F7CAF ;
+    border: solid 1px black;
+    border-radius: 10px;
 }
 
 div#content-resizer-handler.resizer-handler.resizer-handler-right{

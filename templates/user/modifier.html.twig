@@ -3,8 +3,12 @@
     <h1>Modifier votre profil</h1>
     <div class="formulaire_bloc">
         {{ form_start(userForm) }}
-        <img src="{{ asset('images/users/' ~ user.id ~ '/' ~ user.imageName) }}"
-             alt="Votre Photo de profil" class="img-fluid" width="175" height="175">
+        {% if user.imageName %}
+    <img src="{{ asset('images/users/' ~ user.id ~ '/'~ user.imageName) }}"
+         alt="photo de {{ user.prenom }} {{ user.nom }}">
+    {% else %}
+        <img src="{{ asset('images/users/PasDePhoto.png') }}" alt="photo par défaut" width="125" height="125">
+        {% endif %}
         <div class="formulaires">
             <div class="colonne">
             {{ form_row(userForm.nom) }}

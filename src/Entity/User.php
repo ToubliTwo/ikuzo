@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[Vich\Uploadable]
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_PSEUDO', fields: ['pseudo'])]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -35,7 +36,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
 
     #[Assert\Length(min: 3, max: 30)]
     #[Assert\NotBlank]
-    #[Assert\Regex(pattern: '/^0[1-9]([-. ]?[0-9]{2}){4}$/', message: 'Le numéro de téléphone doit être au format 0X XX XX XX XX')]
     #[ORM\Column(length: 30)]
     private ?string $telephone = null;
 
@@ -79,7 +79,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     /**
      * @var Collection<int, Sorties>
      */
-    #[ORM\ManyToMany(targetEntity: Sorties::class, inversedBy: 'users', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToMany(targetEntity: Sorties::class, inversedBy: 'users')]
     private Collection $sortie;
 
     /**
