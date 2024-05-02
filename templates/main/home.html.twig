@@ -3,27 +3,33 @@
 {% block title %}COM SORTIR - ENI{% endblock %}
 
 {% block body %}
-<h1>Rejoignez-nous sur notre plateforme exclusive Sortir.com</h1>
-<div class = "formulaire_bloc">
-    {{ form_start(sortieform) }}
-    <div class="formulaires">
-        {{ form_row(sortieform.titre) }}
-        {{ form_row(sortieform.campus) }}
-        {{ form_row(sortieform.dateRechercheDebut)}}{{ form_row(sortieform.dateRechercheFin) }}
+    <div class="container">
+    <h1>Rejoignez-nous sur notre plateforme exclusive Sortir.com</h1>
+    <div class="formulaire_bloc">
+        {{ form_start(sortieform) }}
+        <div class="formulaires">
+            {{ form_row(sortieform.titre) }}
+            {{ form_row(sortieform.campus) }}
+            {{ form_row(sortieform.dateRechercheDebut) }}{{ form_row(sortieform.dateRechercheFin) }}
+        </div>
+        <div class="formulaires">
+            <div>
+                {{ form_row(sortieform.organisateur) }}
+                {{ form_row(sortieform.sortiesPassees) }}
+            </div>
+            <div>
+                {{ form_row(sortieform.inscrit) }}
+                {{ form_row(sortieform.pasInscrit) }}
+            </div>
+        </div>
+        {{ form_end(sortieform) }}
     </div>
-    <div>
-        {{ form_row(sortieform.organisateur) }}
-        {{ form_row(sortieform.inscrit) }}
-        {{ form_row(sortieform.pasInscrit) }}
-        {{ form_row(sortieform.sortiesPassees) }}
-    </div>
-    {{ form_end(sortieform) }}
-</div>
-<p>Organisez et participez à des sorties passionnantes avec d'autres stagiaires ENI, où que vous soyez !</p>
-COUCOU !!!!
-    //Afficher un tableau avec les sorties
+   <p>Organisez et participez à des sorties passionnantes avec d'autres stagiaires ENI, où que vous soyez !</p>
+    {% if sorties is not empty %}
+
 <div class="tableauAccueil">
-    <table>
+    <div class="table-container">
+    <table class="result-table">
         <tr>
             <th>Nom de la sortie</th>
             <th>Date de la sortie</th>
@@ -65,11 +71,13 @@ COUCOU !!!!
                         <a href="{{ path('actions_modifier', {'id': sortie.id}) }}" title="Modifier la sortie">Modifier</a>
                         <a href="{{ path('actions_publier', {'id': sortie.id}) }}" title="Publier la sortie">Publier</a>
                         {% endif %}
-                        <a href="{{ path('actions_supprimer', {'id': sortie.id}) }}" title="Annuler la sortie">Annuler</a>
+                        <a href="{{ path('actions_annuler', {'id': sortie.id}) }}" title="Annuler la sortie">Annuler</a>
                     {% endif %}
                 </td>
             </tr>
         {% endfor %}
     </table>
+    </div>
 </div>
-    {% endblock %}
+    {% endif %}
+{% endblock %}

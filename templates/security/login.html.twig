@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Se Connecter{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -10,29 +10,25 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            Vous êtes connecté sous le pseudo : {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
 
-{#    <h1 class="h3 mb-3 font-weight-normal">Connecte toi ici:</h1>#}
     <h1 class="connecteToiIci">Connecte-toi ici :</h1>
     <label for="inputPseudo">Pseudo</label>
     <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" autocomplete="username" required autofocus>
     <label for="inputPassword">Password</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Remember me
-        </label>
+    <label><input type="checkbox" name="_remember_me"> Se souvenir de moi</label>
+
+    <div class="nosBoutons">
+    <button class="submitConnecter" title="Se connecter" type="submit"> Se connecter </button>
     </div>
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
 </form>
+    <div class="nosBoutons">
+        <div><a href="{{ path('app_forgot_password_request') }}" class="mdpOublie" title="Mot de passe oublié ?">Mot de passe oublié ?</a></div>
+    </div>
 {% endblock %}

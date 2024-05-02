@@ -1,4 +1,5 @@
 /migrations/
+/public/images/
 /public/css/app.css
 /composer.lock
 /idea/ikouzo.iml

@@ -3,30 +3,25 @@
     --couleur-secondaire : #7F7CAF ;
     --couleur-tertiaire : #9FB4C7;
     --couleur-quaternaire : #28587B;
-    font-family: 'Crimson Text', serif;
-}
-
-body {
-    display : flex;
-    flex-direction: column;
-    font-family: 'Crimson Text', serif;
+    font-family: 'Tilt Neon', sans-serif;
 }
 
 header {
-    position: sticky;
     top: 0;
     background-color: var(--couleur-tertiaire);
     padding : 1vw;
-    padding-left : 5%;
-    height : 15%;
-    perspective: 1000px; /* Définit la distance de perspective pour l'effet 3D */
+    height : 10vh;
 }
 
-header img {
-    animation: mouvement 5s infinite alternate;
+header .logo {
+    animation: mouvement 14s infinite alternate;
     height: 70px;
 }
 
+/*header .logo:hover {*/
+/*    transition: transform 0.5s;*/
+/*    transform: rotateY(10deg) scale(1.2);*/
+/*}*/
 
 header nav a {
     color: var(--couleur-principale);
@@ -34,14 +29,258 @@ header nav a {
     padding: 5px 10px;
 }
 
-.contenuDuHeader {
-    display : flex;
-    align-items: center;
+header a {
+    margin-left: 2%;
+    color: var(--couleur-principale);
+    text-decoration: none;
 }
 
-header img {
-    animation: mouvement 5s infinite alternate;
-    height: 70px;
+header a:hover {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.contenuDuHeader {
+    z-index : 1;
+    position : sticky;
+    display : inline-block;
+    width : 98vw;
+    perspective: 1000px; /* Définit la distance de perspective pour l'effet 3D */
+}
+
+main {
+    background-color: var(--couleur-principale);
+    color: black;
+    text-align: center;
+    height: 81vh;
+    margin: 0;
+    animation: fadeIn 1s ease forwards ;
+    animation-iteration-count: 1;
+    overflow-y: auto;
+}
+
+.detailSortie {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 5%;
+    text-align: left;
+    padding: 5%;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination .page-item {
+    list-style-type: none;
+    padding: 5px;
+    border: solid 1px black;
+    border-radius: 5px;
+
+}
+
+.pagination .page-item:hover {
+    background-color: var(--couleur-tertiaire);
+}
+
+.pagination .next {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination .previous {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination .current {
+    background-color: var(--couleur-tertiaire);
+}
+
+.pagination .last {
+    background-color: var(--couleur-tertiaire);
+}
+
+.tableauAccueil {
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+   max-height: 25vh;
+}
+
+.result-table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+    margin: auto;
+}
+
+.result-table th {
+    position: sticky;
+    top: 0; /* Pour maintenir les en-têtes en haut */
+    background-color: var(--couleur-secondaire);
+    color: white;/* Couleur de fond pour les en-têtes */
+    z-index: 2;
+    margin-bottom: 5%;
+    overflow: auto;
+    max-height: 20vh;
+}
+
+.result-table td {
+    padding: 5px;
+}
+
+.tableauAccueil th {
+
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: left;
+    padding: 5px;
+}
+
+.tableauAccueil td {
+    justify-content: flex-start;
+    text-align: left;
+    padding: 5px;
+}
+
+footer {
+    position : fixed;
+    bottom: 0;
+    width:100%;
+    background-color: var(--couleur-quaternaire);
+    color: var(--couleur-principale);
+    height: 5vh;
+    text-align: center;
+    align-content: center;
+    margin: 0;
+}
+
+input, select {
+    margin-bottom: 0.8rem;
+    box-sizing: border-box;
+    width: 250px;
+}
+
+textarea {
+    resize: none;
+    width : 250px;
+    height : 100px;
+}
+
+label {
+    display : block;
+}
+
+.formulaire_bloc {
+    display: flex;
+    background-color: lavenderBlush;
+    width: 60vw;
+    margin : auto;
+    justify-content: center;
+    padding: 1%;
+    border: solid 1px black;
+    border-radius: 10px;
+}
+
+.formulaires {
+    display: flex;
+    justify-content: center;
+    column-gap: 5%;
+}
+
+.colonne {
+    margin-right: 10px;
+}
+
+.profilUser {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 5%;
+    text-align: left;
+    padding: 5%;
+}
+
+ul, ol {
+    list-style-type: none;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+a.button-create {
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
+    /*border: solid 1px black;*/
+
+    /* styles personnalisés */
+    justify-content: center;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+    width: 100px;
+    height: 40px;
+}
+
+a.button-create:hover {
+    background-color: forestgreen;
+    transition: transform 0.2s;
+    transform: rotateY(10deg) scale(1.1);
+}
+
+/*utile pour le positionnement*/
+.nosBoutons {
+    display: flex;
+    justify-content: center;
+    margin-top : 5%;
+    gap : 2%;
+}
+
+/*Les survols de boutons */
+.submitValider:hover,
+.submitValider button:hover,
+.submitPublier button:hover,
+.submitPublier button:hover,
+.submitAnnuler:hover,
+.mdpOublie:hover,
+.submitRechercher:hover,
+.submitConnecter:hover,
+.submitSupprimer:hover{
+   transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
+   transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
+}
+
+/* *********************************************************** */
+/* *****Template pour les boutons cliquables VALIDER  ******** */
+/* *********************************************************** */
+.submitValider button[type="submit"], .submitValider {
+    /* Réinitialiser les styles par défaut */
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
+
+    /* styles personnalisés */
+    justify-content: center;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+    width: 100px;
+    height: 40px;
 }
     header a {
         margin-left: 2%;
@@ -49,62 +288,39 @@ header img {
         font-size: 1.4rem;
         text-decoration: none;
 
-    }
+/* *********************************************************** */
+/* *****Template pour les boutons cliquables PUBLIER  ******** */
+/* *********************************************************** */
+.submitPublier button[type="submit"]{
+    /* Réinitialiser les styles par défaut */
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
+    /*border: solid 1px black;*/
 
-    header a:hover {
-        color: white;
-        font-weight: bold;
-        transition: transform 0.1s;
-        transform: scale(1.1);
-        font-size: 1.4rem;
-    }
+    /* styles personnalisés */
+    justify-content: center;
+    border-radius: 5px;
+    background-color: midnightblue;
+    color: white;
+    width: 100px;
+    height: 40px;
+}
 
-    .contenuDuHeader {
-        display: flex;
-        align-items: center;
-    }
-
-    main {
-        background-color: var(--couleur-principale);
-        color: black;
-        text-align: center;
-        height: 84vh;
-        margin: 0;
-        animation: fadeIn 1s ease forwards;
-        animation-iteration-count: 1;
-        overflow-y: auto; /* Activer le défilement vertical lorsque nécessaire */
-    }
-
-    .tableauAccueil {
-        margin-top: 5%;
-        display: flex;
-        justify-content: center;
-    }
-
-    footer {
-        background-color: var(--couleur-quaternaire);
-        color: var(--couleur-principale);
-        height: 5vh;
-        text-align: center;
-        align-content: center;
-        margin: 0;
-    }
-
-    input, select {
-        margin-bottom: 0.8rem;
-        box-sizing: border-box;
-        width: 250px;
-    }
-
-    textarea {
-        resize: none;
-        width: 250px;
-        height: 100px;
-    }
-
-    label {
-        display: block;
-    }
+/* *********************************************************** */
+/* *****Template pour les boutons cliquables ANNULER******** */
+/* *********************************************************** */
+.submitAnnuler {
+    display : inline-block;
+    cursor: pointer;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: darkred;
+    width: 100px;
+    height: 40px;
+    align-content: center;
+}
 
     .formulaires {
         display: flex;
@@ -113,42 +329,58 @@ header img {
         column-gap: 5%;
     }
 
-    .colonne {
-        margin-right: 10px;
-    }
+/* *********************************************************** */
+/* *****Template pour les boutons cliquables MDPOublié******** */
+/* *********************************************************** */
+.mdpOublie {
+    display : inline-block;
+    cursor: pointer;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: #a1a1aa;
+    width: 150px;
+    height: 40px;
+    align-content: center;
+    font-size: 0.8rem;
+    color: white;
+    text-decoration: none;
+}
 
-    ul, ol {
-        list-style-type: none;
-    }
+/* *************************************************************************** */
+/* *****Templates pour les boutons cliquables RECHERCHER et CONNECTER ******** */
+/* *************************************************************************** */
+.submitRechercher, .submitConnecter {
+    /* Réinitialiser les styles par défaut */
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
 
-    li {
-        margin-bottom: 20px;
-    }
+    /* styles personnalisés */
+    justify-content: center;
+    border-radius: 5px;
+    background-color: var(--couleur-quaternaire);
+    color: white;
+    width: 100px;
+    height: 40px;
+    margin-top: 20px;
+}
 
-    a.button-create {
-        cursor: pointer;
-        padding: 0;
-        font: inherit;
-        outline: none;
-        /*border: solid 1px black;*/
-
-        /* styles personnalisés */
-        justify-content: center;
-        border-radius: 5px;
-        background-color: darkgreen;
-        color: white;
-        width: 100px;
-        height: 40px;
-    }
-
-    a.button-create:hover {
-        background-color: forestgreen;
-        transition: transform 0.2s;
-        transform: rotateY(10deg) scale(1.1);
-    }
-
-    /*utile pour le positionnement*/
-
+/* *********************************************************** */
+/* *****Template pour les boutons cliquables SUPPRIMER******** */
+/* *********************************************************** */
+.submitSupprimer {
+    padding: 0;
+    outline: none;
+    border: solid 1px black;
+    cursor: pointer;
+    align-content: center;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    width: 100px;
+    height: 40px;
+}
     .nosBoutons {
         display: flex;
         justify-content: center;
@@ -156,32 +388,13 @@ header img {
         gap: 2%;
     }
 
-    /* *********************************************************** */
-    /* *****Template pour les boutons cliquables VALIDER  ******** */
-    /* *********************************************************** */
-
-    .submitValider button[type="submit"] {
-        /* Réinitialiser les styles par défaut */
-        cursor: pointer;
-        padding: 0;
-        font: inherit;
-        outline: none;
-        border: solid 1px black;
-
-        /* styles personnalisés */
-        justify-content: center;
-        border-radius: 5px;
-        background-color: darkgreen;
-        color: white;
-        width: 100px;
-        height: 40px;
-    }
-
-    .submitValider button:hover {
-        transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
-        transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
-        border: solid 1px black;
-    }
+.flash {
+    padding: 20px;
+    font-weight: bold;
+    font-size: 1.4rem;
+    border-radius: 5px;
+    text-align: center;
+}
 
     /* *********************************************************** */
     /* *****Template pour les boutons cliquables PUBLIER  ******** */
@@ -211,20 +424,16 @@ header img {
         border: solid 1px black;
     }
 
-
-    /* *********************************************************** */
-    /* *****Template pour les boutons cliquables ANNULER******** */
-    /* *********************************************************** */
-
-    .submitAnnuler {
-        display: inline-block;
-        cursor: pointer;
-        justify-content: center;
-        border-radius: 5px;
-        background-color: darkred;
-        width: 100px;
-        height: 40px;
-        align-content: center;
+/* *************************KEYFRAMES************************* */
+/* *********************************************************** */
+/* *********************************************************** */
+/*Permet de créer un effet sur l'affichage des pages : */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 
     .submitAnnuler a {
@@ -232,10 +441,8 @@ header img {
         color: white;
     }
 
-    .submitAnnuler:hover {
-        transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
-        transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
-        border: solid 1px black;
+    50%{
+        transform: translateX(50vw);
     }
 
     /* *********************************************************** */
@@ -254,109 +461,53 @@ header img {
         width: 100px;
         height: 40px;
     }
+}
+
+a.button-create {
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
+
+    /* styles personnalisés */
+    justify-content: center;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+    width: 100px;
+    height: 40px;
+}
+
+a.button-create:hover {
+    background-color: forestgreen;
+    transition: transform 0.2s;
+    transform: rotateY(10deg) scale(1.1);
+}
+
+#rechercher_sortie_form__token {
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
+    border: solid 1px black;
 
     .submitSupprimer a {
         text-decoration: none;
         color: white;
     }
 
-    .submitSupprimer:hover {
-        transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
-        transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
-        border: solid 1px black;
-    }
+.add-lieu-link {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
 
-    .flash {
-        padding: 20px;
-        font-weight: bold;
-        font-size: 1.4rem;
-        border-radius: 5px;
-        text-align: center;
-    }
-
-    .flash-success {
-        color: var(--couleur-tertiaire);
-
-        background-color: #c1ff72;
-    }
-
-    .flash-fail {
-        color: white;
-        background-color: red;
-    }
-
-    .formulaires ul {
-        flex: 1;
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        text-align: left;
-    }
-
-
-    /* *************************KEYFRAMES************************* */
-    /* *********************************************************** */
-    /* *********************************************************** */
-
-    @keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-
-    /*Permet de créer un mouvement sur le logo : */
-    @keyframes mouvement {
-
-        0% {
-            transform: translateX(0);
-        }
-
-        50% {
-            transform: translateX(-20px);
-        }
-
-        100% {
-            transform: translateX(0);
-        }
-    }
-
-    a.button-create {
-        cursor: pointer;
-        padding: 0;
-        font: inherit;
-        outline: none;
-        /*border: solid 1px black;*/
-
-        /* styles personnalisés */
-        justify-content: center;
-        border-radius: 5px;
-        background-color: darkgreen;
-        color: white;
-        width: 100px;
-        height: 40px;
-    }
-
-    a.button-create:hover {
-        background-color: forestgreen;
-        transition: transform 0.2s;
-        transform: rotateY(10deg) scale(1.1);
-    }
-
-    #rechercher_sortie_form__token {
-        cursor: pointer;
-        padding: 0;
-        font: inherit;
-        outline: none;
-        border: solid 1px black;
-
-        /* styles personnalisés */
-        justify-content: center;
-        border-radius: 5px;
-        background-color: darkgreen;
-        color: white;
-        width: 100px;
-        height: 40px;
-    }
+.add-lieu-link:hover {
+    background-color: #0056b3;
+}

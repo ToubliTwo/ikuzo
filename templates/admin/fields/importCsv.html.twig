@@ -1,0 +1,22 @@
+{% extends '@EasyAdmin/layout.html.twig' %}
+
+{% block main %}
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-solid box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Importation CSV</h3>
+                    </div>
+                    <div class="box-body">
+                        <form method="post" action="{{ path('user_crud_import_csv') }}" enctype="multipart/form-data">
+                            {{ form_widget(form.file) }}
+                            <button type="submit" class="btn btn-primary">Importer CSV</button>
+                            {{ form_rest(form) }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

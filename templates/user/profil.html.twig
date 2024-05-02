@@ -1,43 +1,51 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Détails utilisateur | {{ parent() }}
+    Détails utilisateur | {{ parent() }}
 {% endblock %}
 
 {% block body %}
     <h1>Détails utilisateur</h1>
-    <div>
-{#        photo de l'utilisateur#}
-{#        <img src="{{ asset('upload/' ~ user.photoFilename) }}" alt="Photo de profil">#}
-    </div>
-    <div>
-    <div>
-        <div>
-            <table>
-                <tr>
-                    <th>Prénom</th>
-                    <td>{{ user.prenom }}</td>
-                </tr>
-                <tr>
-                    <th>Nom</th>
-                    <td>{{ user.nom }}</td>
-                </tr>
-                <tr>
-                    <th>Téléphone</th>
-                    <td>{{ user.telephone }}</td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td>{{ user.email }}</td>
-                </tr>
-                <tr>
-                    <th>Campus</th>
-                    <td>{{ user.campus.nom }}</td>
-                </tr>
-            </table>
+
+    <div class="tableauAccueil">
+        <div class="profilUser">
+
+            {% if user.imageName %}
+                <img src="{{ asset('images/users/' ~ user.id ~ '/'~ user.imageName) }}"
+                     alt="photo de {{ user.prenom }} {{ user.nom }}" width="125" height="125">
+            {% else %}
+                <img src="{{ asset('images/users/PasDePhoto.png') }}" alt="photo par défaut" width="125" height="125">
+            {% endif %}
         </div>
-    </div>
-    <a href="{{ path('main_home') }}">Retour</a>
+        <div class="profilUser">
+            <div>
+                <div>
+                    <table>
+                        <tr>
+                            <th>Prénom</th>
+                            <td>{{ user.prenom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ user.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Téléphone</th>
+                            <td>{{ user.telephone }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Campus</th>
+                            <td>{{ user.campus.nom }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <a href="{{ path('main_home') }}">Retour</a>
+        </div>
     </div>
 {% endblock %}
 

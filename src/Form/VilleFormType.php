@@ -13,7 +13,7 @@ class VilleFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', null, [
+            ->add(child: 'nom', type: null, options: [
                 'label' => 'Le nom contient :',
                 'required'=> false,
             ]);

@@ -10,34 +10,35 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ProfilFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom',)
-            ->add('prenom')
-            ->add('telephone')
-            ->add('email')
+            ->add(child: 'nom',)
+            ->add(child: 'prenom')
+            ->add(child: 'telephone')
+            ->add(child: 'email')
             //ne pas afficher le mot de passe
-            ->add('password', null, [
+            ->add(child: 'password', type: null, options: [
                 'label' => 'Mot de passe',
                 'required' => false,
                 'mapped' => false,
             ])
-            ->add('pseudo')
-            ->add('campus', EntityType::class, [
+            ->add(child: 'pseudo')
+            ->add(child: 'campus', type: EntityType::class, options: [
                 'class' => Campus::class,
                 'choice_label' => 'nom',
             ])
-            //AJOUTER UN CHAMP POUR UPLOAD UNE PHOTO
-            ->add('photo', FileType::class, [
+            //ajouter un champ pour uploader une photo
+            ->add(child: 'imageFile', type: VichFileType::class, options: [
                 'label' => 'Photo de profil',
                 'required' => false,
-                'mapped' => false,
-            ]);
-   }
+            ])
+        ;
+    }
 
     public function configureOptions(OptionsResolver $resolver): void
     {

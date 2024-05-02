@@ -2,7 +2,16 @@
 
 {% block content_title %}Sortir.com | Administration{% endblock %}
 
-
 {% block main %}
+    {# Incluez d'autres éléments de votre tableau de bord si nécessaire #}
 
+    {# Ajoutez un lien vers l'action d'import CSV #}
+    <a href="{{ path('user_crud_import_csv') }}" class="btn btn-primary">
+        Import user.csv non encore implanté
+    </a>
 {% endblock main %}
+
+{% block head %}
+    {# insertion d'une feuille de style CSS pour la partie admin #}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}

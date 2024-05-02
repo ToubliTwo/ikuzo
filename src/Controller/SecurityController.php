@@ -27,6 +27,20 @@ class SecurityController extends AbstractController
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        throw new \LogicException(message: 'This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+
+//    #[Route(path: '/mdpOublie', name: 'app_mdpOublie')]
+//    public function mdpOublie(Request $request) : Response
+//    {
+//        $mdp = new User();
+//
+//        $mdpOublieForm = $this->createForm(MotDePasseOublieFormType::class, $mdp);
+//
+//        $mdpOublieForm->handleRequest($request);
+//
+//            return $this->render('security/mdpOublie.html.twig', ['mdpOublie' => $mdpOublieForm]);
+//    }
+
 }

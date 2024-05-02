@@ -36,7 +36,7 @@ class CampusController extends AbstractController
         if ($rechercheCampusForm->isSubmitted() && $rechercheCampusForm->isValid() && $request->request->has('clickSurRechercher')) {
             $nomSaisi = $rechercheCampusForm->get('nom')->getData();
             $campusList = $this->campusRepository->findByCriteriaWithCampus($nomSaisi);
-//            $this -> addFlash('success', 'Le campus recherché à bien été trouvé ! ');
+//          $this -> addFlash('success', 'Le campus recherché à bien été trouvé ! ');
         }
 
 

@@ -68,7 +68,7 @@ class Sorties
     private ?User $organisateur = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $MotifAnnulation = null;
+    private ?string $motifAnnulation = null;
 
     public function getId(): ?int
     {
@@ -222,12 +222,12 @@ class Sorties
 
     public function getMotifAnnulation(): ?string
     {
-        return $this->MotifAnnulation;
+        return $this->motifAnnulation;
     }
 
-    public function setMotifAnnulation(?string $MotifAnnulation): static
+    public function setMotifAnnulation(?string $motifAnnulation): static
     {
-        $this->MotifAnnulation = $MotifAnnulation;
+        $this->motifAnnulation = $motifAnnulation;
 
         return $this;
     }

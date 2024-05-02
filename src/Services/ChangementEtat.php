@@ -12,7 +12,28 @@ class ChangementEtat
     {
         $this->entityManager = $entityManager;
     }
-    public function modifierEtat(Sorties $sorties):void
+
+    public function modifierEtat(?Sorties $sorties = null): void
+    {
+        $today = new \DateTime();
+
+        if ($sorties !== null) {
+            $this->modifierEtatPourSortie($sorties, $today);
+        } else {
+            // Récupérer toutes les sorties depuis le repository
+            $sortiesRepository = $this->entityManager->getRepository(Sorties::class);
+            $allSorties = $sortiesRepository->findAll();
+
+            // Traiter chaque sortie
+            foreach ($allSorties as $sortie) {
+                $this->modifierEtatPourSortie($sortie, $today);
+            }
+        }
+
+        // Flush une seule fois après avoir terminé toutes les modifications
+        $this->entityManager->flush();
+    }
+    public function modifierEtatPourSortie(Sorties $sorties):void
     {
 
         //obtenir la date actuelle :
@@ -25,6 +46,7 @@ class ChangementEtat
          $dateLimiteInscription = $sorties -> getDateLimiteInscription();
 
         // Créer une nouvelle instance de DateTime pour la date de 30j auparavant
+
 //      $delaiMax = $today->modify('-30 days');
         $delaiMax = (clone $today)->sub(new \DateInterval('P30D'));
 
@@ -37,7 +59,6 @@ class ChangementEtat
             $this -> entityManager -> flush();
         }
 
-
         /*/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\*/
         // /!\ PASSÉE : Si la date actuelle est supérieure à la date de l'activité, on passe :
         if ($today > $dateDeLaSortie)
@@ -47,8 +68,6 @@ class ChangementEtat
             $this -> entityManager -> flush();
         }
         /*/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\*/
-
-
 
         // CLOTURE : Si la date actuelle est supérieure à la date limite d'inscription, on clôture :
         if ($today>$dateLimiteInscription && $today<$dateDeLaSortie)
