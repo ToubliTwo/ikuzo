@@ -8,15 +8,15 @@
     <h1>Gérer les villes</h1>
     <h2>Filtrer les villes</h2>
 
-     Afficher le formulaire de recherche des villes
+{#     Afficher le formulaire de recherche des villes#}
+    <div class="formulaire_bloc">
     {{ form_start(rechercherForm) }}
     {{ form_row(rechercherForm.nom, {'label': 'Le nom contient'}) }}
-
-     <div class="submitRechercher">
-         <button type="submit" title="Valider la recherche" name="clickSurRechercher">Rechercher</button>
-     </div>
+         <button type="submit" class="classicBtn" name="clickSurRechercher">Rechercher</button>
     {{ form_end(rechercherForm) }}
-    <div class="table-wrapper">
+    </div>
+{#    <div class="table-wrapper">#}
+    <div class="tableau">
     <table>
         <thead>
         <tr>
