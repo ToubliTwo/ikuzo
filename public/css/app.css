@@ -114,7 +114,7 @@ main {
     display: flex;
     justify-content: center;
     overflow: auto;
-   max-height: 25vh;
+    max-height: 25vh;
 }
 
 .result-table {
@@ -260,8 +260,8 @@ a.button-create:hover {
 .submitRechercher:hover,
 .submitConnecter:hover,
 .submitSupprimer:hover{
-   transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
-   transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
+    transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
+    transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
 }
 
 /* *********************************************************** */
@@ -282,11 +282,6 @@ a.button-create:hover {
     width: 100px;
     height: 40px;
 }
-    header a {
-        margin-left: 2%;
-        color: var(--couleur-principale);
-        font-size: 1.4rem;
-        text-decoration: none;
 
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables PUBLIER  ******** */
@@ -322,12 +317,10 @@ a.button-create:hover {
     align-content: center;
 }
 
-    .formulaires {
-        display: flex;
-        justify-content: center;
-        flex-direction: row;
-        column-gap: 5%;
-    }
+.submitAnnuler a {
+    text-decoration: none;
+    color: white;
+}
 
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables MDPOublié******** */
@@ -381,12 +374,11 @@ a.button-create:hover {
     width: 100px;
     height: 40px;
 }
-    .nosBoutons {
-        display: flex;
-        justify-content: center;
-        margin-top: 200px;
-        gap: 2%;
-    }
+
+.submitSupprimer a {
+    text-decoration: none;
+    color: white;
+}
 
 .flash {
     padding: 20px;
@@ -396,33 +388,23 @@ a.button-create:hover {
     text-align: center;
 }
 
-    /* *********************************************************** */
-    /* *****Template pour les boutons cliquables PUBLIER  ******** */
-    /* *********************************************************** */
+.flash-success {
+    color: var(--couleur-tertiaire);
 
-    .submitPublier button[type="submit"] {
-        /* Réinitialiser les styles par défaut */
-        cursor: pointer;
-        padding: 0;
-        font: inherit;
-        outline: none;
-        border: solid 1px black;
+    background-color: #c1ff72;
+}
 
-        /* styles personnalisés */
-        justify-content: center;
-        border-radius: 5px;
-        background-color: midnightblue;
-        color: white;
-        width: 100px;
-        height: 40px;
-
-    }
-
-    .submitPublier button:hover {
-        transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
-        transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
-        border: solid 1px black;
-    }
+.flash-fail {
+    color: white;
+    background-color: red;
+}
+.formulaires ul {
+    flex: 1;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
 
 /* *************************KEYFRAMES************************* */
 /* *********************************************************** */
@@ -435,31 +417,21 @@ a.button-create:hover {
     100% {
         opacity: 1;
     }
+}
 
-    .submitAnnuler a {
-        text-decoration: none;
-        color: white;
+/*Permet de créer un mouvement sur le logo : */
+@keyframes mouvement {
+
+    0% {
+        transform: translateX(0);
     }
 
     50%{
         transform: translateX(50vw);
     }
 
-    /* *********************************************************** */
-    /* *****Template pour les boutons cliquables SUPPRIMER******** */
-    /* *********************************************************** */
-
-    .submitSupprimer {
-        padding: 0;
-        outline: none;
-        border: solid 1px black;
-        cursor: pointer;
-        align-content: center;
-        border-radius: 5px;
-        background-color: black;
-        color: white;
-        width: 100px;
-        height: 40px;
+    100% {
+        transform: translateX(0);
     }
 }
 
@@ -491,10 +463,14 @@ a.button-create:hover {
     outline: none;
     border: solid 1px black;
 
-    .submitSupprimer a {
-        text-decoration: none;
-        color: white;
-    }
+    /* styles personnalisés */
+    justify-content: center;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+    width: 100px;
+    height: 40px;
+}
 
 .add-lieu-link {
     display: inline-block;
