@@ -8,7 +8,6 @@ use App\Entity\User;
 use App\EventListener\EnvoiMailPourAnnulation;
 use App\Form\AjouterSortieFormType;
 use App\Form\AnnulerSortieFormType;
-use App\Form\ModifierSortieFormType;
 use App\Repository\SortiesRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -97,10 +96,11 @@ class ActionsController extends AbstractController
     #[Route('/sorties/details/{id}', name:'actions_details')]
     public function details(Request $request, Sorties $sortie, PaginatorInterface $paginator, UserRepository $userRepository): Response
     {
+        $participants = $sortie->getUsers();
         // Paginer les utilisateurs
          $page = $request->query->getInt('page', 1);
          $limite = 4;
-         $participantsPagination = $userRepository->paginateUsers($page, $limite);
+         $participantsPagination = $paginator->paginate($participants, $page, $limite);
          $maxPages = ceil($participantsPagination->getTotalItemCount() / $limite);
          return $this->render('sorties/sorties_details.html.twig', [
              'maxPages' => $maxPages,

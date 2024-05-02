@@ -18,7 +18,7 @@ class EnvoiMailPourAnnulation
         //file_put_contents('debug.txt', $user->getEmail() . ' has been registered');
         $message = new Email();
         $message->from('acounts@sorties.com') // l'adresse mail de l'expéditeur
-            ->to('admin@sorties.com') // l'adresse mail du destinataire
+            ->to('fblitte@hotmail.com') // l'adresse mail du destinataire /*admin@sorties.com*/
             ->subject('Annulation d\'une sortie !')
             ->html('<h1>Annulation d\'une sortie :</h1><br>'
          .'<p>'.$motifAnnulation.'<p>');
