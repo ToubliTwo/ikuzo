@@ -11,7 +11,6 @@ header {
     background-color: var(--couleur-tertiaire);
     padding : 1vw;
     height : 10vh;
-
 }
 
 header .logo {
@@ -19,10 +18,10 @@ header .logo {
     height: 70px;
 }
 
-header .logo:hover {
-    transition: transform 0.5s;
-    transform: rotateY(10deg) scale(1.2);
-}
+/*header .logo:hover {*/
+/*    transition: transform 0.5s;*/
+/*    transform: rotateY(10deg) scale(1.2);*/
+/*}*/
 
 header nav a {
     color: var(--couleur-principale);
@@ -30,12 +29,10 @@ header nav a {
     padding: 5px 10px;
 }
 
-
 header a {
     margin-left: 2%;
     color: var(--couleur-principale);
     text-decoration: none;
-
 }
 
 header a:hover {
@@ -45,7 +42,6 @@ header a:hover {
 }
 
 .contenuDuHeader {
-    /*background-color: rgba(159, 180, 199, 0.8);*/
     z-index : 1;
     position : sticky;
     display : inline-block;
@@ -91,7 +87,6 @@ main {
 
 .pagination .page-item:hover {
     background-color: var(--couleur-tertiaire);
-
 }
 
 .pagination .next {
@@ -116,8 +111,6 @@ main {
     color: white;
 }
 
-
-
 .tableauAccueil {
     margin-top: 2%;
     display: flex;
@@ -125,8 +118,6 @@ main {
     overflow: auto;
     max-height: 20vh;
 }
-
-
 
 .result-table {
     border-collapse: collapse;
@@ -202,7 +193,6 @@ label {
     display : block;
 }
 
-
 .formulaire_bloc {
     display: flex;
     background-color: lavenderBlush;
@@ -233,8 +223,6 @@ label {
     text-align: left;
     padding: 5%;
 }
-
-
 
 ul, ol {
     list-style-type: none;
@@ -274,6 +262,20 @@ a.button-create:hover {
     gap : 2%;
 }
 
+/*Les survols de boutons */
+.submitValider:hover,
+.submitValider button:hover,
+.submitPublier button:hover,
+.submitPublier button:hover,
+.submitAnnuler:hover,
+.mdpOublie:hover,
+.submitRechercher:hover,
+.submitConnecter:hover,
+.submitSupprimer:hover{
+   transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
+   transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
+}
+
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables VALIDER  ******** */
 /* *********************************************************** */
@@ -283,7 +285,6 @@ a.button-create:hover {
     padding: 0;
     font: inherit;
     outline: none;
-    border: solid 1px black;
 
     /* styles personnalisés */
     justify-content: center;
@@ -293,41 +294,6 @@ a.button-create:hover {
     width: 100px;
     height: 40px;
 }
-
-.submitValider button:hover {
-    transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
-    transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
-    /*border: solid 1px black;*/
-}
-
-
-/* *********************************************************** */
-/* *****Template pour les boutons submit VALIDER  ******** */
-/* *********************************************************** */
-.submitValider {
-    /* Réinitialiser les styles par défaut */
-    cursor: pointer;
-    padding: 0;
-    font: inherit;
-    outline: none;
-    border: solid 1px black;
-
-    /* styles personnalisés */
-    justify-content: center;
-    border-radius: 5px;
-    background-color: darkgreen;
-    color: white;
-    width: 100px;
-    height: 40px;
-}
-
-
-/*.submitValider:hover {*/
-/*    transition: transform 0.2s; !* Ajoute une transition pour un effet plus fluide *!*/
-/*    transform: scale(1.2); !* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol *!*/
-/*    border: solid 1px black;*/
-/*}*/
-
 
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables PUBLIER  ******** */
@@ -338,7 +304,7 @@ a.button-create:hover {
     padding: 0;
     font: inherit;
     outline: none;
-    border: solid 1px black;
+    /*border: solid 1px black;*/
 
     /* styles personnalisés */
     justify-content: center;
@@ -347,15 +313,7 @@ a.button-create:hover {
     color: white;
     width: 100px;
     height: 40px;
-
 }
-
-.submitPublier button:hover {
-    transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
-    transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
-    border: solid 1px black;
-}
-
 
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables ANNULER******** */
@@ -376,24 +334,32 @@ a.button-create:hover {
     color: white;
 }
 
-
-.submitAnnuler:hover {
-    transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
-    transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
-    border: solid 1px black;
+/* *********************************************************** */
+/* *****Template pour les boutons cliquables MDPOublié******** */
+/* *********************************************************** */
+.mdpOublie {
+    display : inline-block;
+    cursor: pointer;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: #a1a1aa;
+    width: 150px;
+    height: 40px;
+    align-content: center;
+    font-size: 0.8rem;
+    color: white;
+    text-decoration: none;
 }
 
-
-/* *********************************************************** */
-/* *****Template pour les boutons cliquables RECHERCHER  ******** */
-/* *********************************************************** */
-.submitRechercher {
+/* *************************************************************************** */
+/* *****Templates pour les boutons cliquables RECHERCHER et CONNECTER ******** */
+/* *************************************************************************** */
+.submitRechercher, .submitConnecter {
     /* Réinitialiser les styles par défaut */
     cursor: pointer;
     padding: 0;
     font: inherit;
     outline: none;
-    border: solid 1px black;
 
     /* styles personnalisés */
     justify-content: center;
@@ -405,17 +371,9 @@ a.button-create:hover {
     margin-top: 20px;
 }
 
-.submitRechercher:hover {
-    transition: transform 0.2s;
-    transform: scale(1.2);
-    border: solid 1px black;
-}
-
-
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables SUPPRIMER******** */
 /* *********************************************************** */
-
 .submitSupprimer {
     padding: 0;
     outline: none;
@@ -432,12 +390,6 @@ a.button-create:hover {
 .submitSupprimer a {
     text-decoration: none;
     color: white;
-}
-
-.submitSupprimer:hover {
-    transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
-    transform:  scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
-    border: solid 1px black;
 }
 
 .flash {
@@ -466,11 +418,10 @@ a.button-create:hover {
     text-align: left;
 }
 
-
 /* *************************KEYFRAMES************************* */
 /* *********************************************************** */
 /* *********************************************************** */
-
+/*Permet de créer un effet sur l'affichage des pages : */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -479,7 +430,6 @@ a.button-create:hover {
         opacity: 1;
     }
 }
-
 
 /*Permet de créer un mouvement sur le logo : */
 @keyframes mouvement {
@@ -502,7 +452,6 @@ a.button-create {
     padding: 0;
     font: inherit;
     outline: none;
-    /*border: solid 1px black;*/
 
     /* styles personnalisés */
     justify-content: center;
@@ -550,11 +499,3 @@ a.button-create:hover {
 .add-lieu-link:hover {
     background-color: #0056b3;
 }
-
-
-
-
-
-
-
-
