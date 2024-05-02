@@ -282,6 +282,11 @@ a.button-create:hover {
     width: 100px;
     height: 40px;
 }
+    header a {
+        margin-left: 2%;
+        color: var(--couleur-principale);
+        font-size: 1.4rem;
+        text-decoration: none;
 
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables PUBLIER  ******** */
@@ -317,10 +322,12 @@ a.button-create:hover {
     align-content: center;
 }
 
-.submitAnnuler a {
-    text-decoration: none;
-    color: white;
-}
+    .formulaires {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        column-gap: 5%;
+    }
 
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables MDPOublié******** */
@@ -374,11 +381,12 @@ a.button-create:hover {
     width: 100px;
     height: 40px;
 }
-
-.submitSupprimer a {
-    text-decoration: none;
-    color: white;
-}
+    .nosBoutons {
+        display: flex;
+        justify-content: center;
+        margin-top: 200px;
+        gap: 2%;
+    }
 
 .flash {
     padding: 20px;
@@ -388,23 +396,33 @@ a.button-create:hover {
     text-align: center;
 }
 
-.flash-success {
-    color: var(--couleur-tertiaire);
+    /* *********************************************************** */
+    /* *****Template pour les boutons cliquables PUBLIER  ******** */
+    /* *********************************************************** */
 
-    background-color: #c1ff72;
-}
+    .submitPublier button[type="submit"] {
+        /* Réinitialiser les styles par défaut */
+        cursor: pointer;
+        padding: 0;
+        font: inherit;
+        outline: none;
+        border: solid 1px black;
 
-.flash-fail {
-    color: white;
-    background-color: red;
-}
-.formulaires ul {
-    flex: 1;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    text-align: left;
-}
+        /* styles personnalisés */
+        justify-content: center;
+        border-radius: 5px;
+        background-color: midnightblue;
+        color: white;
+        width: 100px;
+        height: 40px;
+
+    }
+
+    .submitPublier button:hover {
+        transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
+        transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
+        border: solid 1px black;
+    }
 
 /* *************************KEYFRAMES************************* */
 /* *********************************************************** */
@@ -417,21 +435,31 @@ a.button-create:hover {
     100% {
         opacity: 1;
     }
-}
 
-/*Permet de créer un mouvement sur le logo : */
-@keyframes mouvement {
-
-    0% {
-        transform: translateX(0);
+    .submitAnnuler a {
+        text-decoration: none;
+        color: white;
     }
 
     50%{
         transform: translateX(50vw);
     }
 
-    100% {
-        transform: translateX(0);
+    /* *********************************************************** */
+    /* *****Template pour les boutons cliquables SUPPRIMER******** */
+    /* *********************************************************** */
+
+    .submitSupprimer {
+        padding: 0;
+        outline: none;
+        border: solid 1px black;
+        cursor: pointer;
+        align-content: center;
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        width: 100px;
+        height: 40px;
     }
 }
 
@@ -463,14 +491,10 @@ a.button-create:hover {
     outline: none;
     border: solid 1px black;
 
-    /* styles personnalisés */
-    justify-content: center;
-    border-radius: 5px;
-    background-color: darkgreen;
-    color: white;
-    width: 100px;
-    height: 40px;
-}
+    .submitSupprimer a {
+        text-decoration: none;
+        color: white;
+    }
 
 .add-lieu-link {
     display: inline-block;
