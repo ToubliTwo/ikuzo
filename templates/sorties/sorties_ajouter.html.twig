@@ -35,15 +35,7 @@
                 {{ form_row(sortieForm.longitude) }}
             </div>
        </div>
-            <div class="nosBoutons">
-               <div class="submitValider"><button type="submit" name="sorties_ajouter">Valider</button></div>
-                <div class="submitPublier"><button type="submit" name="publier">Publier</button></div>
-                {# Champ caché pour stocker les détails du lieu sélectionné #}
-                <input type="hidden" id="lieuDetails" name="lieuDetails">
-                {{ form_end(sortieForm) }}
-                <div class="submitAnnuler"><a href="{{ path('main_home') }}">Annuler</a></div>
-            </div>
-         
+
 <script>
         document.addEventListener('DOMContentLoaded', function () {
             var villeSelect = document.querySelector('#{{ sortieForm.ville.vars.id }}');
@@ -118,10 +110,13 @@
 
         });
     </script>
-
+    </div>
+    <div class="nosBoutons">
+        <div class="submitValider"><button type="submit" name="sorties_ajouter">Valider</button></div>
+        <div class="submitPublier"><button type="submit" name="publier">Publier</button></div>
+        {# Champ caché pour stocker les détails du lieu sélectionné #}
+        <input type="hidden" id="lieuDetails" name="lieuDetails">
+        {{ form_end(sortieForm) }}
+        <div class="submitAnnuler"><a href="{{ path('main_home') }}">Annuler</a></div>
+    </div>
 {% endblock %}
-
-
-
-
-

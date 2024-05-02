@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau mot de passe envoyé ! {% endblock %}
+
+{% block body %}
+    <p>
+        Si un compte existant est lié à l'adresse e-mail renseignée, alors un e-mail vient d'être envoyé avec un lien vous permettant de réinitialiser votre mot de passe.
+        Attention, ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+    </p>
+
+    <p>Si vous ne recevez pas l'email, vérifiez votre dossier de spam ou <a href="{{ path('app_forgot_password_request') }}">réessayez</a>.</p>
+{% endblock %}
