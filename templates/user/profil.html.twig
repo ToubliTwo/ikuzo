@@ -7,7 +7,7 @@
 {% block body %}
     <h1>Détails utilisateur</h1>
 
-    <div class="tableauAccueil">
+    <div class="formulaire_bloc">
         <div class="profilUser">
 
             {% if user.imageName %}
@@ -44,8 +44,8 @@
                     </table>
                 </div>
             </div>
-            <a href="{{ path('main_home') }}">Retour</a>
         </div>
+        <a class="classicBtn" href="{{ path('main_home') }}">Retour</a>
     </div>
 {% endblock %}
 
