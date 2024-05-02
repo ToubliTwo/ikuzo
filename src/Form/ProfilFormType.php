@@ -7,6 +7,7 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,7 +23,7 @@ class ProfilFormType extends AbstractType
             ->add(child: 'telephone')
             ->add(child: 'email')
             //ne pas afficher le mot de passe
-            ->add(child: 'password', type: null, options: [
+            ->add(child: 'password', type: PasswordType::class, options: [
                 'label' => 'Mot de passe',
                 'required' => false,
                 'mapped' => false,

@@ -165,10 +165,11 @@ footer {
     margin: 0;
 }
 
-input, select {
+input, select, textarea {
     margin-bottom: 0.8rem;
     box-sizing: border-box;
-    width: 250px;
+    width: 100%;
+    max-width: 250px;
 }
 
 textarea {
@@ -182,11 +183,9 @@ label {
 }
 
 .formulaire_bloc {
-    display: flex;
     background-color: lavenderBlush;
     width: 60vw;
     margin : auto;
-    justify-content: center;
     padding: 1%;
     border: solid 1px black;
     border-radius: 10px;
@@ -194,12 +193,14 @@ label {
 
 .formulaires {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
     column-gap: 5%;
+    justify-content: center;
 }
 
 .colonne {
     margin-right: 10px;
+    flex-wrap: wrap;
 }
 
 .profilUser {
@@ -209,7 +210,6 @@ label {
     align-items: center;
     margin: 5%;
     text-align: left;
-    padding: 5%;
 }
 
 ul, ol {
@@ -218,28 +218,6 @@ ul, ol {
 
 li {
     margin-bottom: 20px;
-}
-
-a.button-create {
-    cursor: pointer;
-    padding: 0;
-    font: inherit;
-    outline: none;
-    /*border: solid 1px black;*/
-
-    /* styles personnalisés */
-    justify-content: center;
-    border-radius: 5px;
-    background-color: darkgreen;
-    color: white;
-    width: 100px;
-    height: 40px;
-}
-
-a.button-create:hover {
-    background-color: forestgreen;
-    transition: transform 0.2s;
-    transform: rotateY(10deg) scale(1.1);
 }
 
 /*utile pour le positionnement*/
@@ -280,6 +258,11 @@ a.button-create:hover {
     color: white;
     width: 100px;
     height: 40px;
+    border-top: 2px solid #494949;
+    border-left: 2px solid #494949;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+
 }
 
 /* *********************************************************** */
@@ -298,6 +281,10 @@ a.button-create:hover {
     color: white;
     width: 100px;
     height: 40px;
+    border-top: 2px solid #494949;
+    border-left: 2px solid #494949;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
 }
 
 /* *********************************************************** */
@@ -312,6 +299,10 @@ a.button-create:hover {
     width: 100px;
     height: 40px;
     align-content: center;
+    border-top: 2px solid #494949;
+    border-left: 2px solid #494949;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
 }
 
 .submitAnnuler a {
@@ -352,6 +343,10 @@ a.button-create:hover {
     padding: 0;
     outline: none;
     margin-top: 20px;
+    border-top: 2px solid #494949;
+    border-left: 2px solid #494949;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
 }
 
 /* *********************************************************** */
@@ -360,7 +355,6 @@ a.button-create:hover {
 .submitSupprimer {
     padding: 0;
     outline: none;
-    border: solid 1px black;
     cursor: pointer;
     align-content: center;
     border-radius: 5px;
@@ -368,6 +362,10 @@ a.button-create:hover {
     color: white;
     width: 100px;
     height: 40px;
+    border-top: 2px solid #494949;
+    border-left: 2px solid #494949;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
 }
 
 .submitSupprimer a {
@@ -442,7 +440,10 @@ a.button-create {
     background-color: darkgreen;
     color: white;
     width: 100px;
-    height: 40px;
+    height: 40px;    border-top: 2px solid #494949;
+    border-left: 2px solid #494949;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
 }
 
 a.button-create:hover {
@@ -481,4 +482,29 @@ a.button-create:hover {
 
 .add-lieu-link:hover {
     background-color: #0056b3;
+}
+
+.sortie_detail {
+    display: flex;
+    justify-content: center; /* Centrer le contenu horizontalement */
+}
+
+.attribut {
+    display: flex;
+    flex-wrap: wrap; /* Permettre le retour à la ligne */
+    max-width: 1000px; /* Définir une largeur maximale */
+}
+
+.detail {
+    flex: 1; /* Prendre autant d'espace que possible */
+    margin-right: 20px; /* Espacement entre les colonnes */
+}
+
+.description {
+    flex: 2; /* Prendre deux fois plus d'espace que les colonnes */
+    margin-top: 20px; /* Espacement entre les colonnes et la description */
+}
+
+.description ul {
+    list-style-type: none; /* Supprimer les puces de la liste */
 }
