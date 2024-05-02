@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Sorties;
 use App\Entity\User;
+use App\EventListener\EnvoiMailPourAnnulation;
 use App\Form\AjouterSortieFormType;
+use App\Form\AnnulerSortieFormType;
 use App\Form\ModifierSortieFormType;
 use App\Repository\SortiesRepository;
 use App\Repository\UserRepository;
@@ -60,21 +62,26 @@ class ActionsController extends AbstractController
 
     #[Route('/sorties/desinscription/{id}', name:'actions_desinscription')]
  /*   #[IsGranted(ProfilVoter::DELETE, subject: 'user')]*/
-    public function desinscrireSortie(Sorties $sortie, EntityManagerInterface $em): Response
+    public function desinscrireSortie(Sorties $sortie, EntityManagerInterface $em, Request $request): Response
     {
-        // Récupérer l'utilisateur actuellement connecté (vous devez gérer cela en fonction de votre système d'authentification)
+        // Récupérer l'utilisateur actuellement connecté
         $user = $this->getUser();
-        // Vérifier si l'utilisateur est connecté et est une instance de \App\Entity\User
-        if ($user instanceof \App\Entity\User) {
-            // Vérifier si l'utilisateur est inscrit à la sortie
+
+        if ($user instanceof User) {
             if ($sortie->getUsers()->contains($user)) {
                 // Vérifier si la date de sortie est dépassée
                 if ($sortie->getDate() > new \DateTime()) {
                     // Retirer l'utilisateur de la sortie
                     $sortie->removeUser($user);
                     $em->flush();
-
                     $this->addFlash(type: 'success', message: 'Désinscription réussie !');
+
+                    // Si l'utilisateur est inactif, annuler les sorties dont il est organisateur
+                    if (!$user->isActif()) {
+                        if ($sortie->getOrganisateur() === $user) {
+                            $this->annulerSortie($sortie, $em);
+                        }
+                    }
                 } else {
                     $this->addFlash(type: 'warning', message: 'La date de la sortie est dépassée, vous ne pouvez pas vous désinscrire.');
                 }
@@ -85,7 +92,6 @@ class ActionsController extends AbstractController
             $this->addFlash(type: 'warning', message: 'Vous devez être connecté pour vous désinscrire d\'une sortie.');
         }
 
-        // Rediriger l'utilisateur vers la page d'accueil ou une autre page appropriée
         return $this->redirectToRoute(route: 'main_home');
     }
     #[Route('/sorties/details/{id}', name:'actions_details')]
@@ -103,10 +109,11 @@ class ActionsController extends AbstractController
              'sortie' => $sortie
         ]);
     }
+
     #[Route('/sorties/modifier/{id}', name:'actions_modifier')]
     public function modifier(SortiesRepository $sortiesRepository, Request $request, EntityManagerInterface $entityManager, Sorties $modifSortie): Response
     {
-        $modifSortieForm = $this->createForm(type: ModifierSortieFormType::class, data: $modifSortie);
+        $modifSortieForm = $this->createForm(type: AjouterSortieFormType::class, data: $modifSortie);
 
         $modifSortieForm->handleRequest($request);
 
@@ -143,6 +150,28 @@ class ActionsController extends AbstractController
 
         return $this->redirectToRoute(route: 'main_home');
     }
+    #[Route('/sorties/annuler/{id}', name:'actions_annuler')]
+    public function annulerSortie(Sorties $sortie, EntityManagerInterface $em, Request $request, EnvoiMailPourAnnulation $annulation): Response
+    {
+        // Envoyer sortie_annuler.html.twig permettant l'annulation de la sortie avec le form AnnulerSortieFormType
+        $annulerSortieForm = $this->createForm(type: AnnulerSortieFormType::class, data: $sortie);
+
+        $annulerSortieForm->handleRequest($request);
+
+        if ($annulerSortieForm->isSubmitted() && $annulerSortieForm->isValid()) {
+            $sortie->setEtat($em->getReference(entityName: Etat::class, id: 6));
+
+            $annulation->sendNewUserNotificationToAdmin($sortie->getMotifAnnulation());
+
+            $em->flush();
+            $this->addFlash(type: 'success', message: 'Sortie annulée avec succès !');
+            return $this->redirectToRoute(route: 'main_home');
+        }
+        return $this->render('sorties/sorties_annuler.html.twig', [
+            'annulerSortieForm' => $annulerSortieForm->createView(),
+            'sortie' => $sortie
+        ]);
+    }
     #[Route('/sorties/supprimer/{id}', name:'actions_supprimer')]
     public function supprimer(EntityManagerInterface $entityManager, Sorties $supprimerSortie): Response
     {
@@ -154,6 +183,24 @@ class ActionsController extends AbstractController
 
         return $this->redirectToRoute(route: 'main_home');
     }
+
+    #[Route('/sorties/annuler_par_admin', name:'actions_annuler_par_admin')]
+    public function annulerParAdmin(Sorties $sortie, EntityManagerInterface $em, Request $request): Response
+    {
+        //Récupérer toutes les sorties liées à un utilisateur avec un role ["ROLE_OFF"]
+        $sorties = $em->getRepository(Sorties::class)->findBy(criteria: ['organisateur' => $this->getUser()]);
+        //Mettre l'état de la sortie à annuler avec le motid d'annulation "Annulé par l'administrateur" et libérer les places
+        foreach ($sorties as $sortie) {
+            $sortie->setEtat($em->getReference(entityName: Etat::class, id: 6));
+            $sortie->setMotifAnnulation('Annulé par l\'administrateur');
+            $sortie->setNombreDePlaces($sortie->getNombreDePlaces() + $sortie->getUsers()->count());
+        }
+        $em->flush();
+        $this->addFlash(type: 'success', message: 'Sortie annulée avec succès !');
+        return $this->redirectToRoute(route: 'main_home');
+    }
+
+
 }
 
 

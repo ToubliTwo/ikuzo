@@ -2,9 +2,15 @@
 {% block body %}
     <h1>Modifier votre profil</h1>
     <div class="formulaire_bloc">
+        {{ form_start(userForm) }}
+        {% if user.imageName %}
+    <img src="{{ asset('images/users/' ~ user.id ~ '/'~ user.imageName) }}"
+         alt="photo de {{ user.prenom }} {{ user.nom }}">
+    {% else %}
+        <img src="{{ asset('images/users/PasDePhoto.png') }}" alt="photo par défaut" width="125" height="125">
+        {% endif %}
         <div class="formulaires">
             <div class="colonne">
-            {{ form_start(userForm) }}
             {{ form_row(userForm.nom) }}
             {{ form_row(userForm.prenom) }}
             {{ form_row(userForm.pseudo) }}
@@ -14,7 +20,7 @@
                 {{ form_row(userForm.telephone) }}
                 {{ form_row(userForm.password) }}
                 {{ form_row(userForm.campus) }}
-                {{ form_widget(userForm) }}
+                {{ form_row(userForm.imageFile) }}
             </div>
         </div>
     </div>

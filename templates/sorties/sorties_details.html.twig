@@ -4,7 +4,6 @@
     <div class="detailSortie">
         <h1>Détails de la sortie</h1>
         <div>
-
             <ul>
                 <li>Nom de la sortie : {{ sortie.titre }}</li>
                 <li>Date et heure de la sortie : {{ sortie.date|date('d/m/Y H:i') }}</li>
@@ -22,36 +21,38 @@
                 <li>Code postal : {{ sortie.lieu.ville.codePostal }}</li>
                 <li>Latitude : {{ sortie.lieu.latitude }}</li>
                 <li>Longitude : {{ sortie.lieu.longitude }}</li>
-                <li>Motif d'annulation : </li>
-
-        </ul>
+                <li>Motif d'annulation :</li>
+            </ul>
         </div>
     </div>
     <h2>Liste des participants</h2>
     <div class="tableauAccueil">
-    <div class="table-container">
-    <table class="result-table">
-        <tr>
-            <th></th>
-            <th>Pseudo</th>
-            <th>Nom</th>
-        </tr>
-        {% for participant in participants %}
+        <div class="table-container">
+            <table class="result-table">
+                <tr>
+                    <th></th>
+                    <th>Pseudo</th>
+                    <th>Nom</th>
+                </tr>
+                {% for participant in participants %}
 
-            <tr>
-                <td>
-                    {% if participant.imageName %}
-                    <img src="{{ asset('images/users/' ~ participant.id ~ '/' ~ participant.imageName) }}" alt="photo de profil" width="35" height="35" >
-        {% else %}
-                        <img src="{{ asset('images/users/PasDePhoto.png') }}" alt="Pas de Photo" width="35" height="35">
-        {% endif %}
-            </td>
-                <td><a href="{{ path('user_details', {'id' : participant.id}) }}">{{ participant.pseudo }}</a></td>
-                <td>{{ participant.prenom ~ ' ' ~ participant.nom }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-    </div>
+                    <tr>
+                        <td>
+                            {% if participant.imageName %}
+                                <img src="{{ asset('images/users/' ~ participant.id ~ '/' ~ participant.imageName) }}"
+                                     alt="photo de profil" width="35" height="35">
+                            {% else %}
+                                <img src="{{ asset('images/users/PasDePhoto.png') }}" alt="Pas de Photo" width="35"
+                                     height="35">
+                            {% endif %}
+                        </td>
+                        <td><a href="{{ path('user_details', {'id' : participant.id}) }}">{{ participant.pseudo }}</a>
+                        </td>
+                        <td>{{ participant.prenom ~ ' ' ~ participant.nom }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
     <!-- Affichage des liens de pagination -->
     {{ knp_pagination_render(participants) }}

@@ -12,7 +12,28 @@ class ChangementEtat
     {
         $this->entityManager = $entityManager;
     }
-    public function modifierEtat(Sorties $sorties):void
+
+    public function modifierEtat(?Sorties $sorties = null): void
+    {
+        $today = new \DateTime();
+
+        if ($sorties !== null) {
+            $this->modifierEtatPourSortie($sorties, $today);
+        } else {
+            // Récupérer toutes les sorties depuis le repository
+            $sortiesRepository = $this->entityManager->getRepository(Sorties::class);
+            $allSorties = $sortiesRepository->findAll();
+
+            // Traiter chaque sortie
+            foreach ($allSorties as $sortie) {
+                $this->modifierEtatPourSortie($sortie, $today);
+            }
+        }
+
+        // Flush une seule fois après avoir terminé toutes les modifications
+        $this->entityManager->flush();
+    }
+    public function modifierEtatPourSortie(Sorties $sorties):void
     {
 
         //obtenir la date actuelle :
