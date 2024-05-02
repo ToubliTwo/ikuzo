@@ -161,7 +161,7 @@ class ActionsController extends AbstractController
         if ($annulerSortieForm->isSubmitted() && $annulerSortieForm->isValid()) {
             $sortie->setEtat($em->getReference(entityName: Etat::class, id: 6));
 
-            $annulation->sendNewUserNotificationToAdmin($sortie->getMotifAnnulation());
+            $annulation->sendNewUserNotificationToAdmin($sortie->getMotifAnnulation(), $sortie);
 
             $em->flush();
             $this->addFlash(type: 'success', message: 'Sortie annulée avec succès !');

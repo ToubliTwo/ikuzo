@@ -2,10 +2,10 @@
     {% if app.user %}
         {% if app.user.administrateur %}
            <a href="{{ path('admin_dashboard_index') }}" title="Panneau d'administration"> | Administration</a>
-           <a href="{{ path('campus_gerer') }}" title="GererCampus"> | Gerer les Campus</a>
+           {#<a href="{{ path('campus_gerer') }}" title="GererCampus"> | Gerer les Campus</a>#}
         {% endif %}
         <a href="{{ path('sorties_ajouter') }}" title="AjoutSortie"> | Créer une sortie </a>
-        <a href="{{ path('gerer_villes') }}" title="GererVilles"> | Gerer les Villes</a>
+        {#<a href="{{ path('gerer_villes') }}" title="GererVilles"> | Gerer les Villes</a>#}
         <a href="{{ path('user_modifier', {'id': app.user.id}) }}" title="Modifier le profil de l'utilisateur"> | Modifier mon profil</a>
         <a href="{{ path('app_logout') }}" title="Logout"> | Se déconnecter <img src="{{ asset('img/ninja.png') }}" alt="ninja" class="img-fluid ea-lightbox-thumbnail" width="20" height="20"> ({{ app.user.pseudo }})</a>
     {% endif %}
