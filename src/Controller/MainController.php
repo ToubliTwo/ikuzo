@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/', name: 'main_home')]
+    #[Route('/', name: 'main_home', options: ['requires_roles' => ['ROLE_USER']])]
     public function home(Request $request,
                          SortiesRepository $sortiesRepository,
                          ChangementEtat $changementEtat
@@ -56,9 +56,9 @@ class MainController extends AbstractController
                 dateRechercheDebut: $dateRechercheDebut,
                 dateRechercheFin: $dateRechercheFin
             );
-            foreach ($sorties as $instanceDeSortie) {
+            /*foreach ($sorties as $instanceDeSortie) {
                 $changementEtat->modifierEtatPourSortie($instanceDeSortie);
-            }
+            }*/
             return $this->render('main/home.html.twig', [
                 'sortieform' => $sortieform,
                 'sorties' => $sorties,

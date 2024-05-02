@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Fields;
 
 use App\Entity\User;
+use App\Form\ImportCsvFormType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -14,6 +15,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -67,5 +71,22 @@ class UserCrudController extends AbstractCrudController
             ->renderContentMaximized()
             ->setDateTimeFormat(dateFormatOrPattern: 'dd/MM/yyyy HH:mm:ss')
             ->showEntityActionsInlined();
+    }
+
+    #[Route('/admin/import-csv', name: 'user_crud_import_csv')]
+    public function importCsvAction(Request $request) : Response
+    {
+        $form = $this->createForm(ImportCsvFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('file')->getData();
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('csv_directory'), $fileName);
+            $this->addFlash('success', 'Fichier importé avec succès !');
+            return $this->redirectToRoute('admin');
+        }
+        return $this->render('admin/fields/importCsv.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

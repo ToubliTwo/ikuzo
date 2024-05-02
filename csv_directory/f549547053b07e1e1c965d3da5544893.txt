@@ -1,0 +1,11 @@
+﻿ID,Nom,Prénom,Téléphone,Email,Pseudo,Campus,Rôles,Password,Administrateur,Actif
+"11,Dupont,Henri,0607080910,h.dupont@example.com,henri.dupont,1,""ROLE_USER"",""password"",0,1"
+"12,Dubois,Marie,0712345678,marie.dubois@example.com,marie.dubois,2,""ROLE_USER"",""password"",0,1"
+"13,Leroy,Paul,0787654321,paul.leroy@example.com,paul.leroy,3,""ROLE_USER"",""password"",0,1"
+"14,Moreau,Sophie,0698765432,sophie.moreau@example.com,sophie.moreau,1,""ROLE_USER"",""password"",0,1"
+"15,Lefevre,Jean,0612345678,jean.lefevre@example.com,jean.lefevre,1,""ROLE_USER"",""password"",0,1"
+"16,Garcia,Julie,0678901234,julie.garcia@example.com,julie.garcia,1,""ROLE_USER"",""password"",0,1"
+"17,Roux,Thomas,0656789012,thomas.roux@example.com,thomas.roux,1,""ROLE_USER"",""password"",0,1"
+"18,Fournier,Anne,0789456123,anne.fournier@example.com,anne.fournier,1,""ROLE_USER"",""password"",0,1"
+"19,Lucas,Caroline,0690123456,caroline.lucas@example.com,caroline.lucas,1,""ROLE_USER"",""password"",0,1"
+"20,Meunier,Nicolas,0712345678,nicolas.meunier@example.com,nicolas.meunier,1,""ROLE_USER"",""password"",0,1"

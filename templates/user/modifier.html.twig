@@ -5,7 +5,7 @@
         {{ form_start(userForm) }}
         {% if user.imageName %}
     <img src="{{ asset('images/users/' ~ user.id ~ '/'~ user.imageName) }}"
-         alt="photo de {{ user.prenom }} {{ user.nom }}">
+         alt="photo de {{ user.prenom }} {{ user.nom }}" width="125" height="125">
     {% else %}
         <img src="{{ asset('images/users/PasDePhoto.png') }}" alt="photo par défaut" width="125" height="125">
         {% endif %}

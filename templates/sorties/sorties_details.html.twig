@@ -1,28 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="detailSortie">
-        <h1>Détails de la sortie</h1>
-        <div>
-            <ul>
-                <li>Nom de la sortie : {{ sortie.titre }}</li>
-                <li>Date et heure de la sortie : {{ sortie.date|date('d/m/Y H:i') }}</li>
-                <li>Date limite d'inscription : {{ sortie.dateLimiteInscription|date('d/m/Y H:i') }}</li>
-                <li>Nombre de places : {{ sortie.nombreDePlaces }}</li>
-                <li>Durée : {{ sortie.duree|date('H:i') }}</li>
-                <li>Description et infos : {{ sortie.description }}</li>
-            </ul>
-        </div>
-        <div>
-            <ul>
-                <li>Campus : {{ sortie.campus.nom }}</li>
-                <li>Lieu : {{ sortie.lieu.nom }}</li>
-                <li>Rue : {{ sortie.lieu.rue }}</li>
-                <li>Code postal : {{ sortie.lieu.ville.codePostal }}</li>
-                <li>Latitude : {{ sortie.lieu.latitude }}</li>
-                <li>Longitude : {{ sortie.lieu.longitude }}</li>
-                <li>Motif d'annulation :</li>
-            </ul>
+    <h1>Détails de la sortie {{ sortie.titre }}</h1>
+    <div class="formulaire_bloc">
+        <div class="formulaires">
+            <div class="colonne">
+                <ul>
+                    <li>Nom de la sortie : {{ sortie.titre }}</li>
+                    <li>Date et heure de la sortie : {{ sortie.date|date('d/m/Y H:i') }}</li>
+                    <li>Date limite d'inscription : {{ sortie.dateLimiteInscription|date('d/m/Y H:i') }}</li>
+                    <li>Nombre de places : {{ sortie.nombreDePlaces }}</li>
+                    <li>Durée : {{ sortie.duree|date('H:i') }}</li>
+                    <li>Description et infos : {{ sortie.description }}</li>
+                </ul>
+            </div>
+            <div class="colonne">
+                <ul>
+                    <li>Campus : {{ sortie.campus.nom }}</li>
+                    <li>Lieu : {{ sortie.lieu.nom }}</li>
+                    <li>Rue : {{ sortie.lieu.rue }}</li>
+                    <li>Code postal : {{ sortie.lieu.ville.codePostal }}</li>
+                    <li>Latitude : {{ sortie.lieu.latitude }}</li>
+                    <li>Longitude : {{ sortie.lieu.longitude }}</li>
+                </ul>
+            </div>
         </div>
     </div>
     <h2>Liste des participants</h2>
@@ -35,7 +36,6 @@
                     <th>Nom</th>
                 </tr>
                 {% for participant in participants %}
-
                     <tr>
                         <td>
                             {% if participant.imageName %}
@@ -54,11 +54,15 @@
             </table>
         </div>
     </div>
-    <!-- Affichage des liens de pagination -->
+       <!-- Affichage des liens de pagination -->
     {{ knp_pagination_render(participants) }}
 {% endblock %}
 
 {% block title %}
-
+{{ sortie.titre }}
 {% endblock %}
 
+{% block head %}
+    {{ parent() }}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T+OASUxh6I6GpA4RFip2tv02/5N25c1Tp/z12q9v3YmtoJSIw5d6+EQSkqNuR/yj" crossorigin="anonymous">
+{% endblock %}
