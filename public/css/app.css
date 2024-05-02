@@ -109,7 +109,7 @@ main {
     background-color: var(--couleur-tertiaire);
 }
 
-.tableauAccueil {
+.tableau {
     margin-top: 2%;
     display: flex;
     justify-content: center;
@@ -139,7 +139,7 @@ main {
     padding: 5px;
 }
 
-.tableauAccueil th {
+.tableau th {
 
     font-weight: bold;
     font-size: 1.2rem;
@@ -147,7 +147,7 @@ main {
     padding: 5px;
 }
 
-.tableauAccueil td {
+.tableau td {
     justify-content: flex-start;
     text-align: left;
     padding: 5px;
@@ -256,10 +256,9 @@ a.button-create:hover {
 .submitPublier button:hover,
 .submitPublier button:hover,
 .submitAnnuler:hover,
-.mdpOublie:hover,
-.submitRechercher:hover,
-.submitConnecter:hover,
-.submitSupprimer:hover{
+.classicBtn:hover,
+.submitSupprimer:hover,
+.mdpOublie:hover {
    transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
    transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
 }
@@ -292,9 +291,7 @@ a.button-create:hover {
     padding: 0;
     font: inherit;
     outline: none;
-    /*border: solid 1px black;*/
 
-    /* styles personnalisés */
     justify-content: center;
     border-radius: 5px;
     background-color: midnightblue;
@@ -322,40 +319,38 @@ a.button-create:hover {
     color: white;
 }
 
-/* *********************************************************** */
-/* *****Template pour les boutons cliquables MDPOublié******** */
-/* *********************************************************** */
 .mdpOublie {
+    text-decoration: none;
+    background-color: var(--couleur-secondaire) ;
+    color: white;
+    font-size : 0.8rem;
+    width: 140px;
+    height: 40px;
+    margin-top : 10px;
     display : inline-block;
     cursor: pointer;
     justify-content: center;
     border-radius: 5px;
-    background-color: #a1a1aa;
-    width: 150px;
-    height: 40px;
     align-content: center;
-    font-size: 0.8rem;
-    color: white;
-    text-decoration: none;
 }
 
-/* *************************************************************************** */
-/* *****Templates pour les boutons cliquables RECHERCHER et CONNECTER ******** */
-/* *************************************************************************** */
-.submitRechercher, .submitConnecter {
-    /* Réinitialiser les styles par défaut */
+/* *********************************************************** */
+/* *****Template pour les boutons cliquables classicBtn ******** */
+/* *********************************************************** */
+.classicBtn {
+    display : inline-block;
     cursor: pointer;
-    padding: 0;
-    font: inherit;
-    outline: none;
-
-    /* styles personnalisés */
     justify-content: center;
+    align-content: center;
     border-radius: 5px;
-    background-color: var(--couleur-quaternaire);
-    color: white;
     width: 100px;
     height: 40px;
+    font-size: 0.8rem;
+    background-color: var(--couleur-quaternaire);
+    color: white;
+    text-decoration: none;
+    padding: 0;
+    outline: none;
     margin-top: 20px;
 }
 
