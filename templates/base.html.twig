@@ -50,9 +50,8 @@
     </head>
     <body>
         <header class="contenuDuHeader">
-               <a class="zoom" href="{{ path('main_home') }}"><img class="logo" src="{{ asset('img/LogoProjetSortir.webp') }}" alt="Ikouzo !"></a>
+               <a href="{{ path('main_home') }}"><img class="logo" src="{{ asset('img/LogoProjetSortir.webp') }}" alt="Ikouzo !"></a>
                {%  include('inc/nav.html.twig') %}
-
         </header>
         {# gestion du flash message : #}
         {% for label, messages in app.flashes %}

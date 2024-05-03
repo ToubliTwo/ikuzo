@@ -7,38 +7,33 @@
 }
 
 header {
+    position: fixed;
     top: 0;
     background-color: var(--couleur-tertiaire);
     padding : 1vw;
-    height : 10vh;
-}
-
-header .logo {
-    animation: mouvement 14s infinite alternate;
-    height: 70px;
-}
-
-/*header .logo:hover {*/
-/*    transition: transform 0.5s;*/
-/*    transform: rotateY(10deg) scale(1.2);*/
-/*}*/
-
-header nav a {
-    color: var(--couleur-principale);
-    border-radius: 5px;
-    padding: 5px 10px;
+    height : 10vh ;
 }
 
 header a {
-    margin-left: 2%;
     color: var(--couleur-principale);
     text-decoration: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-left: 2%;
 }
 
 header a:hover {
     color: white;
-    font-weight: bold;
     font-size: 1.2rem;
+    font-weight: bold;
+    transform: scale(1.2); /* mise à l'échelle de 120% lors du survol */
+    transition: transform 40ms; /* Ajoute une transition pour un effet plus fluide */
+}
+
+header .logo {
+    animation: mouvement 5s infinite alternate;
+    height: 70px;
+    /*margin-left : 2vw;*/
 }
 
 .contenuDuHeader {
@@ -53,11 +48,12 @@ main {
     background-color: var(--couleur-principale);
     color: black;
     text-align: center;
-    height: 81vh;
+    height: 82vh;
     margin: 0;
     animation: fadeIn 1s ease forwards ;
     animation-iteration-count: 1;
     overflow-y: auto;
+    min-height: 85vh;
 }
 
 .detailSortie {
@@ -70,7 +66,6 @@ main {
     padding: 5%;
 }
 
-
 .pagination {
     display: flex;
     justify-content: center;
@@ -82,7 +77,6 @@ main {
     padding: 5px;
     border: solid 1px black;
     border-radius: 5px;
-
 }
 
 .pagination .page-item:hover {
@@ -114,7 +108,8 @@ main {
     display: flex;
     justify-content: center;
     overflow: auto;
-    max-height: 25vh;
+    height : 100%;
+    max-height: 34vh;
 }
 
 .result-table {
@@ -140,7 +135,6 @@ main {
 }
 
 .tableau th {
-
     font-weight: bold;
     font-size: 1.2rem;
     text-align: left;
@@ -154,7 +148,7 @@ main {
 }
 
 footer {
-    position : fixed;
+    position : absolute;
     bottom: 0;
     width:100%;
     background-color: var(--couleur-quaternaire);
@@ -168,7 +162,8 @@ footer {
 input, select {
     margin-bottom: 0.8rem;
     box-sizing: border-box;
-    width: 250px;
+    width: 100%;
+    max-width: 250px;
 }
 
 textarea {
@@ -182,17 +177,16 @@ label {
 }
 
 .formulaire_bloc {
-    display: flex;
     background-color: lavenderBlush;
     width: 60vw;
     margin : auto;
-    justify-content: center;
     padding: 1%;
     border: solid 1px black;
     border-radius: 10px;
 }
 
 .formulaires {
+    flex-wrap: wrap;
     display: flex;
     justify-content: center;
     column-gap: 5%;
@@ -209,7 +203,6 @@ label {
     align-items: center;
     margin: 5%;
     text-align: left;
-    padding: 5%;
 }
 
 ul, ol {
@@ -225,9 +218,6 @@ a.button-create {
     padding: 0;
     font: inherit;
     outline: none;
-    /*border: solid 1px black;*/
-
-    /* styles personnalisés */
     justify-content: center;
     border-radius: 5px;
     background-color: darkgreen;
@@ -242,7 +232,27 @@ a.button-create:hover {
     transform: rotateY(10deg) scale(1.1);
 }
 
-/*utile pour le positionnement*/
+.attribut {
+    display: flex;
+    flex-wrap: wrap; /* Permettre le retour à la ligne */
+    max-width: 1000px; /* Définir une largeur maximale */
+}
+
+.detail {
+    flex: 1; /* Prendre autant d'espace que possible */
+    margin-right: 20px; /* Espacement entre les colonnes */
+}
+
+.description {
+    flex: 2; /* Prendre deux fois plus d'espace que les colonnes */
+    margin-top: 20px; /* Espacement entre les colonnes et la description */
+}
+
+.description ul {
+    list-style-type: none; /* Supprimer les puces de la liste */
+}
+
+/*a conserver pour le positionnement*/
 .nosBoutons {
     display: flex;
     justify-content: center;
@@ -252,28 +262,20 @@ a.button-create:hover {
 
 /*Les survols de boutons */
 .submitValider:hover,
-.submitValider button:hover,
-.submitPublier button:hover,
 .submitPublier button:hover,
 .submitAnnuler:hover,
 .classicBtn:hover,
-.submitSupprimer:hover,
 .mdpOublie:hover {
    transition: transform 0.2s; /* Ajoute une transition pour un effet plus fluide */
    transform: scale(1.2); /* Rotation de 10 degrés autour de l'axe Y et mise à l'échelle de 110% lors du survol */
 }
 
-/* *********************************************************** */
-/* *****Template pour les boutons cliquables VALIDER  ******** */
-/* *********************************************************** */
+/*!* *********************************************************** *!*/
+/*!* *****Template pour les boutons cliquables VALIDER  ******** *!*/
+/*!* *********************************************************** *!*/
 .submitValider button[type="submit"], .submitValider {
-    /* Réinitialiser les styles par défaut */
     cursor: pointer;
     padding: 0;
-    font: inherit;
-    outline: none;
-
-    /* styles personnalisés */
     justify-content: center;
     border-radius: 5px;
     background-color: darkgreen;
@@ -286,12 +288,10 @@ a.button-create:hover {
 /* *****Template pour les boutons cliquables PUBLIER  ******** */
 /* *********************************************************** */
 .submitPublier button[type="submit"]{
-    /* Réinitialiser les styles par défaut */
     cursor: pointer;
     padding: 0;
     font: inherit;
     outline: none;
-
     justify-content: center;
     border-radius: 5px;
     background-color: midnightblue;
@@ -337,9 +337,10 @@ a.button-create:hover {
 /* *********************************************************** */
 /* *****Template pour les boutons cliquables classicBtn ******** */
 /* *********************************************************** */
-.classicBtn {
-    display : inline-block;
+.classicBtn, .uploadPhotoProfil a{
     cursor: pointer;
+    font: inherit;
+    display : inline-block;
     justify-content: center;
     align-content: center;
     border-radius: 5px;
@@ -354,27 +355,6 @@ a.button-create:hover {
     margin-top: 20px;
 }
 
-/* *********************************************************** */
-/* *****Template pour les boutons cliquables SUPPRIMER******** */
-/* *********************************************************** */
-.submitSupprimer {
-    padding: 0;
-    outline: none;
-    border: solid 1px black;
-    cursor: pointer;
-    align-content: center;
-    border-radius: 5px;
-    background-color: black;
-    color: white;
-    width: 100px;
-    height: 40px;
-}
-
-.submitSupprimer a {
-    text-decoration: none;
-    color: white;
-}
-
 .flash {
     padding: 20px;
     font-weight: bold;
@@ -385,7 +365,6 @@ a.button-create:hover {
 
 .flash-success {
     color: var(--couleur-tertiaire);
-
     background-color: #c1ff72;
 }
 
@@ -422,33 +401,12 @@ a.button-create:hover {
     }
 
     50%{
-        transform: translateX(50vw);
+        transform: translateX(2vw);
     }
 
     100% {
         transform: translateX(0);
     }
-}
-
-a.button-create {
-    cursor: pointer;
-    padding: 0;
-    font: inherit;
-    outline: none;
-
-    /* styles personnalisés */
-    justify-content: center;
-    border-radius: 5px;
-    background-color: darkgreen;
-    color: white;
-    width: 100px;
-    height: 40px;
-}
-
-a.button-create:hover {
-    background-color: forestgreen;
-    transition: transform 0.2s;
-    transform: rotateY(10deg) scale(1.1);
 }
 
 #rechercher_sortie_form__token {
@@ -457,8 +415,6 @@ a.button-create:hover {
     font: inherit;
     outline: none;
     border: solid 1px black;
-
-    /* styles personnalisés */
     justify-content: center;
     border-radius: 5px;
     background-color: darkgreen;

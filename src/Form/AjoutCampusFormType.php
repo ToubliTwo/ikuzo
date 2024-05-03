@@ -15,10 +15,9 @@ class AjoutCampusFormType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => 'Nom du nouveau campus',
+                'label' => 'Nom du nouveau campus :',
+                'label_attr' => ['style' => 'font-weight: bold;'],
                 'required' => true,
-                ])
-        ->add('submit', SubmitType::class, [
                 ]);
     }
 

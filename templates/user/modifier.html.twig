@@ -20,9 +20,10 @@
                 {{ form_row(userForm.telephone) }}
                 {{ form_row(userForm.password) }}
                 {{ form_row(userForm.campus) }}
-                {{ form_row(userForm.imageFile) }}
+                <div class="uploadPhotoProfil">
+                    {{ form_row(userForm.imageFile) }}
+                </div>
             </div>
-
         </div>
     </div>
     <div class="nosBoutons">
@@ -36,5 +37,5 @@
     </div>
 {% endblock %}
 {% block title %}
-    Votre profil ({{ user.nom~' '~user.prenom }})| {{ parent() }}
+    Mon profil ({{ user.nom~' '~user.prenom }}) | {{ parent() }}
 {% endblock %}

@@ -18,7 +18,7 @@ class RechercheSortieFormType extends AbstractType
     {
         $builder
             ->add(child: 'titre', type: null, options: [
-                'label' => 'Le nom de la sortie contient :',
+                'label' => 'Recherche par mot clé :',
                 'required' => false,
             ])
             ->add(child: 'campus', type: EntityType::class, options: [
@@ -66,7 +66,7 @@ class RechercheSortieFormType extends AbstractType
 
             ->add("submit", SubmitType::class, [
                 'label' => 'Rechercher',
-                'attr' => ['class' => 'submitRechercher']
+                'attr' => ['class' => 'classicBtn']
             ])
         ;
     }

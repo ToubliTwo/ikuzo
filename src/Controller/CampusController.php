@@ -40,16 +40,33 @@ class CampusController extends AbstractController
         }
 
 
-//      ***** GESTION DE L'AJOUT DE NOUVEAUX CAMPUS *****
+        //      ***** GESTION DE L'AJOUT DE NOUVEAUX CAMPUS *****
         $ajoutCampusForm = $this->createForm(AjoutCampusFormType::class);
         $ajoutCampusForm->handleRequest($request);
-        if ($ajoutCampusForm ->isSubmitted() && $ajoutCampusForm ->isValid()) {
+        if ($ajoutCampusForm ->isSubmitted() && $ajoutCampusForm ->isValid() && $request->request->has('clickSurEnregistrer')) {
             $newCampus = $ajoutCampusForm->getData();
             $entityManager->persist($newCampus);
             $entityManager->flush();
             $this -> addFlash('success', 'Le campus a bien été ajouté ! ');
-          return $this->redirectToRoute('campus_gerer');
+            return $this->redirectToRoute('campus_gerer');
         }
+
+
+
+
+
+
+
+//      ***** GESTION DE L'AJOUT DE NOUVEAUX CAMPUS *****
+//        $ajoutCampusForm = $this->createForm(AjoutCampusFormType::class);
+//        $ajoutCampusForm->handleRequest($request);
+//        if ($ajoutCampusForm ->isSubmitted() && $ajoutCampusForm ->isValid()) {
+//            $newCampus = $ajoutCampusForm->getData();
+//            $entityManager->persist($newCampus);
+//            $entityManager->flush();
+//            $this -> addFlash('success', 'Le campus a bien été ajouté ! ');
+//          return $this->redirectToRoute('campus_gerer');
+//        }
 
     return $this->render('\campus\campus_gerer.html.twig', [
         'rechercheCampusForm' => $rechercheCampusForm, //permet la recherche par mot-clé
