@@ -1,5 +1,9 @@
 body {
     background: #EEEEFF;
+    font-family: "Antonio", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
 }
 
 aside.sidebar {
