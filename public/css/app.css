@@ -3,7 +3,10 @@
     --couleur-secondaire : #7F7CAF ;
     --couleur-tertiaire : #9FB4C7;
     --couleur-quaternaire : #28587B;
-    font-family: 'Tilt Neon', sans-serif;
+    font-family: "Antonio", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
 }
 
 header {
@@ -159,7 +162,7 @@ footer {
     margin: 0;
 }
 
-input, select {
+input, select, textarea {
     margin-bottom: 0.8rem;
     box-sizing: border-box;
     width: 100%;
@@ -188,12 +191,14 @@ label {
 .formulaires {
     flex-wrap: wrap;
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
     column-gap: 5%;
+    justify-content: center;
 }
 
 .colonne {
     margin-right: 10px;
+    flex-wrap: wrap;
 }
 
 .profilUser {
@@ -253,6 +258,7 @@ a.button-create:hover {
 }
 
 /*a conserver pour le positionnement*/
+
 .nosBoutons {
     display: flex;
     justify-content: center;
@@ -282,6 +288,11 @@ a.button-create:hover {
     color: white;
     width: 100px;
     height: 40px;
+    border-top: 2px solid #494949;
+    border-left: 2px solid #494949;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+
 }
 
 /* *********************************************************** */
@@ -298,6 +309,10 @@ a.button-create:hover {
     color: white;
     width: 100px;
     height: 40px;
+    border-top: 2px solid #494949;
+    border-left: 2px solid #494949;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
 }
 
 /* *********************************************************** */
@@ -312,6 +327,10 @@ a.button-create:hover {
     width: 100px;
     height: 40px;
     align-content: center;
+    border-top: 2px solid #494949;
+    border-left: 2px solid #494949;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
 }
 
 .submitAnnuler a {
@@ -353,7 +372,13 @@ a.button-create:hover {
     padding: 0;
     outline: none;
     margin-top: 20px;
+    border-top: 2px solid #494949;
+    border-left: 2px solid #494949;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
 }
+
+
 
 .flash {
     padding: 20px;
@@ -437,4 +462,29 @@ a.button-create:hover {
 
 .add-lieu-link:hover {
     background-color: #0056b3;
+}
+
+.sortie_detail {
+    display: flex;
+    justify-content: center; /* Centrer le contenu horizontalement */
+}
+
+.attribut {
+    display: flex;
+    flex-wrap: wrap; /* Permettre le retour à la ligne */
+    max-width: 1000px; /* Définir une largeur maximale */
+}
+
+.detail {
+    flex: 1; /* Prendre autant d'espace que possible */
+    margin-right: 20px; /* Espacement entre les colonnes */
+}
+
+.description {
+    flex: 2; /* Prendre deux fois plus d'espace que les colonnes */
+    margin-top: 20px; /* Espacement entre les colonnes et la description */
+}
+
+.description ul {
+    list-style-type: none; /* Supprimer les puces de la liste */
 }
