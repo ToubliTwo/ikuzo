@@ -11,24 +11,29 @@ class SortiesFixtures extends Fixture implements  DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create(locale: 'fr_FR');
+        $faker = \Faker\Factory::create(locale: 'frFR');
         for ($i = 0; $i < 100; $i++) {
             $sortie = new Sorties();
             $sortie->setTitre($faker->jobTitle);
-            $sortie->setDateLimiteInscription($faker->dateTimeBetween(startDate: '-30 days', endDate: '+90 days'));
+            $sortie->setDateLimiteInscription($faker->dateTimeBetween('-30 days', '+90 days'));
             $dateInscription = $sortie->getDateLimiteInscription();
-            $sortie->setDate($faker->dateTimeBetween($dateInscription, endDate: '+90 days'));
-            $sortie->setNombreDePlaces($faker->numberBetween(int1: 1, int2: 20));
+            $sortie->setDate($faker->dateTimeBetween($dateInscription, '+90 days'));
+            $sortie->setNombreDePlaces($faker->numberBetween(1, 20));
             $nbPlaces = $sortie->getNombreDePlaces();
             $sortie->setDuree($faker->dateTime);
             $sortie->setDescription($faker->text);
-            $sortie->setEtat($this->getReference(name: 'etat_1'));
-            $sortie->setCampus($this->getReference(name: 'campus_'.$faker->numberBetween(int1: 1, int2: count(value: CampusFixtures::CAMPUS_NOM))));
-            $sortie->setLieu($this->getReference(name: 'lieu_'.$faker->numberBetween(int1: 1, int2: LieuFixtures::NB_LIEUX)));
-            $sortie->setOrganisateur($this->getReference(name: 'user_'.$faker->numberBetween(int1: 1, int2: UserFixtures::NB_USERS)));
-            //ajouter des inscrits à la sortie (entre 0 et nbPlaces)
+            $sortie->setEtat($this->getReference('etat_1'));
+            $sortie->setCampus($this->getReference('campus_'.$faker->numberBetween(1, count(CampusFixtures::CAMPUS_NOM))));
+            $sortie->setLieu($this->getReference('lieu_'.$faker->numberBetween(1, LieuFixtures::NB_LIEUX)));
+            $organisateur = $this->getReference('user_'.$faker->numberBetween(1, UserFixtures::NB_USERS));
+            $sortie->setOrganisateur($organisateur);
+// Ajouter des inscrits à la sortie (entre 0 et nbPlaces)
             for ($j = 0; $j < $nbPlaces; $j++) {
-                $sortie->addUser($this->getReference(name: 'user_'.$faker->numberBetween(int1: 1, int2: userFixtures::NB_USERS)));
+                // Vérifier si l'utilisateur ajouté n'est pas l'organisateur
+                do {
+                    $utilisateur = $this->getReference('user_'.$faker->numberBetween(1, UserFixtures::NB_USERS));
+                } while ($utilisateur === $organisateur);
+                $sortie->addUser($utilisateur);
             }
             $manager->persist($sortie);
         }
