@@ -66,7 +66,7 @@ class RechercheSortieFormType extends AbstractType
 
             ->add("submit", SubmitType::class, [
                 'label' => 'Rechercher',
-                'attr' => ['class' => 'submitRechercher']
+                'attr' => ['class' => 'classicBtn']
             ])
         ;
     }

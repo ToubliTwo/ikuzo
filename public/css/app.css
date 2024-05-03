@@ -3,7 +3,10 @@
     --couleur-secondaire : #7F7CAF ;
     --couleur-tertiaire : #9FB4C7;
     --couleur-quaternaire : #28587B;
-    font-family: 'Tilt Neon', sans-serif;
+    font-family: "Antonio", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
 }
 
 header {
@@ -194,6 +197,7 @@ label {
 
 .formulaires {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     column-gap: 5%;
 }

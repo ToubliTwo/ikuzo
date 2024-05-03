@@ -10,7 +10,8 @@
         <div class="formulaires">
             {{ form_row(sortieform.titre) }}
             {{ form_row(sortieform.campus) }}
-            {{ form_row(sortieform.dateRechercheDebut) }}{{ form_row(sortieform.dateRechercheFin) }}
+            <div>{{ form_row(sortieform.dateRechercheDebut) }}{{ form_row(sortieform.dateRechercheFin) }}
+            </div>
         </div>
         <div class="formulaires">
             <div>
@@ -59,7 +60,7 @@
                 </td>
                 <td><a href="{{ path('user_details', {'id' : sortie.organisateur.id}) }}" title="détails organisateur"> {{ sortie.organisateur.pseudo }}</a></td>
                 <td>
-                    {% if sortie.etat.id != 1 and not sortie.users.contains(app.user) and not sortie.organisateur.id %}
+                    {% if sortie.etat.id == 2 and not sortie.users.contains(app.user) and not sortie.organisateur.id is same as app.user.id %}
                     <a href="{{ path('actions_inscription', {'id': sortie.id}) }}" title="S'inscrire">S'inscrire</a>
                     {% endif %}
                     {% if sortie.users.contains(app.user) and sortie.date > 'now'|date('Y-m-d H:i:s') %}
