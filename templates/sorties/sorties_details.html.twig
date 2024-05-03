@@ -3,18 +3,16 @@
 {% block body %}
     <h1>Détails de la sortie {{ sortie.titre }}</h1>
     <div class="formulaire_bloc">
-        <div class="formulaires">
-            <div class="colonne">
+        <div class="attribut">
+            <div class="detail">
                 <ul>
                     <li>Nom de la sortie : {{ sortie.titre }}</li>
-                    <li>Date et heure de la sortie : {{ sortie.date|date('d/m/Y H:i') }}</li>
+                    <li>Date et heure de la sortie : {{ sortie.date|date('d/m/Y H:i') }} pour une durée de {{ sortie.duree|date('H:i') }}</li>
                     <li>Date limite d'inscription : {{ sortie.dateLimiteInscription|date('d/m/Y H:i') }}</li>
                     <li>Nombre de places : {{ sortie.nombreDePlaces }}</li>
-                    <li>Durée : {{ sortie.duree|date('H:i') }}</li>
-                    <li>Description et infos : {{ sortie.description }}</li>
                 </ul>
             </div>
-            <div class="colonne">
+            <div class="detail">
                 <ul>
                     <li>Campus : {{ sortie.campus.nom }}</li>
                     <li>Lieu : {{ sortie.lieu.nom }}</li>
@@ -24,10 +22,17 @@
                     <li>Longitude : {{ sortie.lieu.longitude }}</li>
                 </ul>
             </div>
+            <div class="description">
+                <ul>
+                    <li>Description et infos :</li>
+                    <li>{{ sortie.description }}</li>
+                </ul>
+            </div>
         </div>
     </div>
+
     <h2>Liste des participants</h2>
-    <div class="tableauAccueil">
+    <div class="tableau">
         <div class="table-container">
             <table class="result-table">
                 <tr>
