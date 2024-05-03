@@ -15,7 +15,7 @@ class ImageDirectoryNamer implements DirectoryNamerInterface
     public function directoryName(object|array $object, PropertyMapping $mapping): string
     {
         if (!$object instanceof User) {
-            throw new \InvalidArgumentException(sprintf(format: 'Expected an instance of "%s", but got "%s"', values: User::class, method: get_class($object)));
+            throw new \InvalidArgumentException(sprintf(format: 'Instance de "%s" attendue, mais reçue "%s"', values: User::class, method: get_class($object)));
         }
 
         $directoryName = '';

@@ -27,7 +27,8 @@ class SortiesFixtures extends Fixture implements  DependentFixtureInterface
             $sortie->setLieu($this->getReference('lieu_'.$faker->numberBetween(1, LieuFixtures::NB_LIEUX)));
             $organisateur = $this->getReference('user_'.$faker->numberBetween(1, UserFixtures::NB_USERS));
             $sortie->setOrganisateur($organisateur);
-// Ajouter des inscrits à la sortie (entre 0 et nbPlaces)
+
+            // Ajouter des inscrits à la sortie (entre 0 et nbPlaces)
             for ($j = 0; $j < $nbPlaces; $j++) {
                 // Vérifier si l'utilisateur ajouté n'est pas l'organisateur
                 do {
