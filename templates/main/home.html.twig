@@ -10,8 +10,7 @@
         <div class="formulaires">
             {{ form_row(sortieform.titre) }}
             {{ form_row(sortieform.campus) }}
-            <div>{{ form_row(sortieform.dateRechercheDebut) }}{{ form_row(sortieform.dateRechercheFin) }}
-            </div>
+            {{ form_row(sortieform.dateRechercheDebut) }}{{ form_row(sortieform.dateRechercheFin) }}
         </div>
         <div class="formulaires">
             <div>
@@ -28,7 +27,7 @@
     <p>Organisez et participez à des sorties passionnantes avec d'autres stagiaires ENI, où que vous soyez !</p>
     {% if sorties is not empty %}
     
-<div class="tableau">
+<div class="tableauAccueil">
     <div class="table-container">
     <table class="result-table">
         <tr>

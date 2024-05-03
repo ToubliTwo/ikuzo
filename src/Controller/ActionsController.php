@@ -19,8 +19,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ActionsController extends AbstractController
 {
-
-
     #[Route('/sorties/inscription/{id}', name:'actions_inscription')]
     public function inscrireSortie(Sorties $sortie, EntityManagerInterface $em): Response
     {

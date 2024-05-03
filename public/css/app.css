@@ -107,12 +107,24 @@ main {
 }
 
 .tableau {
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    height : 100%;
+    max-height: 24vh;
+}
+.table-container{
+    display: flex;
+    justify-content: center;
+    max-height: 30vh;
+}
+.tableauAccueil {
     margin-top: 2%;
     display: flex;
     justify-content: center;
     overflow: auto;
     height : 100%;
-    max-height: 34vh;
+    max-height: 31vh;
 }
 
 .result-table {
@@ -191,7 +203,6 @@ label {
 .formulaires {
     flex-wrap: wrap;
     display: flex;
-    flex-wrap: wrap;
     column-gap: 5%;
     justify-content: center;
 }

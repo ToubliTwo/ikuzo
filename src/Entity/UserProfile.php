@@ -10,7 +10,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 
-#[Vich\Uploadable]
+/*#[Vich\Uploadable]*/
 #[ORM\Entity(repositoryClass: UserProfileRepository::class)]
 class UserProfile
 {
