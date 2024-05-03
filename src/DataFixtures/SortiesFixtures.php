@@ -11,7 +11,7 @@ class SortiesFixtures extends Fixture implements  DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $faker = \Faker\Factory::create(locale: 'fr_FR');
+        $faker = \Faker\Factory::create(locale: 'frFR');
         for ($i = 0; $i < 100; $i++) {
             $sortie = new Sorties();
             $sortie->setTitre($faker->jobTitle);
@@ -27,6 +27,7 @@ class SortiesFixtures extends Fixture implements  DependentFixtureInterface
             $sortie->setLieu($this->getReference('lieu_'.$faker->numberBetween(1, LieuFixtures::NB_LIEUX)));
             $organisateur = $this->getReference('user_'.$faker->numberBetween(1, UserFixtures::NB_USERS));
             $sortie->setOrganisateur($organisateur);
+
             // Ajouter des inscrits à la sortie (entre 0 et nbPlaces)
             for ($j = 0; $j < $nbPlaces; $j++) {
                 // Vérifier si l'utilisateur ajouté n'est pas l'organisateur

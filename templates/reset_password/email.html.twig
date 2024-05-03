@@ -1,9 +1,13 @@
 <h1>Bonjour ! </h1>
 
-<p>Pour réinitialiser votre mot de passe, vous pouvez cliquer sur le lien suivant : </p>
+<p>Vous venez d'avouer avoir des troubles de la mémoire ; bonne nouvelle, nous pouvons vous aider. </p>
+
+<p>Pour réinitialiser votre mot de passe, vous pouvez cliquer sur le lien suivant :</p>
 
 <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
 
-<p>Faites-vite ! Ce lien expirera dans 1 heure ! </p> {# {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }} cette instruction indique le délai d'expiration sous la forme : "1 hour" #}
+<p>Dépêchez-vous, ce lien expirera 💣 dans 1 heure  ! </p> {# {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }} cette instruction indique le délai d'expiration sous la forme : "1 hour" #}
 
-<p>A + ! </p>
+<p><small>Pour tout autres types de troubles, veuillez consulter un spécialiste.</small></p>
+
+<p>A bientôt ! </p>
