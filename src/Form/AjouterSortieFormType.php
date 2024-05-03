@@ -30,8 +30,7 @@ class AjouterSortieFormType extends AbstractType
 
             ->add(child: 'titre', type: TextType::class, options: [
                 'label' => 'Nom de la sortie :',
-                'attr' => ['placeholder' => 'Donnez un titire à votre évènement !']
-                ,'required'=> false
+                'required'=> true
             ])
 
             ->add(child: 'date', type: DateTimeType::class, options: [
@@ -39,13 +38,13 @@ class AjouterSortieFormType extends AbstractType
                 'widget' => 'single_text',
                 'label' => 'Date et heure de la sortie :',
                 'input' => 'datetime',
-                'required'=> false
+                'required'=> true
             ])
 
 
             ->add(child: 'nombreDePlaces', type: TextType::class, options: [
                 'label' => 'Nombre de places :'
-                ,'required'=> false
+                ,'required'=> true
             ])
 
 
@@ -63,13 +62,13 @@ class AjouterSortieFormType extends AbstractType
                 'widget' => 'single_text',
                 'label' => 'Date limite d\'inscription :',
                 'input' => 'datetime',
-                'required'=> false
+                'required'=> true
             ])
 
             ->add(child: 'description', type: TextareaType::class, options: [
                     'label' => 'Description et infos : ',
                     'attr' => ['placeholder' => 'Ajoutez une description à votre évènement !']
-                    ,'required'=> false
+                    ,'required'=> true
                 ])
 
             ->add(child: 'campus', type: EntityType::class, options: [

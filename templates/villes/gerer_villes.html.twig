@@ -8,53 +8,55 @@
     <h1>Gérer les villes</h1>
     <h2>Filtrer les villes</h2>
 
-{#     Afficher le formulaire de recherche des villes#}
+    {#     Afficher le formulaire de recherche des villes #}
     <div class="formulaire_bloc">
-    {{ form_start(rechercherForm) }}
-    {{ form_row(rechercherForm.nom, {'label': 'Le nom contient'}) }}
-         <button type="submit" class="classicBtn" name="clickSurRechercher">Rechercher</button>
-    {{ form_end(rechercherForm) }}
+        {{ form_start(rechercherForm) }}
+        {{ form_row(rechercherForm.nom, {'label': 'Le nom contient'}) }}
+        <button type="submit" class="classicBtn" name="clickSurRechercher">Rechercher</button>
+        {{ form_end(rechercherForm) }}
     </div>
-{#    <div class="table-wrapper">#}
+    {#    <div class="table-wrapper"> #}
     <div class="tableau">
-    <table>
-        <thead>
-        <tr>
-            <th>Ville</th>
-            <th>Code Postal</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for ville in villes %}
-            <tr>
-                <td>{{ ville.nom }}</td>
-                <td>{{ ville.codePostal }}</td>
-                <td>
-{#                    <a href="{{ path('modifier_ville', {'id': ville.id}) }}">Modifier</a>#}
-{#                    <a href="{{ path('supprimer_ville', {'id': ville.id}) }}">Supprimer</a>#}
-                </td>
-            </tr>
-        {% endfor %}
-        <tr>
-            {{ form_start(form) }}
-            <td colspan="2">
-                {# Formulaire d'ajout de nouvelle ville #}
-                {{ form_row(form.nom) }}
-            </td>
-            <td>
-                {{ form_row(form.codePostal) }}
+        <div class="table-container">
+            <table class="result-table">
+                <thead>
+                <tr>
+                    <th>Ville</th>
+                    <th>Code Postal</th>
+                    {#            <th>Actions</th> #}
+                </tr>
+                </thead>
+                <tbody>
+                {% for ville in villes %}
+                    <tr>
+                        <td>{{ ville.nom }}</td>
+                        <td>{{ ville.codePostal }}</td>
+                        <td>
+                            {#                    <a href="{{ path('modifier_ville', {'id': ville.id}) }}">Modifier</a> #}
+                            {#                    <a href="{{ path('supprimer_ville', {'id': ville.id}) }}">Supprimer</a> #}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    {{ form_start(form) }}
+                    <td colspan="2">
+                        {# Formulaire d'ajout de nouvelle ville #}
+                        {{ form_row(form.nom) }}
+                    </td>
+                    <td>
+                        {{ form_row(form.codePostal) }}
 
-            </td>
-            <td>
-                {# Bouton Ajouter #}
-                <button type="submit" name="clickSurAjouter">Ajouter</button>
-                {{ form_end(form) }}
-{#                onclick="window.location.href='{{ path('ajouter_villes') }}'"#}
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+                    </td>
+                    <td>
+                        {# Bouton Ajouter #}
+                        <button type="submit" class="submitValider" name="clickSurAjouter">Ajouter</button>
+                        {{ form_end(form) }}
+                        {#                onclick="window.location.href='{{ path('ajouter_villes') }}'" #}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 {% endblock %}

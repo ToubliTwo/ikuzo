@@ -15,9 +15,11 @@ class NouvelleVilleFormType extends AbstractType
         $builder
             ->add('nom', TextType::class, [
                 'required' => true,
+                'label_attr' => ['style' => 'font-weight: bold;'],
             ])
             ->add('codePostal', TextType::class, [
                 'required' => true,
+                'label_attr' => ['style' => 'font-weight: bold;'],
             ]);
     }
 

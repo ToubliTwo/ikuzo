@@ -22,30 +22,33 @@
                 <div>
                     <table>
                         <tr>
-                            <th>Prénom</th>
+                            <th>Pseudo :</th>
+                            <td style="font-weight: bold">{{ user.pseudo }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prénom :</th>
                             <td>{{ user.prenom }}</td>
                         </tr>
                         <tr>
-                            <th>Nom</th>
+                            <th>Nom :</th>
                             <td>{{ user.nom }}</td>
                         </tr>
                         <tr>
-                            <th>Téléphone</th>
+                            <th>Téléphone :</th>
                             <td>{{ user.telephone }}</td>
                         </tr>
                         <tr>
-                            <th>Email</th>
+                            <th>Email :</th>
                             <td>{{ user.email }}</td>
                         </tr>
                         <tr>
-                            <th>Campus</th>
+                            <th>Campus :</th>
                             <td>{{ user.campus.nom }}</td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-        <a class="classicBtn" href="{{ path('main_home') }}">Retour</a>
+            <a href="{{ path('main_home') }}" class="classicBtn">Retour</a>
     </div>
 {% endblock %}
-
